@@ -204,7 +204,7 @@ export default function ProfilePage() {
                     Member Since
                   </label>
                   <p className="text-gray-900 dark:text-white py-2">
-                    {new Date().toLocaleDateString()}
+                    {new Date().toLocaleDateString('en-US')}
                   </p>
                 </div>
               </div>

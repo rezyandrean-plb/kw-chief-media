@@ -20,7 +20,7 @@ interface ServicePackage {
   price: number;
   features: string[];
   popular?: boolean;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 export default function ServicesPage() {
@@ -246,7 +246,7 @@ export default function ServicesPage() {
 
                   <div className="mb-6">
                     <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
-                      What's included:
+                      What&apos;s included:
                     </h4>
                     <ul className="space-y-2">
                       {pkg.features.map((feature, index) => (

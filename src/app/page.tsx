@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { 
   UserGroupIcon, 
-  BuildingOfficeIcon, 
   DocumentTextIcon,
-  CurrencyDollarIcon,
-  ChartBarIcon,
   CameraIcon,
   VideoCameraIcon,
   CheckCircleIcon,
   ShieldCheckIcon,
   StarIcon
 } from '@heroicons/react/24/outline';
+import CurrentYear from "../components/CurrentYear";
 
 export default function Home() {
   return (
@@ -185,7 +183,7 @@ export default function Home() {
                   <CheckCircleIcon className="h-5 w-5 sm:h-6 sm:w-6 text-green-500 mr-3 mt-0.5" />
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">Exclusive Market</h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">Access to KW's extensive realtor network</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">Access to KW&apos;s extensive realtor network</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -287,7 +285,7 @@ export default function Home() {
             Ready to Get Started?
           </h2>
           <p className="text-blue-100 mb-6 max-w-2xl mx-auto text-sm sm:text-base">
-            Whether you're a KW realtor looking for quality vendors or a creative professional wanting to join our exclusive network, 
+            Whether you&apos;re a KW realtor looking for quality vendors or a creative professional wanting to join our exclusive network, 
             Isabelle is here to help you get started.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
@@ -308,7 +306,7 @@ export default function Home() {
       </main>
 
       <footer className="mt-12 sm:mt-16 text-gray-400 text-xs sm:text-sm text-center px-4">
-        <p>&copy; {new Date().getFullYear()} Chief Media. Exclusive to Keller Williams Realtors.</p>
+        <p>&copy; <CurrentYear /> Chief Media. Exclusive to Keller Williams Realtors.</p>
         <div className="mt-2 space-x-2 sm:space-x-4">
           <Link href="/vendors" className="hover:text-gray-300 transition">Browse Vendors</Link>
           <Link href="/vendor-application" className="hover:text-gray-300 transition">Become a Vendor</Link>

@@ -24,7 +24,7 @@ interface Vendor {
   experience: string;
   description: string;
   specialties: string[];
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 export default function VendorsPage() {
@@ -348,7 +348,7 @@ export default function VendorsPage() {
               Need a Vendor Not Listed?
             </h2>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              If you don't see a vendor that matches your specific needs, contact Isabelle. 
+              If you don&apos;t see a vendor that matches your specific needs, contact Isabelle. 
               She can help you find the perfect match or connect you with new vendors in our network.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

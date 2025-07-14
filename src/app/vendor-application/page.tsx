@@ -94,9 +94,9 @@ export default function VendorApplicationPage() {
               <p>What happens next:</p>
               <ul className="text-left space-y-2">
                 <li>• Isabelle will review your portfolio and experience</li>
-                <li>• You'll receive a call to discuss your services</li>
-                <li>• If approved, you'll be onboarded to our platform</li>
-                <li>• You'll gain access to KW's realtor network</li>
+                <li>• You&apos;ll receive a call to discuss your services</li>
+                <li>• If approved, you&apos;ll be onboarded to our platform</li>
+                <li>• You&apos;ll gain access to KW&apos;s realtor network</li>
               </ul>
             </div>
           </div>

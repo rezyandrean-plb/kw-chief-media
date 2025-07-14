@@ -22,7 +22,7 @@ interface PortfolioItem {
   price: string;
   rating: number;
   imageUrl?: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 export default function PortfolioPage() {
@@ -267,8 +267,8 @@ export default function PortfolioPage() {
               Ready to Create Something Amazing?
             </h2>
             <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
-              Whether you're a KW realtor looking for quality vendors or a creative professional wanting to join our network, 
-              let's create something exceptional together.
+              Whether you&apos;re a KW realtor looking for quality vendors or a creative professional wanting to join our network, 
+              let&apos;s create something exceptional together.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a

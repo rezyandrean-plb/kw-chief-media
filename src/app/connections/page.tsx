@@ -9,7 +9,6 @@ import {
   MapPinIcon,
   StarIcon,
   CheckCircleIcon,
-  XMarkIcon,
   ChatBubbleLeftIcon,
   CalendarIcon
 } from '@heroicons/react/24/outline';
@@ -32,7 +31,7 @@ interface Connection {
 }
 
 export default function ConnectionsPage() {
-  const { user } = useAuth();
+  const { } = useAuth();
   const [statusFilter, setStatusFilter] = useState<string>('all');
 
   // Mock data
@@ -108,7 +107,7 @@ export default function ConnectionsPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString();
+    return new Date(dateString).toLocaleDateString('en-US');
   };
 
   const formatCurrency = (amount: number) => {

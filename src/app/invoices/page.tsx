@@ -24,7 +24,7 @@ interface Invoice {
 }
 
 export default function InvoicesPage() {
-  const { user } = useAuth();
+  const { } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
 
@@ -91,7 +91,7 @@ export default function InvoicesPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString();
+    return new Date(dateString).toLocaleDateString('en-US');
   };
 
   const formatCurrency = (amount: number) => {

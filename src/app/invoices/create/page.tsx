@@ -14,7 +14,7 @@ interface InvoiceItem {
 }
 
 export default function CreateInvoicePage() {
-  const { user } = useAuth();
+  const { } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [invoiceData, setInvoiceData] = useState({
@@ -230,7 +230,7 @@ export default function CreateInvoicePage() {
 
               {invoiceData.items.length === 0 ? (
                 <p className="text-gray-500 dark:text-gray-400 text-center py-8">
-                  No items added yet. Click "Add Item" to get started.
+                  No items added yet. Click &quot;Add Item&quot; to get started.
                 </p>
               ) : (
                 <div className="space-y-4">

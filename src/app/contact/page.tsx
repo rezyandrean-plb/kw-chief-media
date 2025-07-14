@@ -71,9 +71,9 @@ export default function ContactPage() {
               <p>What happens next:</p>
               <ul className="text-left space-y-2">
                 <li>• Isabelle will review your message</li>
-                <li>• You'll receive a response within 24 hours</li>
+                <li>• You&apos;ll receive a response within 24 hours</li>
                 <li>• If needed, a follow-up call will be scheduled</li>
-                <li>• We'll help you get started with Chief Media</li>
+                <li>• We&apos;ll help you get started with Chief Media</li>
               </ul>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function ContactPage() {
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Get in touch with Isabelle, our vendor-relationship manager and agent liaison. 
-              Whether you're a KW realtor looking for quality vendors or a creative professional wanting to join our network, 
+              Whether you&apos;re a KW realtor looking for quality vendors or a creative professional wanting to join our network, 
               Isabelle is here to help.
             </p>
           </div>
@@ -163,7 +163,7 @@ export default function ContactPage() {
                       <div>
                         <h4 className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">For Vendors</h4>
                         <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                          Join our exclusive network, get access to KW's realtor base, and grow your business 
+                          Join our exclusive network, get access to KW&apos;s realtor base, and grow your business 
                           with our curated marketplace approach.
                         </p>
                       </div>

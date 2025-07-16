@@ -10,6 +10,7 @@ import {
   StarIcon,
   MapPinIcon
 } from '@heroicons/react/24/outline';
+import AnimatedBackground from '../../components/AnimatedBackground';
 
 interface PortfolioItem {
   id: string;
@@ -117,15 +118,16 @@ export default function PortfolioPage() {
     : portfolioItems.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+      <AnimatedBackground />
+      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl font-bold text-[#273f4f] mb-4">
               Our Portfolio
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-[#273f4f]/80 max-w-3xl mx-auto">
               Showcasing successful collaborations between KW realtors and our verified vendors. 
               See the quality and creativity that makes Chief Media the trusted choice for real estate marketing.
             </p>
@@ -133,15 +135,15 @@ export default function PortfolioPage() {
 
           {/* Category Filter */}
           <div className="flex justify-center mb-6 sm:mb-8">
-            <div className="flex flex-wrap justify-center gap-1 sm:gap-2 bg-white dark:bg-gray-800 rounded-lg p-1 shadow w-full max-w-4xl">
+            <div className="flex flex-wrap justify-center gap-1 sm:gap-2 bg-white rounded-lg p-1 shadow w-full max-w-4xl">
               {categories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`flex items-center px-2 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors ${
                     selectedCategory === category.id
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                      ? 'bg-[#f37521] text-white'
+                      : 'text-[#273f4f] hover:text-[#f37521]'
                   }`}
                 >
                   <category.icon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
@@ -156,59 +158,59 @@ export default function PortfolioPage() {
             {filteredItems.map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                <div key={item.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                   {/* Image Placeholder */}
-                  <div className="h-32 sm:h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                  <div className="h-32 sm:h-48 bg-gradient-to-br from-[#03809c] to-[#f37521] flex items-center justify-center">
                     <Icon className="h-8 w-8 sm:h-16 sm:w-16 text-white" />
                   </div>
                   
                   <div className="p-4 sm:p-6">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
+                      <h3 className="text-base sm:text-lg font-semibold text-[#273f4f]">
                         {item.title}
                       </h3>
                       <div className="flex items-center">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <StarIcon
                             key={star}
-                            className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current"
+                            className="h-3 w-3 sm:h-4 sm:w-4 text-[#f37521] fill-current"
                           />
                         ))}
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4">
+                    <p className="text-[#273f4f]/80 text-xs sm:text-sm mb-3 sm:mb-4">
                       {item.description}
                     </p>
 
                     {/* Details */}
                     <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4">
-                      <div className="flex items-center text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center text-xs sm:text-sm text-[#273f4f]/60">
                         <MapPinIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                         {item.location}
                       </div>
                       <div className="text-xs sm:text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">Vendor: </span>
-                        <span className="text-gray-900 dark:text-white font-medium">{item.vendor}</span>
+                        <span className="text-[#273f4f]/60">Vendor: </span>
+                        <span className="text-[#273f4f] font-medium">{item.vendor}</span>
                       </div>
                       <div className="text-xs sm:text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">Realtor: </span>
-                        <span className="text-gray-900 dark:text-white font-medium">{item.realtor}</span>
+                        <span className="text-[#273f4f]/60">Realtor: </span>
+                        <span className="text-[#273f4f] font-medium">{item.realtor}</span>
                       </div>
                       <div className="text-xs sm:text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">Project Value: </span>
-                        <span className="text-green-600 dark:text-green-400 font-medium">{item.price}</span>
+                        <span className="text-[#273f4f]/60">Project Value: </span>
+                        <span className="text-[#03809c] font-medium">{item.price}</span>
                       </div>
                     </div>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-1 sm:gap-2">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#f37521]/10 text-[#f37521]">
                         {item.category.charAt(0).toUpperCase() + item.category.slice(1)}
                       </span>
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#03809c]/10 text-[#03809c]">
                         Completed
                       </span>
                     </div>
@@ -221,13 +223,13 @@ export default function PortfolioPage() {
           {/* Empty State */}
           {filteredItems.length === 0 && (
             <div className="text-center py-8 sm:py-12">
-              <div className="text-gray-400 dark:text-gray-500 mb-4">
+              <div className="text-[#273f4f]/40 mb-4">
                 <BuildingOfficeIcon className="h-8 w-8 sm:h-12 sm:w-12 mx-auto" />
               </div>
-              <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-white mb-2">
+              <h3 className="text-base sm:text-lg font-medium text-[#273f4f] mb-2">
                 No projects found
               </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-[#273f4f]/70">
                 No projects match the selected category. Try selecting a different category or view all projects.
               </p>
             </div>
@@ -235,54 +237,29 @@ export default function PortfolioPage() {
 
           {/* Stats */}
           <div className="mt-12 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-2">
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-[#f37521] mb-1 sm:mb-2">
                 {portfolioItems.length}
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Projects Completed</p>
+              <p className="text-xs sm:text-sm text-[#273f4f]/80">Projects Completed</p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400 mb-1 sm:mb-2">
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-[#03809c] mb-1 sm:mb-2">
                 5.0
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Average Rating</p>
+              <p className="text-xs sm:text-sm text-[#273f4f]/80">Average Rating</p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-purple-600 dark:text-purple-400 mb-1 sm:mb-2">
-                $8,000+
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-[#f2a16d] mb-1 sm:mb-2">
+                $8,000
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Total Project Value</p>
+              <p className="text-xs sm:text-sm text-[#273f4f]/80">Total Value</p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6 text-center">
-              <div className="text-xl sm:text-2xl font-bold text-yellow-600 dark:text-yellow-400 mb-1 sm:mb-2">
-                100%
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6 text-center">
+              <div className="text-xl sm:text-2xl font-bold text-[#03809c] mb-1 sm:mb-2">
+                6
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Client Satisfaction</p>
-            </div>
-          </div>
-
-          {/* CTA Section */}
-          <div className="mt-12 sm:mt-16 bg-blue-600 rounded-lg p-6 sm:p-8 text-center">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
-              Ready to Create Something Amazing?
-            </h2>
-            <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
-              Whether you&apos;re a KW realtor looking for quality vendors or a creative professional wanting to join our network, 
-              let&apos;s create something exceptional together.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <a
-                href="/contact"
-                className="bg-white text-blue-600 px-4 sm:px-6 py-2 sm:py-3 rounded-md font-medium hover:bg-gray-100 transition-colors text-sm sm:text-base"
-              >
-                Contact Isabelle
-              </a>
-              <a
-                href="/vendor-application"
-                className="border border-white text-white px-4 sm:px-6 py-2 sm:py-3 rounded-md font-medium hover:bg-blue-700 transition-colors text-sm sm:text-base"
-              >
-                Apply as Vendor
-              </a>
+              <p className="text-xs sm:text-sm text-[#273f4f]/80">Vendors Used</p>
             </div>
           </div>
         </div>

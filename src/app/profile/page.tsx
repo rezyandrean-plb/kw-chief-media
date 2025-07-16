@@ -9,6 +9,7 @@ import {
   CheckIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
+import AnimatedBackground from '../../components/AnimatedBackground';
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -59,8 +60,9 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+      <AnimatedBackground />
+      <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
           <div className="mb-8">

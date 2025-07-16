@@ -2,16 +2,31 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function Navigation() {
   const { } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700' 
+        : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -28,13 +43,25 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/vendors" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+            <Link href="/vendors" className={`transition-colors duration-300 ${
+              isScrolled 
+                ? 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' 
+                : 'text-white hover:text-gray-200'
+            }`}>
               Browse Vendors
             </Link>
-            <Link href="/portfolio" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+            <Link href="/portfolio" className={`transition-colors duration-300 ${
+              isScrolled 
+                ? 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' 
+                : 'text-white hover:text-gray-200'
+            }`}>
               Portfolio
             </Link>
-            <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+            <Link href="/contact" className={`transition-colors duration-300 ${
+              isScrolled 
+                ? 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' 
+                : 'text-white hover:text-gray-200'
+            }`}>
               Contact
             </Link>
             <Link href="/vendor-application" className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 transition">
@@ -46,7 +73,11 @@ export default function Navigation() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+              className={`transition-colors duration-300 ${
+                isScrolled 
+                  ? 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' 
+                  : 'text-white hover:text-gray-200'
+              }`}
             >
               {mobileMenuOpen ? (
                 <XMarkIcon className="h-6 w-6" />

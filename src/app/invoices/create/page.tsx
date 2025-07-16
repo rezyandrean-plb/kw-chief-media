@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import AnimatedBackground from '../../../components/AnimatedBackground';
 
 interface InvoiceItem {
   id: string;
@@ -94,8 +95,9 @@ export default function CreateInvoicePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+      <AnimatedBackground />
+      <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">

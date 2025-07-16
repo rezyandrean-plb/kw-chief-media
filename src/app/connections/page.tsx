@@ -12,6 +12,7 @@ import {
   ChatBubbleLeftIcon,
   CalendarIcon
 } from '@heroicons/react/24/outline';
+import AnimatedBackground from '../../components/AnimatedBackground';
 
 interface Connection {
   id: string;
@@ -118,8 +119,9 @@ export default function ConnectionsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+      <AnimatedBackground />
+      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
           <div className="mb-8">

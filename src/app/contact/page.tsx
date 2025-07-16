@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { 
   EnvelopeIcon,
   PhoneIcon,
-  MapPinIcon,
   UserGroupIcon,
   BuildingOfficeIcon,
   CheckCircleIcon
@@ -92,12 +91,10 @@ export default function ContactPage() {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-3xl font-semibold text-white mb-4 font-poppins">
-              Contact Isabelle
+              Contact us
             </h1>
             <p className="text-lg text-white/90 max-w-2xl mx-auto font-poppins">
-              Get in touch with Isabelle, our vendor-relationship manager and agent liaison. 
-              Whether you&apos;re a KW realtor looking for quality vendors or a creative professional wanting to join our network, 
-              Isabelle is here to help.
+              Get in touch with us - Whether youre a KW Singapore Realtor looking to streamline your media support or a creative looking to join our network, we’re happy to chat
             </p>
           </div>
 
@@ -125,18 +122,8 @@ export default function ContactPage() {
                     </div>
                     <div className="ml-3 sm:ml-4">
                       <h3 className="text-base sm:text-lg font-medium text-white font-poppins">Phone</h3>
-                      <p className="text-sm sm:text-base text-white/90 font-poppins">+65 9123 4567</p>
+                      <p className="text-sm sm:text-base text-white/90 font-poppins">+65 93246195</p>
                       <p className="text-xs sm:text-sm text-white/70 font-poppins">Mon-Fri, 9 AM - 6 PM SGT</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      <MapPinIcon className="h-5 w-5 sm:h-6 sm:w-6 text-[#f37521]" />
-                    </div>
-                    <div className="ml-3 sm:ml-4">
-                      <h3 className="text-base sm:text-lg font-medium text-white font-poppins">Location</h3>
-                      <p className="text-sm sm:text-base text-white/90 font-poppins">Serving KW realtors in Singapore</p>
-                      <p className="text-xs sm:text-sm text-white/70 font-poppins">Virtual meetings available</p>
                     </div>
                   </div>
                 </div>
@@ -145,14 +132,14 @@ export default function ContactPage() {
               {/* How Isabelle Helps */}
               <div>
                 <h3 className="text-lg sm:text-xl font-medium text-white mb-3 sm:mb-4 font-poppins">
-                  How Isabelle Can Help You
+                  How We Can Help You
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
                   <div className="bg-[#fcebdc] rounded-lg p-3 sm:p-4 border border-[#f37521]/20">
                     <div className="flex items-start">
                       <UserGroupIcon className="h-4 w-4 sm:h-5 sm:w-5 text-[#f37521] mr-2 sm:mr-3 mt-0.5" />
                       <div>
-                        <h4 className="font-medium text-[#273f4f] text-sm sm:text-base font-poppins">For KW Realtors</h4>
+                        <h4 className="font-medium text-[#273f4f] text-sm sm:text-base font-poppins">For KW Singapore Realtors</h4>
                         <p className="text-xs sm:text-sm text-[#273f4f]/80 font-poppins">
                           Find the perfect vendor for your marketing needs, get matched with verified creatives, 
                           and ensure quality deliverables for your listings.
@@ -166,8 +153,7 @@ export default function ContactPage() {
                       <div>
                         <h4 className="font-medium text-[#273f4f] text-sm sm:text-base font-poppins">For Vendors</h4>
                         <p className="text-xs sm:text-sm text-[#273f4f]/80 font-poppins">
-                          Join our exclusive network, get access to KW&apos;s realtor base, and grow your business 
-                          with our curated marketplace approach.
+                          Join our exclusive network, get access to KW Singapore’s network, and grow your business with our curated marketplace approach.
                         </p>
                       </div>
                     </div>
@@ -271,7 +257,7 @@ export default function ContactPage() {
                     required
                     className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm font-poppins"
                   >
-                    <option value="kw-realtor">KW Realtor</option>
+                    <option value="kw-realtor">KW SingaporeRealtor</option>
                     <option value="potential-vendor">Potential Vendor</option>
                     <option value="other">Other</option>
                   </select>
@@ -329,8 +315,7 @@ export default function ContactPage() {
                   How does the vendor matching process work?
                 </h3>
                 <p className="text-sm text-[#273f4f]/80 font-poppins">
-                  Isabelle meets with KW realtors to understand their specific needs, then matches them with the most suitable vendors from our curated network. 
-                  A WhatsApp group is created for direct communication between the realtor and vendor.
+                  Connect directly to the vendors who best suit your media needs, or speak to us for a consultation - our team will perform a social media audit based on your goals and connect you to the right vendors.
                 </p>
               </div>
               <div className="bg-[#fcebdc] rounded-lg p-4 sm:p-6">
@@ -338,7 +323,7 @@ export default function ContactPage() {
                   What are the payment terms?
                 </h3>
                 <p className="text-sm text-[#273f4f]/80 font-poppins">
-                  We use a 50% deposit, 50% upon completion payment structure. The revenue split is 85% to the vendor and 15% to Chief Media for platform management.
+                  We use a 50% deposit, 50% upon completion payment structure. The revenue split will be paid out to the vendor monthly. There will be platform fee charges.
                 </p>
               </div>
               <div className="bg-[#fcebdc] rounded-lg p-4 sm:p-6">
@@ -346,12 +331,12 @@ export default function ContactPage() {
                   How do I become a vendor?
                 </h3>
                 <p className="text-sm text-[#273f4f]/80 font-poppins">
-                  Submit an application through our website. Isabelle will review your portfolio and experience, then schedule a call to discuss your services and the platform requirements.
+                Submit an application through our website! After we review your portfolio, you’ll meet the team for a business consultation on how we can support you, as well as how you can add value to our KW Singapore Realtors.
                 </p>
               </div>
               <div className="bg-[#fcebdc] rounded-lg p-4 sm:p-6">
                 <h3 className="text-base sm:text-lg font-medium text-[#273f4f] mb-2 sm:mb-3 font-poppins">
-                  Is Chief Media exclusive to KW realtors?
+                  Is Chief Media exclusive to KW Singapore Realtors?
                 </h3>
                 <p className="text-sm text-[#273f4f]/80 font-poppins">
                   Yes, Chief Media is exclusively for Keller Williams realtors. Vendors must work only through our platform when serving KW agents to maintain quality standards and exclusivity.

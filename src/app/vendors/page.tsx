@@ -7,8 +7,6 @@ import {
   DocumentTextIcon,
   UserGroupIcon,
   BuildingOfficeIcon,
-  StarIcon,
-  MapPinIcon,
   MagnifyingGlassIcon,
   FunnelIcon
 } from '@heroicons/react/24/outline';
@@ -31,7 +29,6 @@ interface Vendor {
 export default function VendorsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedService, setSelectedService] = useState<string>('all');
-  const [selectedLocation, setSelectedLocation] = useState<string>('all');
 
   const vendors: Vendor[] = [
     {
@@ -123,24 +120,15 @@ export default function VendorsPage() {
     { id: 'virtual-tours', name: 'Virtual Tours', icon: BuildingOfficeIcon },
   ];
 
-  const locations = [
-    { id: 'all', name: 'All Locations' },
-    { id: 'Orchard Road, Singapore', name: 'Orchard Road, Singapore' },
-    { id: 'Marina Bay, Singapore', name: 'Marina Bay, Singapore' },
-    { id: 'Sentosa, Singapore', name: 'Sentosa, Singapore' },
-    { id: 'Clarke Quay, Singapore', name: 'Clarke Quay, Singapore' },
-    { id: 'Raffles Place, Singapore', name: 'Raffles Place, Singapore' },
-    { id: 'Tanjong Pagar, Singapore', name: 'Tanjong Pagar, Singapore' },
-  ];
+
 
   const filteredVendors = vendors.filter(vendor => {
     const matchesSearch = vendor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          vendor.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          vendor.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesService = selectedService === 'all' || vendor.services.includes(selectedService);
-    const matchesLocation = selectedLocation === 'all' || vendor.location === selectedLocation;
     
-    return matchesSearch && matchesService && matchesLocation;
+    return matchesSearch && matchesService;
   });
 
   return (
@@ -161,9 +149,9 @@ export default function VendorsPage() {
 
           {/* Search and Filters */}
           <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-10 gap-4">
               {/* Search */}
-              <div className="sm:col-span-2">
+              <div className="sm:col-span-7">
                 <label className="block text-sm font-medium text-[#273f4f] mb-2">
                   Search Vendors
                 </label>
@@ -180,7 +168,7 @@ export default function VendorsPage() {
               </div>
 
               {/* Service Filter */}
-              <div>
+              <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-[#273f4f] mb-2">
                   Service Type
                 </label>
@@ -192,24 +180,6 @@ export default function VendorsPage() {
                   {services.map((service) => (
                     <option key={service.id} value={service.id}>
                       {service.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Location Filter */}
-              <div>
-                <label className="block text-sm font-medium text-[#273f4f] mb-2">
-                  Location
-                </label>
-                <select
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521]"
-                >
-                  {locations.map((location) => (
-                    <option key={location.id} value={location.id}>
-                      {location.name}
                     </option>
                   ))}
                 </select>
@@ -250,10 +220,6 @@ export default function VendorsPage() {
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center">
-                        <StarIcon className="h-4 w-4 text-[#f37521] mr-1" />
-                        <span className="text-sm font-medium text-[#273f4f]">{vendor.rating}</span>
-                      </div>
                     </div>
 
                     {/* Services */}
@@ -268,11 +234,7 @@ export default function VendorsPage() {
                       ))}
                     </div>
 
-                    {/* Location */}
-                    <div className="flex items-center text-sm text-[#273f4f]/70 mb-3">
-                      <MapPinIcon className="h-4 w-4 mr-1" />
-                      {vendor.location}
-                    </div>
+
 
                     {/* Stats */}
                     <div className="flex items-center justify-between text-sm">
@@ -308,7 +270,7 @@ export default function VendorsPage() {
 
                     {/* Contact Button */}
                     <button className="w-full bg-[#f37521] text-white py-2 px-4 rounded-md hover:bg-[#e0651a] transition font-medium text-sm">
-                      Contact Vendor
+                      Connect
                     </button>
                   </div>
                 </div>

@@ -23,3 +23,17 @@ body {
   color: var(--foreground);
   font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
 }
+
+/* Auto-scroll animation for service categories */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll linear infinite;
+}

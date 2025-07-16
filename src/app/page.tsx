@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useMemo } from "react";
 import { 
   UserGroupIcon, 
@@ -123,14 +124,11 @@ export default function Home() {
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={400}>
-              <h2 className="text-2xl lg:text-4xl font-bold text-white mb-6">
-                Where Creativity Meets Strategy
-              </h2>
+              <h3 className="text-xl lg:text-2xl font-bold text-white mb-6">KW Singapore’s Exclusive Curated Media Network</h3>
             </ScrollAnimation>
             <ScrollAnimation delay={600}>
-              <p className="text-lg lg:text-xl text-white mb-8 max-w-3xl mx-auto">
-                The <span className="font-semibold">exclusive curated marketplace</span> for Keller Williams realtors. 
-                Connect with verified creatives, photographers, and marketing experts.
+              <p className="text-lg lg:text-xl text-white mb-8 mx-auto text-center">
+                Partner with trusted media experts—so you can focus on what truly matters: <span className="font-bold">real estate</span>.
               </p>
             </ScrollAnimation>
             <ScrollAnimation delay={800}>
@@ -251,35 +249,35 @@ export default function Home() {
           </ScrollAnimation>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             <ScrollAnimation delay={400} direction="left">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full min-h-[400px] flex flex-col">
                 <div className="w-16 h-16 bg-[#03809c]/10 rounded-2xl flex items-center justify-center mb-6 animate-pulse">
                   <span className="text-2xl font-bold text-[#03809c]">01</span>
                 </div>
                 <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Curated Vendors</h3>
-                <p className="text-[#273f4f]/80 text-lg">
-                  We carefully select and verify the best creatives, photographers, and marketing experts.
+                <p className="text-[#273f4f]/80 text-lg flex-grow">
+                  We handpick and verify only reliable creatives who understand real estate—and show up with quality.
                 </p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={600} direction="up">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full min-h-[400px] flex flex-col">
                 <div className="w-16 h-16 bg-[#f37521]/10 rounded-2xl flex items-center justify-center mb-6 animate-pulse">
                   <span className="text-2xl font-bold text-[#f37521]">02</span>
                 </div>
-                <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Direct Connection</h3>
-                <p className="text-[#273f4f]/80 text-lg">
-                  Isabelle matches you with the perfect vendor and creates a direct WhatsApp group.
+                <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Efficient Workflows</h3>
+                <p className="text-[#273f4f]/80 text-lg flex-grow">
+                  No more chasing vendors. We ensure clear coordination between agents and creatives, so your project runs smoothly from start to finish
                 </p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={800} direction="right">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full min-h-[400px] flex flex-col">
                 <div className="w-16 h-16 bg-[#f2a16d]/10 rounded-2xl flex items-center justify-center mb-6 animate-pulse">
                   <span className="text-2xl font-bold text-[#f2a16d]">03</span>
                 </div>
-                <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Quality Delivery</h3>
-                <p className="text-[#273f4f]/80 text-lg">
-                  Get professional results with our 50% deposit, 50% completion payment structure.
+                <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Quality Results, No Guesswork</h3>
+                <p className="text-[#273f4f]/80 text-lg flex-grow">
+                  Say goodbye to vague timelines and subpar work. With a structured 50/50 payment model you get professional delivery you can count on.
                 </p>
               </div>
             </ScrollAnimation>
@@ -300,51 +298,211 @@ export default function Home() {
               </p>
             </div>
           </ScrollAnimation>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <ScrollAnimation delay={300} direction="left">
-              <div className="group bg-[#fcebdc] rounded-2xl p-8 hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2">
-                <div className="w-16 h-16 bg-[#03809c]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform animate-pulse">
-                  <CameraIcon className="h-8 w-8 text-[#03809c]" />
+          
+          {/* Auto-sliding carousel container */}
+          <div className="relative overflow-hidden">
+            <div className="flex animate-scroll gap-8" style={{ animationDuration: '60s' }}>
+              {/* First set of services */}
+              <div className="flex gap-8 min-w-full">
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=64&fit=crop&crop=center" 
+                      alt="Professional Stills"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                                    <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Professional Stills</h3>
+                    <p className="text-[#273f4f]/80">
+                      High-quality photography for luxury properties and listings
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-[#273f4f] mb-4">Photography</h3>
-                <p className="text-[#273f4f]/80">
-                  Professional real estate photography and virtual tours
-                </p>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation delay={500} direction="up">
-              <div className="group bg-[#fcebdc] rounded-2xl p-8 hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2">
-                <div className="w-16 h-16 bg-[#f37521]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform animate-pulse">
-                  <VideoCameraIcon className="h-8 w-8 text-[#f37521]" />
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1506947411487-a56738267384?w=400&h=64&fit=crop&crop=center" 
+                      alt="Drone Imagery"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Drone Imagery</h3>
+                    <p className="text-[#273f4f]/80">
+                      Aerial photography and videography for stunning property views
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-[#273f4f] mb-4">Videography</h3>
-                <p className="text-[#273f4f]/80">
-                  Property videos, drone footage, and marketing content
-                </p>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation delay={700} direction="up">
-              <div className="group bg-[#fcebdc] rounded-2xl p-8 hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2">
-                <div className="w-16 h-16 bg-[#f2a16d]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform animate-pulse">
-                  <DocumentTextIcon className="h-8 w-8 text-[#f2a16d]" />
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=64&fit=crop&crop=center" 
+                      alt="Virtual Tours"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Virtual Tours</h3>
+                    <p className="text-[#273f4f]/80">
+                      Interactive 360° virtual tours for immersive property viewing
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-[#273f4f] mb-4">Copywriting</h3>
-                <p className="text-[#273f4f]/80">
-                  Compelling property descriptions and marketing copy
-                </p>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation delay={900} direction="right">
-              <div className="group bg-[#fcebdc] rounded-2xl p-8 hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2">
-                <div className="w-16 h-16 bg-[#03809c]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform animate-pulse">
-                  <UserGroupIcon className="h-8 w-8 text-[#03809c]" />
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=64&fit=crop&crop=center" 
+                      alt="Virtual Staging"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Virtual Staging</h3>
+                    <p className="text-[#273f4f]/80">
+                      Digital furniture and decor to showcase property potential
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-[#273f4f] mb-4">Social Media</h3>
-                <p className="text-[#273f4f]/80">
-                  Social media management and content creation
-                </p>
               </div>
-            </ScrollAnimation>
+              
+              {/* Second set of services */}
+              <div className="flex gap-8 min-w-full">
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=64&fit=crop&crop=center" 
+                      alt="Personal Branding"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Personal Branding</h3>
+                    <p className="text-[#273f4f]/80">
+                      Professional headshots and branding content for realtors
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=64&fit=crop&crop=center" 
+                      alt="Home Listing Content"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Home Listing Content</h3>
+                    <p className="text-[#273f4f]/80">
+                      Complete content packages for property listings
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=64&fit=crop&crop=center" 
+                      alt="New Launch Content"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">New Launch Content</h3>
+                    <p className="text-[#273f4f]/80">
+                      Marketing materials for new property developments
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=64&fit=crop&crop=center" 
+                      alt="Copywriting"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Copywriting</h3>
+                    <p className="text-[#273f4f]/80">
+                      Compelling property descriptions and marketing copy
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Third set of services */}
+              <div className="flex gap-8 min-w-full">
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=64&fit=crop&crop=center" 
+                      alt="Social Media Management"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Social Media Management</h3>
+                    <p className="text-[#273f4f]/80">
+                      Complete social media strategy and content management
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=64&fit=crop&crop=center" 
+                      alt="Storyboard Creation"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Storyboard Creation</h3>
+                    <p className="text-[#273f4f]/80">
+                      Visual storytelling and marketing campaign planning
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=64&fit=crop&crop=center" 
+                      alt="Videography"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Videography</h3>
+                    <p className="text-[#273f4f]/80">
+                      Property videos, drone footage, and marketing content
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
+                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=64&fit=crop&crop=center" 
+                      alt="Photography"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#273f4f] mb-4">Photography</h3>
+                    <p className="text-[#273f4f]/80">
+                      Professional real estate photography and virtual tours
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -361,37 +519,37 @@ export default function Home() {
           </ScrollAnimation>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <ScrollAnimation delay={400} direction="left">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col min-h-[600px]">
                 <h3 className="text-2xl lg:text-3xl font-bold text-[#273f4f] mb-8 text-center">
                   For KW Realtors
                 </h3>
-                <div className="space-y-6">
+                <div className="space-y-6 flex-grow">
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#03809c] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
-                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Exclusive Access</h4>
-                      <p className="text-[#273f4f]/80">Curated vendors exclusively for KW agents</p>
+                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Curated Vendors</h4>
+                      <p className="text-[#273f4f]/80">Exclusive access to a curated marketplace of verified creatives, all tailored for KW agents.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#03809c] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Quality Guaranteed</h4>
-                      <p className="text-[#273f4f]/80">All vendors pre-screened and verified</p>
+                      <p className="text-[#273f4f]/80">We guarantee quality as all our vendors are thoroughly vetted, ensuring consistent, high-standard service.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#03809c] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
-                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Direct Communication</h4>
-                      <p className="text-[#273f4f]/80">Work directly with vendors via WhatsApp</p>
+                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Efficient Communication</h4>
+                      <p className="text-[#273f4f]/80">Work directly with your chosen vendors via WhatsApp for seamless and efficient project communication.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#03809c] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
-                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Secure Payments</h4>
-                      <p className="text-[#273f4f]/80">50% deposit, 50% upon completion</p>
+                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Transparent Transactions</h4>
+                      <p className="text-[#273f4f]/80">Benefit from our secure payment system with a clear 50% deposit and 50% upon completion structure.</p>
                     </div>
                   </div>
                 </div>
@@ -404,37 +562,37 @@ export default function Home() {
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={600} direction="right">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col min-h-[600px]">
                 <h3 className="text-2xl lg:text-3xl font-bold text-[#273f4f] mb-8 text-center">
                   For Vendors
                 </h3>
-                <div className="space-y-6">
+                <div className="space-y-6 flex-grow">
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
-                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Exclusive Market</h4>
-                      <p className="text-[#273f4f]/80">Access to KW&apos;s extensive realtor network</p>
+                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Lead Generation</h4>
+                      <p className="text-[#273f4f]/80">Tap into an exclusive market of KW Singapore realtors, giving you access to a vast network.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
-                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Fair Revenue Split</h4>
-                      <p className="text-[#273f4f]/80">85% vendor, 15% platform fee</p>
+                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Revenue Share</h4>
+                      <p className="text-[#273f4f]/80">Our competitive revenue share reflects our belief in the value of creative work, ensuring you are equitably rewarded for your talent and effort.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
-                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Direct Client Contact</h4>
-                      <p className="text-[#273f4f]/80">Work directly with clients, not through platform</p>
+                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Reliable Client Connections</h4>
+                      <p className="text-[#273f4f]/80">We provide a structured environment to connect you with serious clients, fostering professional relationships within the KW community.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
-                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Quality Standards</h4>
-                      <p className="text-[#273f4f]/80">Maintain high standards, build reputation</p>
+                      <h4 className="font-bold text-[#273f4f] text-lg mb-2">Build a Strong Reputation</h4>
+                      <p className="text-[#273f4f]/80">Maintain high service standards and build a trusted reputation within the exclusive KW realtor community</p>
                     </div>
                   </div>
                 </div>
@@ -697,13 +855,18 @@ export default function Home() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <ShieldCheckIcon className="h-8 w-8 text-[#f37521]" />
-                <h3 className="text-2xl font-bold">Chief Media</h3>
+              <div className="mb-4">
+                <Image
+                  src="/chief-media-logo.webp"
+                  alt="Chief Media"
+                  width={120}
+                  height={40}
+                  className="h-16 w-auto mb-4 ml-[-20px]"
+                />
+                <p className="text-[#fcebdc]">
+                  The exclusive curated marketplace for Keller Williams realtors. Connect with verified creatives, photographers, and marketing experts.
+                </p>
               </div>
-              <p className="text-[#fcebdc] mb-4">
-                The exclusive curated marketplace for Keller Williams realtors. Connect with verified creatives, photographers, and marketing experts.
-              </p>
             </div>
             <div>
               <h4 className="font-bold text-lg mb-4">Services</h4>

@@ -14,13 +14,12 @@ import {
 } from '@heroicons/react/24/outline';
 import CurrentYear from "../components/CurrentYear";
 import ScrollAnimation from "../components/ScrollAnimation";
-import AnimatedBackground from "../components/AnimatedBackground";
-import HeroAnimatedBackground from "../components/HeroAnimatedBackground";
 import Counter from "../components/Counter";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const projectsPerPage = 4;
 
   // Project data with categories
@@ -107,7 +106,6 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative bg-[#fcebdc] min-h-screen flex items-center justify-center overflow-hidden">
-        <HeroAnimatedBackground />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-center">
@@ -192,7 +190,10 @@ export default function Home() {
             <div className="max-w-6xl mx-auto mb-16">
               <div className="relative bg-gray-300 rounded-2xl p-6 lg:p-8 shadow-2xl">
                 {/* Video Player Container */}
-                <div className="relative bg-gray-200 rounded-xl overflow-hidden h-64 lg:h-80">
+                <div 
+                  className="relative bg-gray-200 rounded-xl overflow-hidden h-64 lg:h-80 cursor-pointer"
+                  onClick={() => setIsVideoModalOpen(true)}
+                >
                   <Image 
                     src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=400&fit=crop&crop=center" 
                     alt="Video thumbnail" 
@@ -202,7 +203,7 @@ export default function Home() {
                   
                   {/* Play Button */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200">
                       <div className="w-0 h-0 border-l-[12px] border-l-[#03809c] border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
                     </div>
                   </div>
@@ -969,6 +970,32 @@ export default function Home() {
         </div>
       </footer>
 
+      {/* Video Modal */}
+      {isVideoModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="relative max-w-2xl w-full bg-white rounded-lg shadow-2xl">
+            <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+              <h3 className="text-lg font-semibold text-gray-800">Recruitment Video</h3>
+              <button
+                onClick={() => setIsVideoModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700 text-2xl transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-4">
+              <video
+                className="w-full h-[600px] rounded object-cover"
+                controls
+                autoPlay
+              >
+                <source src="/video/Recruitment Poster.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

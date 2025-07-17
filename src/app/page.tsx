@@ -10,7 +10,8 @@ import {
   ShieldCheckIcon,
   StarIcon,
   ArrowRightIcon,
-  EnvelopeIcon
+  EnvelopeIcon,
+  ChevronDownIcon
 } from '@heroicons/react/24/outline';
 import CurrentYear from "../components/CurrentYear";
 import ScrollAnimation from "../components/ScrollAnimation";
@@ -145,7 +146,7 @@ export default function Home() {
                   </p>
                 </ScrollAnimation>
                 <ScrollAnimation delay={500}>
-                  <div className="h-12 relative overflow-hidden">
+                  <div className="h-16 relative overflow-hidden">
                     <div className="flex items-center gap-3 animate-fade-up-cycle">
                       <StarIcon className="h-6 w-6 text-[#f37521] animate-pulse" />
                       <span className="text-black text-xl font-bold">Exclusive to KW Realtors</span>
@@ -162,6 +163,16 @@ export default function Home() {
                 </ScrollAnimation>
               </div>
             </div>
+          </div>
+          
+          {/* Scroll to Explore */}
+          <div className="absolute top-[480px] left-1/2 transform -translate-x-1/2 text-center">
+            <ScrollAnimation delay={1000}>
+              <div className="flex flex-col items-center gap-2">
+                <p className="text-black text-sm font-medium">Scroll to explore</p>
+                <ChevronDownIcon className="h-5 w-5 text-black animate-bounce" />
+              </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>

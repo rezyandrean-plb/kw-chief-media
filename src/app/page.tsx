@@ -109,49 +109,61 @@ export default function Home() {
       <section className="relative bg-[#fcebdc] min-h-screen flex items-center justify-center overflow-hidden">
         <HeroAnimatedBackground />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <ScrollAnimation delay={200}>
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <h1 className="text-4xl lg:text-6xl font-bold text-[#273f4f]">
-                  Chief Media
-                </h1>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-center">
+                            {/* Left Column - Main Content */}
+              <div className="text-left lg:col-span-2">
+                <ScrollAnimation delay={200}>
+                  <h1 className="text-4xl lg:text-6xl font-bold text-[#273f4f] mb-6">
+                    Chief Media
+                  </h1>
+                </ScrollAnimation>
+                <ScrollAnimation delay={400}>
+                  <h3 className="text-xl lg:text-2xl font-bold text-[#273f4f] mb-6">KW Singapore’s Exclusive Curated Media Network</h3>
+                </ScrollAnimation>
+                <ScrollAnimation delay={600}>
+                  <p className="text-lg lg:text-xl text-[#273f4f] mb-8">
+                    Partner with trusted media experts—so you can focus on what truly matters: <span className="font-bold">real estate</span>.
+                  </p>
+                </ScrollAnimation>
+                <ScrollAnimation delay={800}>
+                  <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                    <Link href="/vendors" className="inline-flex items-center gap-2 bg-[#f37521] text-white px-8 py-4 rounded-lg hover:bg-[#e0651a] transition font-medium text-lg">
+                      Browse Vendors
+                      <ArrowRightIcon className="h-5 w-5" />
+                    </Link>
+                    <Link href="/vendor-application" className="inline-flex items-center gap-2 bg-white text-[#273f4f] px-8 py-4 rounded-lg hover:bg-[#fcebdc] transition font-medium text-lg border-2 border-white">
+                      Become a Vendor
+                    </Link>
+                  </div>
+                </ScrollAnimation>
               </div>
-            </ScrollAnimation>
-            <ScrollAnimation delay={400}>
-              <h3 className="text-xl lg:text-2xl font-bold text-[#273f4f] mb-6">KW Singapore’s Exclusive Curated Media Network</h3>
-            </ScrollAnimation>
-            <ScrollAnimation delay={600}>
-              <p className="text-lg lg:text-xl text-[#273f4f] mb-8 mx-auto text-center">
-                Partner with trusted media experts—so you can focus on what truly matters: <span className="font-bold">real estate</span>.
-              </p>
-            </ScrollAnimation>
-            <ScrollAnimation delay={800}>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <Link href="/vendors" className="inline-flex items-center gap-2 bg-[#f37521] text-white px-8 py-4 rounded-lg hover:bg-[#e0651a] transition font-medium text-lg hover:scale-105 transform duration-200">
-                  Browse Vendors
-                  <ArrowRightIcon className="h-5 w-5" />
-                </Link>
-                <Link href="/vendor-application" className="inline-flex items-center gap-2 bg-white text-[#273f4f] px-8 py-4 rounded-lg hover:bg-[#fcebdc] transition font-medium text-lg border-2 border-white hover:scale-105 transform duration-200">
-                  Become a Vendor
-                </Link>
+
+              {/* Right Column - Description & Social Proof */}
+              <div className="text-left">
+                <ScrollAnimation delay={300}>
+                  <p className="text-lg lg:text-xl text-black mb-8">
+                    We deliver globally UI, UX & web design smoothly, without delay, saving your time and money with an efficient process.
+                  </p>
+                </ScrollAnimation>
+                <ScrollAnimation delay={500}>
+                  <div className="h-12 relative overflow-hidden">
+                    <div className="flex items-center gap-3 animate-fade-up-cycle">
+                      <StarIcon className="h-6 w-6 text-[#f37521] animate-pulse" />
+                      <span className="text-black text-xl font-bold">Exclusive to KW Realtors</span>
+                    </div>
+                    <div className="flex items-center gap-3 animate-fade-up-cycle" style={{ animationDelay: '2s' }}>
+                      <CheckCircleIcon className="h-6 w-6 text-[#03809c] animate-pulse" />
+                      <span className="text-black text-xl font-bold">Verified Vendors Only</span>
+                    </div>
+                    <div className="flex items-center gap-3 animate-fade-up-cycle" style={{ animationDelay: '4s' }}>
+                      <ShieldCheckIcon className="h-6 w-6 text-[#f37521] animate-pulse" />
+                      <span className="text-black text-xl font-bold">Quality Guaranteed</span>
+                    </div>
+                  </div>
+                </ScrollAnimation>
               </div>
-            </ScrollAnimation>
-            <ScrollAnimation delay={1000}>
-              <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#273f4f]">
-                <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-200">
-                  <StarIcon className="h-4 w-4 text-[#f37521] animate-pulse" />
-                  <span>Exclusive to KW Realtors</span>
-                </div>
-                <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-200">
-                  <CheckCircleIcon className="h-4 w-4 text-[#03809c] animate-pulse" />
-                  <span>Verified Vendors Only</span>
-                </div>
-                <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-200">
-                  <ShieldCheckIcon className="h-4 w-4 text-[#f37521] animate-pulse" />
-                  <span>Quality Guaranteed</span>
-                </div>
-              </div>
-            </ScrollAnimation>
+            </div>
           </div>
         </div>
       </section>
@@ -233,9 +245,8 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 lg:py-24 bg-[#fcebdc] relative overflow-hidden">
-        <AnimatedBackground />
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <section className="py-16 lg:py-24 bg-[#fcebdc]">
+        <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-5xl font-bold text-[#273f4f] mb-6">

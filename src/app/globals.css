@@ -37,3 +37,31 @@ body {
 .animate-scroll {
   animation: scroll linear infinite;
 }
+
+/* Fade-up cycle animation for social proof items */
+@keyframes fade-up-cycle {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  10%, 23.33% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  33.33% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+.animate-fade-up-cycle {
+  animation: fade-up-cycle 6s ease-in-out infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}

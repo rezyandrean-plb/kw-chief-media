@@ -257,7 +257,7 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 lg:py-24 bg-[#fcebdc]">
+      <section className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
@@ -272,10 +272,12 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             <ScrollAnimation delay={400} direction="left">
               <div className="p-8 lg:p-12 h-full min-h-[400] flex flex-col">
-                <div className="w-16 h-16 bg-[#03809c]/10 rounded-2xl flex items-center justify-center mb-6">
-                  <span className="text-2xl font-bold text-[#03809c]">01</span>
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-16 h-16 bg-[#03809c]/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl font-bold text-[#03809c]">01</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#273f4f] flex-1">Curated Vendors</h3>
                 </div>
-                <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Curated Vendors</h3>
                 <p className="text-[#273f4f]/80 text-lg flex-grow">
                   We handpick and verify only reliable creatives who understand real estate—and show up with quality.
                 </p>
@@ -283,10 +285,12 @@ export default function Home() {
             </ScrollAnimation>
             <ScrollAnimation delay={600} direction="up">
               <div className="p-8 lg:p-12 h-full min-h-[400] flex flex-col">
-                <div className="w-16 h-16 bg-[#f37521]/10 rounded-2xl flex items-center justify-center mb-6">
-                  <span className="text-2xl font-bold text-[#f37521]">02</span>
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-16 h-16 bg-[#f37521]/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl font-bold text-[#f37521]">02</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#273f4f] flex-1">Efficient Workflows</h3>
                 </div>
-                <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Efficient Workflows</h3>
                 <p className="text-[#273f4f]/80 text-lg flex-grow">
                   No more chasing vendors. We ensure clear coordination between agents and creatives, so your project runs smoothly from start to finish
                 </p>
@@ -294,10 +298,12 @@ export default function Home() {
             </ScrollAnimation>
             <ScrollAnimation delay={800} direction="right">
               <div className="p-8 lg:p-12 h-full min-h-[400] flex flex-col">
-                <div className="w-16 h-16 bg-[#f2a16d]/10 rounded-2xl flex items-center justify-center mb-6">
-                  <span className="text-2xl font-bold text-[#f2a16d]">03</span>
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-16 h-16 bg-[#f2a16d]/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl font-bold text-[#f2a16d]">03</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#273f4f] flex-1">Quality Results, No Guesswork</h3>
                 </div>
-                <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Quality Results, No Guesswork</h3>
                 <p className="text-[#273f4f]/80 text-lg flex-grow">
                   Say goodbye to vague timelines and subpar work. With a structured 50/50 payment model you get professional delivery you can count on.
                 </p>

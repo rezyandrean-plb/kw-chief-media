@@ -166,7 +166,7 @@ export default function Home() {
           </div>
           
           {/* Scroll to Explore */}
-          <div className="absolute top-[480px] left-1/2 transform -translate-x-1/2 text-center">
+          <div className="absolute top-[420px] left-1/2 transform -translate-x-1/2 text-center">
             <ScrollAnimation delay={1000}>
               <div className="flex flex-col items-center gap-2">
                 <p className="text-black text-sm font-medium">Scroll to explore</p>

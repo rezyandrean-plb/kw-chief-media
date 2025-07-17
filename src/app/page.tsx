@@ -5,8 +5,6 @@ import Image from "next/image";
 import { useState, useMemo } from "react";
 import { 
   UserGroupIcon, 
-  DocumentTextIcon,
-  CameraIcon,
   VideoCameraIcon,
   CheckCircleIcon,
   ShieldCheckIcon,
@@ -15,7 +13,6 @@ import {
   EnvelopeIcon
 } from '@heroicons/react/24/outline';
 import CurrentYear from "../components/CurrentYear";
-import AnimatedIcon from "../components/AnimatedIcon";
 import ScrollAnimation from "../components/ScrollAnimation";
 import AnimatedBackground from "../components/AnimatedBackground";
 import HeroAnimatedBackground from "../components/HeroAnimatedBackground";
@@ -107,27 +104,24 @@ export default function Home() {
   const currentProjects = filteredProjects.slice(startIndex, endIndex);
 
   return (
-    <div className="min-h-screen bg-[#fcebdc]">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative bg-[#273f4f] min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative bg-[#fcebdc] min-h-screen flex items-center justify-center overflow-hidden">
         <HeroAnimatedBackground />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollAnimation delay={200}>
               <div className="flex items-center justify-center gap-3 mb-6">
-                <AnimatedIcon color="#03809c" size={64} delay={500}>
-                  <ShieldCheckIcon className="h-8 w-8" />
-                </AnimatedIcon>
-                <h1 className="text-4xl lg:text-6xl font-bold text-white">
+                <h1 className="text-4xl lg:text-6xl font-bold text-[#273f4f]">
                   Chief Media
                 </h1>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={400}>
-              <h3 className="text-xl lg:text-2xl font-bold text-white mb-6">KW Singapore’s Exclusive Curated Media Network</h3>
+              <h3 className="text-xl lg:text-2xl font-bold text-[#273f4f] mb-6">KW Singapore’s Exclusive Curated Media Network</h3>
             </ScrollAnimation>
             <ScrollAnimation delay={600}>
-              <p className="text-lg lg:text-xl text-white mb-8 mx-auto text-center">
+              <p className="text-lg lg:text-xl text-[#273f4f] mb-8 mx-auto text-center">
                 Partner with trusted media experts—so you can focus on what truly matters: <span className="font-bold">real estate</span>.
               </p>
             </ScrollAnimation>
@@ -143,7 +137,7 @@ export default function Home() {
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={1000}>
-              <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white">
+              <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#273f4f]">
                 <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-200">
                   <StarIcon className="h-4 w-4 text-[#f37521] animate-pulse" />
                   <span>Exclusive to KW Realtors</span>
@@ -163,7 +157,7 @@ export default function Home() {
       </section>
 
       {/* Remarkable Results & Stats Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-[#fcebdc] to-[#f2a16d]">
+      <section className="py-16 lg:py-24 bg-[#fcebdc]">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-6xl mx-auto mb-16">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -187,10 +181,11 @@ export default function Home() {
               <div className="relative bg-gray-300 rounded-2xl p-6 lg:p-8 shadow-2xl">
                 {/* Video Player Container */}
                 <div className="relative bg-gray-200 rounded-xl overflow-hidden h-64 lg:h-80">
-                  <img 
+                  <Image 
                     src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=400&fit=crop&crop=center" 
                     alt="Video thumbnail" 
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                   
                   {/* Play Button */}
@@ -208,21 +203,25 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
               <ScrollAnimation delay={200}>
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                <div className="p-8 text-center relative">
                   <Counter target={100} color="#f37521" />
                   <p className="text-[#273f4f] font-semibold text-lg">Verified Vendors</p>
                   <p className="text-sm text-[#273f4f]/70 mt-2">We have a proven track record of delivering exceptional results across various industries.</p>
+                  {/* Vertical divider - hidden on mobile, visible on md+ */}
+                  <div className="hidden md:block absolute top-1/2 right-0 transform -translate-y-1/2 w-px h-16 bg-[#273f4f]/20"></div>
                 </div>
               </ScrollAnimation>
               <ScrollAnimation delay={400}>
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                <div className="p-8 text-center relative">
                   <Counter target={1000} color="#03809c" />
                   <p className="text-[#273f4f] font-semibold text-lg">Projects Completed</p>
                   <p className="text-sm text-[#273f4f]/70 mt-2">We have a proven track record of delivering exceptional results across various industries.</p>
+                  {/* Vertical divider - hidden on mobile, visible on md+ */}
+                  <div className="hidden md:block absolute top-1/2 right-0 transform -translate-y-1/2 w-px h-16 bg-[#273f4f]/20"></div>
                 </div>
               </ScrollAnimation>
               <ScrollAnimation delay={600}>
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                <div className="p-8 text-center relative">
                   <Counter target={500} color="#f2a16d" />
                   <p className="text-[#273f4f] font-semibold text-lg">Happy Clients</p>
                   <p className="text-sm text-[#273f4f]/70 mt-2">We have a proven track record of delivering exceptional results across various industries.</p>
@@ -249,8 +248,8 @@ export default function Home() {
           </ScrollAnimation>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             <ScrollAnimation delay={400} direction="left">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full min-h-[400px] flex flex-col">
-                <div className="w-16 h-16 bg-[#03809c]/10 rounded-2xl flex items-center justify-center mb-6 animate-pulse">
+              <div className="p-8 lg:p-12 h-full min-h-[400] flex flex-col">
+                <div className="w-16 h-16 bg-[#03809c]/10 rounded-2xl flex items-center justify-center mb-6">
                   <span className="text-2xl font-bold text-[#03809c]">01</span>
                 </div>
                 <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Curated Vendors</h3>
@@ -260,8 +259,8 @@ export default function Home() {
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={600} direction="up">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full min-h-[400px] flex flex-col">
-                <div className="w-16 h-16 bg-[#f37521]/10 rounded-2xl flex items-center justify-center mb-6 animate-pulse">
+              <div className="p-8 lg:p-12 h-full min-h-[400] flex flex-col">
+                <div className="w-16 h-16 bg-[#f37521]/10 rounded-2xl flex items-center justify-center mb-6">
                   <span className="text-2xl font-bold text-[#f37521]">02</span>
                 </div>
                 <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Efficient Workflows</h3>
@@ -271,8 +270,8 @@ export default function Home() {
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={800} direction="right">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full min-h-[400px] flex flex-col">
-                <div className="w-16 h-16 bg-[#f2a16d]/10 rounded-2xl flex items-center justify-center mb-6 animate-pulse">
+              <div className="p-8 lg:p-12 h-full min-h-[400] flex flex-col">
+                <div className="w-16 h-16 bg-[#f2a16d]/10 rounded-2xl flex items-center justify-center mb-6">
                   <span className="text-2xl font-bold text-[#f2a16d]">03</span>
                 </div>
                 <h3 className="text-2xl font-bold text-[#273f4f] mb-4">Quality Results, No Guesswork</h3>
@@ -304,15 +303,16 @@ export default function Home() {
             <div className="flex animate-scroll gap-8" style={{ animationDuration: '60s' }}>
               {/* First set of services */}
               <div className="flex gap-8 min-w-full">
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=64&fit=crop&crop=center" 
                       alt="Professional Stills"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
-                                    <div className="p-8">
+                  <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Professional Stills</h3>
                     <p className="text-[#273f4f]/80">
                       High-quality photography for luxury properties and listings
@@ -320,12 +320,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1506947411487-a56738267384?w=400&h=64&fit=crop&crop=center" 
                       alt="Drone Imagery"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -336,12 +337,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=64&fit=crop&crop=center" 
                       alt="Virtual Tours"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -352,12 +354,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=64&fit=crop&crop=center" 
                       alt="Virtual Staging"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -371,12 +374,13 @@ export default function Home() {
               
               {/* Second set of services */}
               <div className="flex gap-8 min-w-full">
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=64&fit=crop&crop=center" 
                       alt="Personal Branding"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -387,12 +391,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=64&fit=crop&crop=center" 
                       alt="Home Listing Content"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -403,12 +408,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=64&fit=crop&crop=center" 
                       alt="New Launch Content"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -419,12 +425,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=64&fit=crop&crop=center" 
                       alt="Copywriting"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -438,12 +445,13 @@ export default function Home() {
               
               {/* Third set of services */}
               <div className="flex gap-8 min-w-full">
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=64&fit=crop&crop=center" 
                       alt="Social Media Management"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -454,12 +462,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=64&fit=crop&crop=center" 
                       alt="Storyboard Creation"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -470,12 +479,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=64&fit=crop&crop=center" 
                       alt="Videography"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -486,12 +496,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-2 min-w-[280px]">
-                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform animate-pulse overflow-hidden">
-                    <img 
+                <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
+                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                    <Image 
                       src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=64&fit=crop&crop=center" 
                       alt="Photography"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="p-8">
@@ -517,9 +528,9 @@ export default function Home() {
               </h2>
             </div>
           </ScrollAnimation>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative">
             <ScrollAnimation delay={400} direction="left">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col min-h-[600px]">
+              <div className="p-8 lg:p-12 full flex flex-col min-h-[600px]">
                 <h3 className="text-2xl lg:text-3xl font-bold text-[#273f4f] mb-8 text-center">
                   For KW Realtors
                 </h3>
@@ -561,8 +572,16 @@ export default function Home() {
                 </div>
               </div>
             </ScrollAnimation>
+            
+            {/* Static Line Divider */}
+            <div 
+              className="hidden lg:block absolute left-1/2 top-1/2 w-px h-96 bg-gradient-to-b from-transparent via-[#273f4f]/30 to-transparent transform -translate-x-1/2 -translate-y-1/2"
+            >
+              <div className="w-full h-full bg-gradient-to-b from-[#f37521] via-[#03809c] to-[#f2a16d] opacity-60 animate-pulse"></div>
+            </div>
+            
             <ScrollAnimation delay={600} direction="right">
-              <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col min-h-[600px]">
+              <div className="p-8 lg:p-12 full flex flex-col min-h-[600px]">
                 <h3 className="text-2xl lg:text-3xl font-bold text-[#273f4f] mb-8 text-center">
                   For Vendors
                 </h3>
@@ -571,28 +590,28 @@ export default function Home() {
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Lead Generation</h4>
-                      <p className="text-[#273f4f]/80">Tap into an exclusive market of KW Singapore realtors, giving you access to a vast network.</p>
+                      <p className="text-[#273f4f]/80">Access an exclusive market of KW Singapore realtors through our curated network.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Revenue Share</h4>
-                      <p className="text-[#273f4f]/80">Our competitive revenue share reflects our belief in the value of creative work, ensuring you are equitably rewarded for your talent and effort.</p>
+                      <p className="text-[#273f4f]/80">Competitive revenue sharing that fairly rewards your creative talent and professional effort.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Reliable Client Connections</h4>
-                      <p className="text-[#273f4f]/80">We provide a structured environment to connect you with serious clients, fostering professional relationships within the KW community.</p>
+                      <p className="text-[#273f4f]/80">Connect with serious KW clients in a structured environment that fosters professional relationships.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Build a Strong Reputation</h4>
-                      <p className="text-[#273f4f]/80">Maintain high service standards and build a trusted reputation within the exclusive KW realtor community</p>
+                      <p className="text-[#273f4f]/80">Establish trust and build your reputation within the exclusive KW realtor community.</p>
                     </div>
                   </div>
                 </div>
@@ -676,10 +695,11 @@ export default function Home() {
                 <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                   <div className="h-80 relative overflow-hidden">
                     <div className="absolute inset-0">
-                      <img 
+                      <Image 
                         src={project.image} 
                         alt={project.title} 
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                       />
                     </div>
                   </div>
@@ -742,61 +762,109 @@ export default function Home() {
                 Recent Projects
               </h2>
               <p className="text-lg text-[#273f4f]/80 max-w-2xl mx-auto">
-                Recent work from our verified vendors
+                Recent work from our verified vendors.
               </p>
             </div>
           </ScrollAnimation>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ScrollAnimation delay={300} direction="left">
-              <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="h-64 bg-gradient-to-br from-[#03809c] to-[#f37521] flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <CameraIcon className="h-16 w-16 text-white animate-pulse" />
+              <div className="group overflow-hidden transition-all duration-300 rounded-2xl shadow-lg hover:shadow-xl">
+                <div className="relative h-64 bg-gray-900 overflow-hidden">
+                  <video 
+                    className="w-full h-full object-cover"
+                    poster="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=256&fit=crop&crop=center"
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  {/* Play overlay */}
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                      <div className="w-0 h-0 border-l-[12px] border-l-[#03809c] border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#273f4f] mb-3">Luxury Home Photography</h3>
+                  <h3 className="text-xl font-bold text-[#273f4f] mb-3">Luxury Property Tour</h3>
                   <p className="text-[#273f4f]/80 mb-4">
-                    Professional photography for a $2.5M luxury property in Orchard Road
+                    Cinematic video tour of a $3.2M luxury penthouse in Marina Bay
                   </p>
                   <div className="flex items-center text-sm text-[#273f4f]/60">
-                    <span>Photography</span>
+                    <VideoCameraIcon className="h-4 w-4 mr-2" />
+                    <span>Videography</span>
                     <span className="mx-2">•</span>
-                    <span>Completed</span>
+                    <span>2:45 min</span>
                   </div>
                 </div>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={500} direction="up">
-              <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="h-64 bg-gradient-to-br from-[#f37521] to-[#f2a16d] flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <VideoCameraIcon className="h-16 w-16 text-white animate-pulse" />
+              <div className="group overflow-hidden transition-all duration-300 rounded-2xl shadow-lg hover:shadow-xl">
+                <div className="relative h-64 bg-gray-900 overflow-hidden">
+                  <video 
+                    className="w-full h-full object-cover"
+                    poster="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=256&fit=crop&crop=center"
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  {/* Play overlay */}
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                      <div className="w-0 h-0 border-l-[12px] border-l-[#f37521] border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#273f4f] mb-3">Property Video Tour</h3>
+                  <h3 className="text-xl font-bold text-[#273f4f] mb-3">Drone Aerial Showcase</h3>
                   <p className="text-[#273f4f]/80 mb-4">
-                    Cinematic video tour with drone footage for modern townhouse in Marina Bay
+                    Breathtaking drone footage of waterfront properties in Sentosa
                   </p>
                   <div className="flex items-center text-sm text-[#273f4f]/60">
-                    <span>Videography</span>
+                    <VideoCameraIcon className="h-4 w-4 mr-2" />
+                    <span>Drone Videography</span>
                     <span className="mx-2">•</span>
-                    <span>Completed</span>
+                    <span>1:30 min</span>
                   </div>
                 </div>
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={700} direction="right">
-              <div className="group bg-[#fcebdc] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="h-64 bg-gradient-to-br from-[#f2a16d] to-[#03809c] flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <DocumentTextIcon className="h-16 w-16 text-white animate-pulse" />
+              <div className="group overflow-hidden transition-all duration-300 rounded-2xl shadow-lg hover:shadow-xl">
+                <div className="relative h-64 bg-gray-900 overflow-hidden">
+                  <video 
+                    className="w-full h-full object-cover"
+                    poster="https://images.unsplash.com/photo-1506947411487-a56738267384?w=400&h=256&fit=crop&crop=center"
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  {/* Play overlay */}
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                      <div className="w-0 h-0 border-l-[12px] border-l-[#f2a16d] border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#273f4f] mb-3">Marketing Copy</h3>
+                  <h3 className="text-xl font-bold text-[#273f4f] mb-3">Virtual Tour Experience</h3>
                   <p className="text-[#273f4f]/80 mb-4">
-                    Compelling property descriptions and social media content for Sentosa properties
+                    360° virtual tour with interactive hotspots for modern condo
                   </p>
                   <div className="flex items-center text-sm text-[#273f4f]/60">
-                    <span>Copywriting</span>
+                    <VideoCameraIcon className="h-4 w-4 mr-2" />
+                    <span>Virtual Tour</span>
                     <span className="mx-2">•</span>
-                    <span>Completed</span>
+                    <span>3:15 min</span>
                   </div>
                 </div>
               </div>
@@ -805,7 +873,7 @@ export default function Home() {
           <ScrollAnimation delay={900}>
             <div className="text-center mt-12">
               <Link href="/portfolio" className="inline-flex items-center gap-2 text-[#f37521] hover:text-[#e0651a] font-medium text-lg hover:scale-105 transform duration-200">
-                View Full Portfolio
+                View Full Video Portfolio
                 <ArrowRightIcon className="h-5 w-5" />
               </Link>
             </div>
@@ -814,18 +882,18 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 lg:py-24 bg-[#273f4f]">
+      <section className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollAnimation delay={200}>
-              <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
+              <h2 className="text-3xl lg:text-5xl font-bold text-[#273f4f] mb-6">
                 Elevate your digital presence. Contact us today!
               </h2>
             </ScrollAnimation>
             <ScrollAnimation delay={400}>
-              <p className="text-xl text-[#fcebdc] mb-8 max-w-2xl mx-auto">
-                Whether you&apos;re a KW realtor looking for quality vendors or a creative professional wanting to join our exclusive network, 
-                Isabelle is here to help you get started.
+              <p className="text-xl text-[#273f4f]/80 mb-8 max-w-2xl mx-auto">
+                Whether you&apos;re a KW Singapore Realtor looking for quality vendors or a creative professional wanting to join our exclusive network, 
+                We here to help you get started.
               </p>
             </ScrollAnimation>
             <ScrollAnimation delay={600}>
@@ -835,11 +903,11 @@ export default function Home() {
                   className="inline-flex items-center gap-2 bg-[#f37521] text-white px-8 py-4 rounded-lg font-medium hover:bg-[#e0651a] transition text-lg hover:scale-105 transform duration-200"
                 >
                   <EnvelopeIcon className="h-5 w-5" />
-                  Contact Isabelle
+                  Contact us
                 </Link>
                 <Link
                   href="/vendor-application"
-                  className="inline-flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-[#273f4f] transition text-lg hover:scale-105 transform duration-200"
+                  className="inline-flex items-center gap-2 border-2 border-[#273f4f] text-[#273f4f] px-8 py-4 rounded-lg font-medium hover:bg-[#273f4f] hover:text-white transition text-lg hover:scale-105 transform duration-200"
                 >
                   <UserGroupIcon className="h-5 w-5" />
                   Apply as Vendor
@@ -851,26 +919,26 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#273f4f] text-white py-12">
+      <footer className="bg-[#fcebdc] text-[#273f4f] py-12">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
               <div className="mb-4">
                 <Image
-                  src="/chief-media-logo.webp"
+                  src="/chief-media-logo-dark.webp"
                   alt="Chief Media"
                   width={120}
                   height={40}
-                  className="h-16 w-auto mb-4 ml-[-20px]"
+                  className="h-16 w-auto mb-4"
                 />
-                <p className="text-[#fcebdc]">
+                <p className="text-[#273f4f]/80">
                   The exclusive curated marketplace for Keller Williams realtors. Connect with verified creatives, photographers, and marketing experts.
                 </p>
               </div>
             </div>
             <div>
               <h4 className="font-bold text-lg mb-4">Services</h4>
-              <ul className="space-y-2 text-[#fcebdc]">
+              <ul className="space-y-2 text-[#273f4f]/80">
                 <li><Link href="/vendors" className="hover:text-[#f37521] transition">Browse Vendors</Link></li>
                 <li><Link href="/vendor-application" className="hover:text-[#f37521] transition">Become a Vendor</Link></li>
                 <li><Link href="/portfolio" className="hover:text-[#f37521] transition">Portfolio</Link></li>
@@ -878,14 +946,14 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold text-lg mb-4">Contact</h4>
-              <ul className="space-y-2 text-[#fcebdc]">
+              <ul className="space-y-2 text-[#273f4f]/80">
                 <li><Link href="/contact" className="hover:text-[#f37521] transition">Contact Us</Link></li>
                 <li><Link href="/about" className="hover:text-[#f37521] transition">About</Link></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-[#fcebdc]/20 mt-8 pt-8 text-center text-[#fcebdc]">
-            <p>&copy; <CurrentYear /> Chief Media. Exclusive to Keller Williams Realtors.</p>
+          <div className="border-t border-[#273f4f]/20 mt-8 pt-8 text-center text-[#273f4f]/80">
+            <p>&copy; <CurrentYear /> Chief Media. Exclusive to KW Singapore Realtors.</p>
           </div>
         </div>
       </footer>

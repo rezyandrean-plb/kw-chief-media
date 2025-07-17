@@ -57,7 +57,7 @@ export default function ContactPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-[#273f4f] relative overflow-hidden flex items-center justify-center">
+      <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center">
         <AnimatedBackground />
         <div className="max-w-md mx-auto text-center">
           <div className="bg-[#fcebdc] rounded-lg shadow-lg p-8">
@@ -84,16 +84,16 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       <AnimatedBackground />
       <div className="max-w-6xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-3xl font-semibold text-white mb-4 font-poppins">
+            <h1 className="text-3xl font-semibold text-[#273f4f] mb-4 font-poppins">
               Contact us
             </h1>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto font-poppins">
+            <p className="text-lg text-[#273f4f]/90 max-w-2xl mx-auto font-poppins">
               Get in touch with us - Whether youre a KW Singapore Realtor looking to streamline your media support or a creative looking to join our network, we’re happy to chat
             </p>
           </div>
@@ -102,7 +102,7 @@ export default function ContactPage() {
             {/* Contact Information */}
             <div className="space-y-6 sm:space-y-8">
               <div>
-                <h2 className="text-xl sm:text-2xl font-medium text-white mb-4 sm:mb-6 font-poppins">
+                <h2 className="text-xl sm:text-2xl font-medium text-[#273f4f] mb-4 sm:mb-6 font-poppins">
                   Get in Touch
                 </h2>
                 <div className="space-y-4 sm:space-y-6">
@@ -111,9 +111,9 @@ export default function ContactPage() {
                       <EnvelopeIcon className="h-5 w-5 sm:h-6 sm:w-6 text-[#f37521]" />
                     </div>
                     <div className="ml-3 sm:ml-4">
-                      <h3 className="text-base sm:text-lg font-medium text-white font-poppins">Email</h3>
-                      <p className="text-sm sm:text-base text-white/90 font-poppins">isabelle@chiefmedia.com</p>
-                      <p className="text-xs sm:text-sm text-white/70 font-poppins">Response within 24 hours</p>
+                      <h3 className="text-base sm:text-lg font-medium text-[#273f4f] font-poppins">Email</h3>
+                      <p className="text-sm sm:text-base text-[#273f4f]/90 font-poppins">isabelle@chiefmedia.com</p>
+                      <p className="text-xs sm:text-sm text-[#273f4f]/70 font-poppins">Response within 24 hours</p>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -121,9 +121,9 @@ export default function ContactPage() {
                       <PhoneIcon className="h-5 w-5 sm:h-6 sm:w-6 text-[#f37521]" />
                     </div>
                     <div className="ml-3 sm:ml-4">
-                      <h3 className="text-base sm:text-lg font-medium text-white font-poppins">Phone</h3>
-                      <p className="text-sm sm:text-base text-white/90 font-poppins">+65 93246195</p>
-                      <p className="text-xs sm:text-sm text-white/70 font-poppins">Mon-Fri, 9 AM - 6 PM SGT</p>
+                      <h3 className="text-base sm:text-lg font-medium text-[#273f4f] font-poppins">Phone</h3>
+                      <p className="text-sm sm:text-base text-[#273f4f]/90 font-poppins">+65 93246195</p>
+                      <p className="text-xs sm:text-sm text-[#273f4f]/70 font-poppins">Mon-Fri, 9 AM - 6 PM SGT</p>
                     </div>
                   </div>
                 </div>
@@ -131,7 +131,7 @@ export default function ContactPage() {
 
               {/* How Isabelle Helps */}
               <div>
-                <h3 className="text-lg sm:text-xl font-medium text-white mb-3 sm:mb-4 font-poppins">
+                <h3 className="text-lg sm:text-xl font-medium text-[#273f4f] mb-3 sm:mb-4 font-poppins">
                   How We Can Help You
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
@@ -163,7 +163,7 @@ export default function ContactPage() {
 
               {/* Quick Actions */}
               <div>
-                <h3 className="text-lg sm:text-xl font-medium text-white mb-3 sm:mb-4 font-poppins">
+                <h3 className="text-lg sm:text-xl font-medium text-[#273f4f] mb-3 sm:mb-4 font-poppins">
                   Quick Actions
                 </h3>
                 <div className="space-y-2 sm:space-y-3">

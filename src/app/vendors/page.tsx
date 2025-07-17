@@ -132,7 +132,7 @@ export default function VendorsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       <AnimatedBackground />
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">

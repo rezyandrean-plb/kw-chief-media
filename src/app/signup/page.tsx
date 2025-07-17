@@ -72,7 +72,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#273f4f] relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
       <AnimatedBackground />
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div>

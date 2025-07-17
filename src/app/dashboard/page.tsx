@@ -26,7 +26,7 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#273f4f] relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
         <AnimatedBackground />
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 relative z-10"></div>
       </div>
@@ -178,15 +178,15 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       <AnimatedBackground />
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-3xl font-bold text-[#273f4f]">
               Welcome back, {user.name}!
             </h1>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">
+            <p className="mt-2 text-[#273f4f]/80">
               Here&apos;s what&apos;s happening with your {user.role} account.
             </p>
           </div>

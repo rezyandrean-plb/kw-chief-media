@@ -13,6 +13,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Chief Media - Media as a Service Platform",
   description: "Connect vendors and realtors. Create invoices, manage projects, and grow your brand with our comprehensive media services.",
+  icons: {
+    icon: '/chief-media.ico',
+  },
 };
 
 export default function RootLayout({

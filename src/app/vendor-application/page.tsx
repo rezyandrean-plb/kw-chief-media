@@ -84,18 +84,18 @@ export default function VendorApplicationPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-[#273f4f] relative overflow-hidden flex items-center justify-center">
+      <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center">
         <AnimatedBackground />
         <div className="max-w-md mx-auto text-center">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+          <div className="bg-[#fcebdc] rounded-lg shadow-lg p-8">
             <CheckCircleIcon className="h-16 w-16 text-[#03809c] mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-white mb-4">
+            <h1 className="text-2xl font-bold text-[#273f4f] mb-4">
               Application Submitted!
             </h1>
-            <p className="text-white/90 mb-6">
+            <p className="text-[#273f4f]/90 mb-6">
               Thank you for your interest in joining Chief Media. Isabelle will review your application and contact you within 2-3 business days.
             </p>
-            <div className="space-y-3 text-sm text-white/80">
+            <div className="space-y-3 text-sm text-[#273f4f]/80">
               <p>What happens next:</p>
               <ul className="text-left space-y-2">
                 <li>• Isabelle will review your portfolio and experience</li>
@@ -111,16 +111,16 @@ export default function VendorApplicationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       <AnimatedBackground />
       <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-4">
+            <h1 className="text-3xl font-bold text-[#273f4f] mb-4">
               Join Chief Media as a Vendor
             </h1>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto">
+            <p className="text-lg text-[#273f4f]/90 max-w-2xl mx-auto">
               Become part of our exclusive network of verified creatives serving <br /> KW Singapore Realtors. 
               Showcase your talent and grow your business with our curated marketplace.
             </p>
@@ -128,36 +128,36 @@ export default function VendorApplicationPage() {
 
           {/* Benefits */}
           <div className="bg-white/10 rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-white mb-4">
+            <h2 className="text-xl font-semibold text-[#273f4f] mb-4">
               Why Join Chief Media?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-start">
                 <CheckCircleIcon className="h-5 w-5 text-[#03809c] mr-3 mt-0.5" />
                 <div>
-                  <h3 className="font-medium text-white">Curated Vendors</h3>
-                  <p className="text-sm text-white/80">Exclusive access to a curated marketplace of verified creatives, all tailored for KW agents.</p>
+                  <h3 className="font-medium text-[#273f4f]">Curated Vendors</h3>
+                  <p className="text-sm text-[#273f4f]/80">Exclusive access to a curated marketplace of verified creatives, all tailored for KW agents.</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <CheckCircleIcon className="h-5 w-5 text-[#03809c] mr-3 mt-0.5" />
                 <div>
-                  <h3 className="font-medium text-white">Quality Guaranteed</h3>
-                  <p className="text-sm text-white/80">We guarantee quality as all our vendors are thoroughly vetted, ensuring consistent, high-standard service.</p>
+                  <h3 className="font-medium text-[#273f4f]">Quality Guaranteed</h3>
+                  <p className="text-sm text-[#273f4f]/80">We guarantee quality as all our vendors are thoroughly vetted, ensuring consistent, high-standard service.</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <CheckCircleIcon className="h-5 w-5 text-[#03809c] mr-3 mt-0.5" />
                 <div>
-                  <h3 className="font-medium text-white">Efficient Communication</h3>
-                  <p className="text-sm text-white/80">Work directly with your chosen vendors via WhatsApp for seamless and efficient project communication.</p>
+                  <h3 className="font-medium text-[#273f4f]">Efficient Communication</h3>
+                  <p className="text-sm text-[#273f4f]/80">Work directly with your chosen vendors via WhatsApp for seamless and efficient project communication.</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <CheckCircleIcon className="h-5 w-5 text-[#03809c] mr-3 mt-0.5" />
                 <div>
-                  <h3 className="font-medium text-white">Transparent Transactions</h3>
-                  <p className="text-sm text-white/80">Benefit from our secure payment system with a clear 50% deposit and 50% upon completion structure.</p>
+                  <h3 className="font-medium text-[#273f4f]">Transparent Transactions</h3>
+                  <p className="text-sm text-[#273f4f]/80">Benefit from our secure payment system with a clear 50% deposit and 50% upon completion structure.</p>
                 </div>
               </div>
             </div>

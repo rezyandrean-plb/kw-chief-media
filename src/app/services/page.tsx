@@ -155,16 +155,16 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#273f4f] relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       <AnimatedBackground />
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl font-bold text-[#273f4f] mb-4">
               Our Services
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-[#273f4f]/80 max-w-3xl mx-auto">
               Choose from our comprehensive range of media services designed to help you grow your brand and business.
             </p>
           </div>

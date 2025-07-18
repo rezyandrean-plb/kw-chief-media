@@ -107,18 +107,18 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative bg-[#fcebdc] min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div className="w-full px-4 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-center">
-                            {/* Left Column - Main Content */}
+              {/* Left Column - Main Content */}
               <div className="text-left lg:col-span-2">
                 <ScrollAnimation delay={200}>
-                  <h1 className="text-4xl lg:text-6xl font-bold text-[#273f4f] mb-6">
+                  <h1 className="text-4xl lg:text-8xl font-light text-[#273f4f] mb-6">
                     Chief Media
                   </h1>
                 </ScrollAnimation>
                 <ScrollAnimation delay={400}>
-                  <h3 className="text-xl lg:text-2xl font-bold text-[#273f4f] mb-6">KW Singapore’s Exclusive Curated Media Network</h3>
+                  <h3 className="text-xl lg:text-2xl font-semibold text-[#273f4f] mb-6">KW Singapore’s Exclusive Curated Media Network</h3>
                 </ScrollAnimation>
                 <ScrollAnimation delay={600}>
                   <p className="text-lg lg:text-xl text-[#273f4f] mb-8">
@@ -164,21 +164,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-          
-          {/* Scroll to Explore */}
-          <div className="absolute top-[420px] left-1/2 transform -translate-x-1/2 text-center">
-            <ScrollAnimation delay={1000}>
-              <div className="flex flex-col items-center gap-2">
-                <p className="text-black text-sm font-medium">Scroll to explore</p>
-                <ChevronDownIcon className="h-5 w-5 text-black animate-bounce" />
-              </div>
-            </ScrollAnimation>
-          </div>
         </div>
       </section>
 
       {/* Remarkable Results & Stats Section */}
-      <section className="py-16 lg:py-24 bg-[#fcebdc]">
+      <section className="py-12 lg:py-16 bg-[#fcebdc]">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-6xl mx-auto mb-16">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -257,14 +247,14 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-5xl font-bold text-[#273f4f] mb-6">
                 How Chief Media Works
               </h2>
-              <p className="text-lg text-[#273f4f]/80 max-w-2xl mx-auto">
+              <p className="text-lg text-black max-w-2xl mx-auto">
                 From curated vendors to quality delivery, unlock the potential of your real estate marketing journey.
               </p>
             </div>
@@ -278,7 +268,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-bold text-[#273f4f] flex-1">Curated Vendors</h3>
                 </div>
-                <p className="text-[#273f4f]/80 text-lg flex-grow">
+                <p className="text-black text-lg flex-grow">
                   We handpick and verify only reliable creatives who understand real estate—and show up with quality.
                 </p>
               </div>
@@ -291,7 +281,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-bold text-[#273f4f] flex-1">Efficient Workflows</h3>
                 </div>
-                <p className="text-[#273f4f]/80 text-lg flex-grow">
+                <p className="text-black text-lg flex-grow">
                   No more chasing vendors. We ensure clear coordination between agents and creatives, so your project runs smoothly from start to finish
                 </p>
               </div>
@@ -304,7 +294,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-bold text-[#273f4f] flex-1">Quality Results, No Guesswork</h3>
                 </div>
-                <p className="text-[#273f4f]/80 text-lg flex-grow">
+                <p className="text-black text-lg flex-grow">
                   Say goodbye to vague timelines and subpar work. With a structured 50/50 payment model you get professional delivery you can count on.
                 </p>
               </div>
@@ -314,14 +304,14 @@ export default function Home() {
       </section>
 
       {/* Service Categories */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-5xl font-bold text-[#273f4f] mb-6">
                 Powerful Solutions
               </h2>
-              <p className="text-lg text-[#273f4f]/80 max-w-2xl mx-auto">
+              <p className="text-lg text-black max-w-2xl mx-auto">
                 From photography and videography to copywriting and social media, unlock the potential of your digital journey.
               </p>
             </div>
@@ -343,7 +333,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Professional Stills</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       High-quality photography for luxury properties and listings
                     </p>
                   </div>
@@ -360,7 +350,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Drone Imagery</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Aerial photography and videography for stunning property views
                     </p>
                   </div>
@@ -377,7 +367,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Virtual Tours</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Interactive 360° virtual tours for immersive property viewing
                     </p>
                   </div>
@@ -394,7 +384,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Virtual Staging</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Digital furniture and decor to showcase property potential
                     </p>
                   </div>
@@ -414,7 +404,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Personal Branding</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Professional headshots and branding content for realtors
                     </p>
                   </div>
@@ -431,7 +421,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Home Listing Content</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Complete content packages for property listings
                     </p>
                   </div>
@@ -448,7 +438,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">New Launch Content</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Marketing materials for new property developments
                     </p>
                   </div>
@@ -465,7 +455,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Copywriting</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Compelling property descriptions and marketing copy
                     </p>
                   </div>
@@ -485,7 +475,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Social Media Management</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Complete social media strategy and content management
                     </p>
                   </div>
@@ -502,7 +492,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Storyboard Creation</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Visual storytelling and marketing campaign planning
                     </p>
                   </div>
@@ -519,7 +509,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Videography</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Property videos, drone footage, and marketing content
                     </p>
                   </div>
@@ -536,7 +526,7 @@ export default function Home() {
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold text-[#273f4f] mb-4">Photography</h3>
-                    <p className="text-[#273f4f]/80">
+                    <p className="text-black">
                       Professional real estate photography and virtual tours
                     </p>
                   </div>
@@ -548,7 +538,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Chief Media */}
-      <section className="py-16 lg:py-24 bg-[#fcebdc]">
+      <section className="py-12 lg:py-16 bg-[#fcebdc]">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
@@ -568,28 +558,28 @@ export default function Home() {
                     <CheckCircleIcon className="h-6 w-6 text-[#03809c] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Curated Vendors</h4>
-                      <p className="text-[#273f4f]/80">Exclusive access to a curated marketplace of verified creatives, all tailored for KW agents.</p>
+                      <p className="text-black">Exclusive access to a curated marketplace of verified creatives, all tailored for KW agents.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#03809c] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Quality Guaranteed</h4>
-                      <p className="text-[#273f4f]/80">We guarantee quality as all our vendors are thoroughly vetted, ensuring consistent, high-standard service.</p>
+                      <p className="text-black">We guarantee quality as all our vendors are thoroughly vetted, ensuring consistent, high-standard service.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#03809c] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Efficient Communication</h4>
-                      <p className="text-[#273f4f]/80">Work directly with your chosen vendors via WhatsApp for seamless and efficient project communication.</p>
+                      <p className="text-black">Work directly with your chosen vendors via WhatsApp for seamless and efficient project communication.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#03809c] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Transparent Transactions</h4>
-                      <p className="text-[#273f4f]/80">Benefit from our secure payment system with a clear 50% deposit and 50% upon completion structure.</p>
+                      <p className="text-black">Benefit from our secure payment system with a clear 50% deposit and 50% upon completion structure.</p>
                     </div>
                   </div>
                 </div>
@@ -619,28 +609,28 @@ export default function Home() {
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Lead Generation</h4>
-                      <p className="text-[#273f4f]/80">Access an exclusive market of KW Singapore realtors through our curated network.</p>
+                      <p className="text-black">Access an exclusive market of KW Singapore realtors through our curated network.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Revenue Share</h4>
-                      <p className="text-[#273f4f]/80">Competitive revenue sharing that fairly rewards your creative talent and professional effort.</p>
+                      <p className="text-black">Competitive revenue sharing that fairly rewards your creative talent and professional effort.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Reliable Client Connections</h4>
-                      <p className="text-[#273f4f]/80">Connect with serious KW clients in a structured environment that fosters professional relationships.</p>
+                      <p className="text-black">Connect with serious KW clients in a structured environment that fosters professional relationships.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 hover:scale-105 transition-transform duration-200">
                     <CheckCircleIcon className="h-6 w-6 text-[#f37521] mt-1 flex-shrink-0 animate-pulse" />
                     <div>
                       <h4 className="font-bold text-[#273f4f] text-lg mb-2">Build a Strong Reputation</h4>
-                      <p className="text-[#273f4f]/80">Establish trust and build your reputation within the exclusive KW realtor community.</p>
+                      <p className="text-black">Establish trust and build your reputation within the exclusive KW realtor community.</p>
                     </div>
                   </div>
                 </div>
@@ -657,7 +647,7 @@ export default function Home() {
       </section>
 
       {/* Crafting Experiences Section */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12">
             <ScrollAnimation delay={200}>
@@ -718,7 +708,7 @@ export default function Home() {
             </div>
           </ScrollAnimation>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {currentProjects.map((project, index) => (
               <ScrollAnimation key={project.id} delay={400 + (index * 200)} direction={index % 2 === 0 ? "left" : "right"}>
                 <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
@@ -783,14 +773,14 @@ export default function Home() {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-5xl font-bold text-[#273f4f] mb-6">
                 Recent Projects
               </h2>
-              <p className="text-lg text-[#273f4f]/80 max-w-2xl mx-auto">
+              <p className="text-lg text-black max-w-2xl mx-auto">
                 Recent work from our verified vendors.
               </p>
             </div>
@@ -818,7 +808,7 @@ export default function Home() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-[#273f4f] mb-3">Luxury Property Tour</h3>
-                  <p className="text-[#273f4f]/80 mb-4">
+                  <p className="text-black mb-4">
                     Cinematic video tour of a $3.2M luxury penthouse in Marina Bay
                   </p>
                   <div className="flex items-center text-sm text-[#273f4f]/60">
@@ -852,7 +842,7 @@ export default function Home() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-[#273f4f] mb-3">Drone Aerial Showcase</h3>
-                  <p className="text-[#273f4f]/80 mb-4">
+                  <p className="text-black mb-4">
                     Breathtaking drone footage of waterfront properties in Sentosa
                   </p>
                   <div className="flex items-center text-sm text-[#273f4f]/60">
@@ -886,7 +876,7 @@ export default function Home() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-[#273f4f] mb-3">Virtual Tour Experience</h3>
-                  <p className="text-[#273f4f]/80 mb-4">
+                  <p className="text-black mb-4">
                     360° virtual tour with interactive hotspots for modern condo
                   </p>
                   <div className="flex items-center text-sm text-[#273f4f]/60">
@@ -911,7 +901,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollAnimation delay={200}>
@@ -920,7 +910,7 @@ export default function Home() {
               </h2>
             </ScrollAnimation>
             <ScrollAnimation delay={400}>
-              <p className="text-xl text-[#273f4f]/80 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-black mb-8 max-w-2xl mx-auto">
                 Whether you&apos;re a KW Singapore Realtor looking for quality vendors or a creative professional wanting to join our exclusive network, 
                 We here to help you get started.
               </p>
@@ -960,14 +950,14 @@ export default function Home() {
                   height={40}
                   className="h-16 w-auto mb-4"
                 />
-                <p className="text-[#273f4f]/80">
+                <p className="text-black">
                   The exclusive curated marketplace for Keller Williams realtors. Connect with verified creatives, photographers, and marketing experts.
                 </p>
               </div>
             </div>
             <div>
               <h4 className="font-bold text-lg mb-4">Services</h4>
-              <ul className="space-y-2 text-[#273f4f]/80">
+              <ul className="space-y-2 text-black">
                 <li><Link href="/vendors" className="hover:text-[#f37521] transition">Browse Vendors</Link></li>
                 <li><Link href="/vendor-application" className="hover:text-[#f37521] transition">Become a Vendor</Link></li>
                 <li><Link href="/portfolio" className="hover:text-[#f37521] transition">Portfolio</Link></li>
@@ -975,13 +965,13 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold text-lg mb-4">Contact</h4>
-              <ul className="space-y-2 text-[#273f4f]/80">
+              <ul className="space-y-2 text-black">
                 <li><Link href="/contact" className="hover:text-[#f37521] transition">Contact Us</Link></li>
                 <li><Link href="/about" className="hover:text-[#f37521] transition">About</Link></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-[#273f4f]/20 mt-8 pt-8 text-center text-[#273f4f]/80">
+          <div className="border-t border-[#273f4f]/20 mt-8 pt-8 text-center text-black">
             <p>&copy; <CurrentYear /> Chief Media. Exclusive to KW Singapore Realtors.</p>
           </div>
         </div>

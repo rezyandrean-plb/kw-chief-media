@@ -167,7 +167,7 @@ export default function Home() {
       </section>
 
       {/* Remarkable Results & Stats Section */}
-      <section className="py-12 lg:py-16 bg-[#fcebdc]">
+      <section className="section-spacing py-12 lg:py-16 bg-[#fcebdc]">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-6xl mx-auto mb-16">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -246,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-12 lg:py-16 bg-white">
+      <section className="section-spacing py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
@@ -303,7 +303,7 @@ export default function Home() {
       </section>
 
       {/* Service Categories */}
-      <section className="py-12 lg:py-16 bg-white">
+      <section className="section-spacing py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
@@ -537,7 +537,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Chief Media */}
-      <section className="py-12 lg:py-16 bg-[#fcebdc]">
+      <section className="section-spacing py-12 lg:py-16 bg-[#fcebdc]">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
@@ -646,7 +646,7 @@ export default function Home() {
       </section>
 
       {/* Crafting Experiences Section */}
-      <section className="py-12 lg:py-16 bg-white">
+      <section className="section-spacing py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12">
             <ScrollAnimation delay={200}>
@@ -772,7 +772,7 @@ export default function Home() {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-12 lg:py-16 bg-white">
+      <section className="section-spacing py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <ScrollAnimation delay={200}>
             <div className="text-center mb-16">
@@ -900,7 +900,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-12 lg:py-16 bg-white">
+      <section className="section-spacing py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollAnimation delay={200}>

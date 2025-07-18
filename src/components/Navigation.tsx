@@ -10,23 +10,38 @@ export default function Navigation() {
   const { } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 10);
+      if (typeof window !== 'undefined') {
+        const scrollTop = window.scrollY;
+        setIsScrolled(scrollTop > 10);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      // Set initial scroll state
+      handleScroll();
+      
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
+  // Prevent hydration mismatch by using consistent initial state
+  const navClassName = mounted && isScrolled 
+    ? 'bg-white shadow-sm border-b border-gray-200' 
+    : 'bg-transparent';
+
+  const linkClassName = mounted && isScrolled 
+    ? 'text-[#273f4f] hover:text-[#f37521]' 
+    : 'text-[#273f4f] hover:text-[#f37521]';
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white shadow-sm border-b border-gray-200' 
-        : 'bg-transparent'
-    }`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navClassName}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -43,25 +58,13 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/vendors" className={`transition-colors duration-300 ${
-              isScrolled 
-                ? 'text-[#273f4f] hover:text-[#f37521]' 
-                : 'text-[#273f4f] hover:text-[#f37521]'
-            }`}>
+            <Link href="/vendors" className={`transition-colors duration-300 ${linkClassName}`}>
               Browse Vendors
             </Link>
-            <Link href="/portfolio" className={`transition-colors duration-300 ${
-              isScrolled 
-                ? 'text-[#273f4f] hover:text-[#f37521]' 
-                : 'text-[#273f4f] hover:text-[#f37521]'
-            }`}>
+            <Link href="/portfolio" className={`transition-colors duration-300 ${linkClassName}`}>
               Portfolio
             </Link>
-            <Link href="/contact" className={`transition-colors duration-300 ${
-              isScrolled 
-                ? 'text-[#273f4f] hover:text-[#f37521]' 
-                : 'text-[#273f4f] hover:text-[#f37521]'
-            }`}>
+            <Link href="/contact" className={`transition-colors duration-300 ${linkClassName}`}>
               Contact
             </Link>
             <Link href="/vendor-application" className="px-4 py-2 rounded bg-[#f37521] text-white hover:bg-[#e0651a] transition">
@@ -73,11 +76,7 @@ export default function Navigation() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`transition-colors duration-300 ${
-                isScrolled 
-                  ? 'text-[#273f4f] hover:text-[#f37521]' 
-                  : 'text-[#273f4f] hover:text-[#f37521]'
-              }`}
+              className={`transition-colors duration-300 ${linkClassName}`}
             >
               {mobileMenuOpen ? (
                 <XMarkIcon className="h-6 w-6" />

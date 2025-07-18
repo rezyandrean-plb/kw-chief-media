@@ -27,6 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${poppins.variable} antialiased`}
+        suppressHydrationWarning={true}
       >
         <AuthProvider>
           <Navigation />

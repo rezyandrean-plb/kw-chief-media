@@ -322,9 +322,9 @@ export default function Home() {
               {/* First set of services */}
               <div className="flex gap-8 min-w-full">
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=128&fit=crop&crop=center" 
                       alt="Professional Stills"
                       fill
                       className="object-cover"
@@ -339,9 +339,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1506947411487-a56738267384?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1506947411487-a56738267384?w=400&h=128&fit=crop&crop=center" 
                       alt="Drone Imagery"
                       fill
                       className="object-cover"
@@ -356,9 +356,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=128&fit=crop&crop=center" 
                       alt="Virtual Tours"
                       fill
                       className="object-cover"
@@ -373,9 +373,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=128&fit=crop&crop=center" 
                       alt="Virtual Staging"
                       fill
                       className="object-cover"
@@ -393,9 +393,9 @@ export default function Home() {
               {/* Second set of services */}
               <div className="flex gap-8 min-w-full">
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=128&fit=crop&crop=center" 
                       alt="Personal Branding"
                       fill
                       className="object-cover"
@@ -410,9 +410,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=128&fit=crop&crop=center" 
                       alt="Home Listing Content"
                       fill
                       className="object-cover"
@@ -427,9 +427,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=128&fit=crop&crop=center" 
                       alt="New Launch Content"
                       fill
                       className="object-cover"
@@ -444,9 +444,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=128&fit=crop&crop=center" 
                       alt="Copywriting"
                       fill
                       className="object-cover"
@@ -464,9 +464,9 @@ export default function Home() {
               {/* Third set of services */}
               <div className="flex gap-8 min-w-full">
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=128&fit=crop&crop=center" 
                       alt="Social Media Management"
                       fill
                       className="object-cover"
@@ -481,9 +481,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#03809c]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=128&fit=crop&crop=center" 
                       alt="Storyboard Creation"
                       fill
                       className="object-cover"
@@ -498,9 +498,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#f37521]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=128&fit=crop&crop=center" 
                       alt="Videography"
                       fill
                       className="object-cover"
@@ -515,9 +515,9 @@ export default function Home() {
                 </div>
                 
                 <div className="group overflow-hidden transition-all duration-300 min-w-[280px] border border-[#273f4f]/10 rounded-lg shadow-sm hover:shadow-md">
-                  <div className="w-full h-16 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
+                  <div className="w-full h-32 bg-[#f2a16d]/10 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden border-b border-[#273f4f]/10 relative">
                     <Image 
-                      src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=64&fit=crop&crop=center" 
+                      src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=128&fit=crop&crop=center" 
                       alt="Photography"
                       fill
                       className="object-cover"

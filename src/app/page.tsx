@@ -10,8 +10,7 @@ import {
   ShieldCheckIcon,
   StarIcon,
   ArrowRightIcon,
-  EnvelopeIcon,
-  ChevronDownIcon
+  EnvelopeIcon
 } from '@heroicons/react/24/outline';
 import CurrentYear from "../components/CurrentYear";
 import ScrollAnimation from "../components/ScrollAnimation";

@@ -13,7 +13,7 @@ export default function SignupPage() {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'client' as 'vendor' | 'realtor' | 'client',
+    role: 'client' as 'realtor' | 'client',
     company: '',
     phone: '',
   });
@@ -22,7 +22,7 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   
-  const { signup } = useAuth();
+  const { signup, getRedirectPath } = useAuth();
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -60,7 +60,15 @@ export default function SignupPage() {
 
       const success = await signup(userData);
       if (success) {
-        router.push('/dashboard');
+        // Get the user from localStorage to determine redirect path
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          const user = JSON.parse(storedUser);
+          const redirectPath = getRedirectPath(user);
+          router.push(redirectPath);
+        } else {
+          router.push('/dashboard');
+        }
       } else {
         setError('Failed to create account');
       }
@@ -133,12 +141,11 @@ export default function SignupPage() {
                 onChange={handleChange}
               >
                 <option value="client">Client</option>
-                <option value="vendor">Vendor</option>
                 <option value="realtor">Realtor</option>
               </select>
             </div>
 
-            {(formData.role === 'vendor' || formData.role === 'realtor') && (
+            {formData.role === 'realtor' && (
               <div>
                 <label htmlFor="company" className="block text-sm font-medium text-[#273f4f]">
                   Company Name

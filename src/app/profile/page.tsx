@@ -158,7 +158,7 @@ export default function ProfilePage() {
                   )}
                 </div>
 
-                {(user.role === 'vendor' || user.role === 'realtor') && (
+                {user.role === 'realtor' && (
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Company Name

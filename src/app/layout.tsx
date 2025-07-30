@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth";
-import Navigation from "@/components/Navigation";
+import { EnquiryProvider } from "@/lib/enquiries";
+import ConditionalNavigation from "@/components/ConditionalNavigation";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -30,8 +31,10 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <AuthProvider>
-          <Navigation />
-          {children}
+          <EnquiryProvider>
+            <ConditionalNavigation />
+            {children}
+          </EnquiryProvider>
         </AuthProvider>
       </body>
     </html>

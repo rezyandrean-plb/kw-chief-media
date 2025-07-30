@@ -2,381 +2,466 @@
 
 import { useState } from 'react';
 import { 
+  BuildingOfficeIcon,
   CameraIcon,
   VideoCameraIcon,
   DocumentTextIcon,
   UserGroupIcon,
-  BuildingOfficeIcon,
-  CheckCircleIcon
+  CheckIcon,
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 import AnimatedBackground from '../../components/AnimatedBackground';
+import Notification from '../../components/Notification';
 
-interface ApplicationForm {
+interface VendorApplication {
   name: string;
+  company: string;
   email: string;
   phone: string;
-  company: string;
-  website: string;
+  address: string;
   services: string[];
-  otherServices: string;
+  description: string;
+  specialties: string[];
   experience: string;
   portfolio: string;
-  whyJoin: string;
-  availability: string;
+  website?: string;
+  socialMedia?: string;
 }
 
 export default function VendorApplicationPage() {
-  const [formData, setFormData] = useState<ApplicationForm>({
+  const [step, setStep] = useState(1);
+  const [application, setApplication] = useState<VendorApplication>({
     name: '',
+    company: '',
     email: '',
     phone: '',
-    company: '',
-    website: '',
+    address: '',
     services: [],
-    otherServices: '',
+    description: '',
+    specialties: [],
     experience: '',
     portfolio: '',
-    whyJoin: '',
-    availability: '',
+    website: '',
+    socialMedia: ''
   });
-  const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [notification, setNotification] = useState<{
+    isVisible: boolean;
+    message: string;
+    type: 'success' | 'error' | 'warning' | 'info';
+  }>({
+    isVisible: false,
+    message: '',
+    type: 'info'
+  });
 
-  const serviceOptions = [
-    { id: 'photography', label: 'Photography', icon: CameraIcon },
-    { id: 'videography', label: 'Videography', icon: VideoCameraIcon },
-    { id: 'copywriting', label: 'Copywriting', icon: DocumentTextIcon },
-    { id: 'social-media', label: 'Social Media Management', icon: UserGroupIcon },
-    { id: 'virtual-tours', label: 'Virtual Tours', icon: BuildingOfficeIcon },
-    { id: 'others', label: 'Add Others', icon: DocumentTextIcon },
+  const availableServices = [
+    { id: 'photography', name: 'Photography', icon: CameraIcon },
+    { id: 'videography', name: 'Videography', icon: VideoCameraIcon },
+    { id: 'virtual-staging', name: 'Virtual Staging', icon: CameraIcon },
+    { id: 'virtual-tours', name: 'Virtual Tours', icon: BuildingOfficeIcon },
+    { id: '3d-rendering', name: '3D Rendering', icon: BuildingOfficeIcon },
+    { id: 'brand-consulting', name: 'Brand Consulting', icon: UserGroupIcon },
+    { id: 'podcast-production', name: 'Podcast Production', icon: VideoCameraIcon },
+    { id: 'live-streaming', name: 'Live Streaming', icon: VideoCameraIcon },
+    { id: 'graphic-design', name: 'Graphic Design', icon: DocumentTextIcon },
+    { id: 'web-design', name: 'Web Design', icon: DocumentTextIcon },
+    { id: 'content-writing', name: 'Content Writing', icon: DocumentTextIcon },
+    { id: 'personal-branding', name: 'Personal Branding', icon: UserGroupIcon },
+    { id: 'content-creation', name: 'Content Creation', icon: VideoCameraIcon },
   ];
 
   const handleServiceToggle = (serviceId: string) => {
-    setFormData(prev => ({
+    setApplication(prev => ({
       ...prev,
       services: prev.services.includes(serviceId)
-        ? prev.services.filter(s => s !== serviceId)
+        ? prev.services.filter(id => id !== serviceId)
         : [...prev.services, serviceId]
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitted(true);
-    } catch (error) {
-      console.error('Error submitting application:', error);
-    } finally {
-      setLoading(false);
+  const handleSpecialtyAdd = (specialty: string) => {
+    if (specialty.trim() && !application.specialties.includes(specialty.trim())) {
+      setApplication(prev => ({
+        ...prev,
+        specialties: [...prev.specialties, specialty.trim()]
+      }));
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleSpecialtyRemove = (specialty: string) => {
+    setApplication(prev => ({
+      ...prev,
+      specialties: prev.specialties.filter(s => s !== specialty)
+    }));
   };
 
-  if (submitted) {
-    return (
-      <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center">
-        <AnimatedBackground />
-        <div className="max-w-md mx-auto text-center">
-          <div className="bg-[#fcebdc] rounded-lg shadow-lg p-8">
-            <CheckCircleIcon className="h-16 w-16 text-[#03809c] mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-[#273f4f] mb-4">
-              Application Submitted!
-            </h1>
-            <p className="text-[#273f4f]/90 mb-6">
-              Thank you for your interest in joining Chief Media. Isabelle will review your application and contact you within 2-3 business days.
-            </p>
-            <div className="space-y-3 text-sm text-[#273f4f]/80">
-              <p>What happens next:</p>
-              <ul className="text-left space-y-2">
-                <li>• Isabelle will review your portfolio and experience</li>
-                <li>• You&apos;ll receive a call to discuss your services</li>
-                <li>• If approved, you&apos;ll be onboarded to our platform</li>
-                <li>• You&apos;ll gain access to KW&apos;s realtor network</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleSubmit = () => {
+    // Validate required fields
+    if (!application.name || !application.company || !application.email || 
+        !application.phone || !application.services.length || !application.description) {
+      setNotification({
+        isVisible: true,
+        message: 'Please fill in all required fields',
+        type: 'error'
+      });
+      return;
+    }
+
+    // Simulate API call - in real app, send to backend
+    console.log('Vendor application submitted:', application);
+    
+    setNotification({
+      isVisible: true,
+      message: 'Application submitted successfully! We will review your application and get back to you within 3-5 business days.',
+      type: 'success'
+    });
+
+    // Reset form after successful submission
+    setTimeout(() => {
+      setApplication({
+        name: '',
+        company: '',
+        email: '',
+        phone: '',
+        address: '',
+        services: [],
+        description: '',
+        specialties: [],
+        experience: '',
+        portfolio: '',
+        website: '',
+        socialMedia: ''
+      });
+      setStep(1);
+    }, 3000);
+  };
+
+  const nextStep = () => {
+    if (step === 1 && (!application.name || !application.company || !application.email || !application.phone)) {
+      setNotification({
+        isVisible: true,
+        message: 'Please fill in all required fields',
+        type: 'error'
+      });
+      return;
+    }
+    if (step === 2 && (!application.services.length || !application.description)) {
+      setNotification({
+        isVisible: true,
+        message: 'Please select at least one service and provide a description',
+        type: 'error'
+      });
+      return;
+    }
+    setStep(step + 1);
+  };
+
+  const prevStep = () => {
+    setStep(step - 1);
+  };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden">
       <AnimatedBackground />
+      
       <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-[#273f4f] mb-4">
-              Join Chief Media as a Vendor
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-[#FCEBDC] mb-4">
+              Vendor Application
             </h1>
-            <p className="text-lg text-[#273f4f]/90 max-w-2xl mx-auto">
-              Become part of our exclusive network of verified creatives serving <br /> KW Singapore Realtors. 
-              Showcase your talent and grow your business with our curated marketplace.
+            <p className="text-xl text-[#FCEBDC]/80 max-w-3xl mx-auto">
+              Join our network of verified vendors serving KW Singapore realtors. 
+                              Submit your application and we&apos;ll review it within 3-5 business days.
             </p>
           </div>
 
-          {/* Benefits */}
-          <div className="bg-white/10 rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-[#273f4f] mb-4">
-              Why Join Chief Media?
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-start">
-                <CheckCircleIcon className="h-5 w-5 text-[#03809c] mr-3 mt-0.5" />
-                <div>
-                  <h3 className="font-medium text-[#273f4f]">Curated Vendors</h3>
-                  <p className="text-sm text-[#273f4f]/80">Exclusive access to a curated marketplace of verified creatives, all tailored for KW agents.</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <CheckCircleIcon className="h-5 w-5 text-[#03809c] mr-3 mt-0.5" />
-                <div>
-                  <h3 className="font-medium text-[#273f4f]">Quality Guaranteed</h3>
-                  <p className="text-sm text-[#273f4f]/80">We guarantee quality as all our vendors are thoroughly vetted, ensuring consistent, high-standard service.</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <CheckCircleIcon className="h-5 w-5 text-[#03809c] mr-3 mt-0.5" />
-                <div>
-                  <h3 className="font-medium text-[#273f4f]">Efficient Communication</h3>
-                  <p className="text-sm text-[#273f4f]/80">Work directly with your chosen vendors via WhatsApp for seamless and efficient project communication.</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <CheckCircleIcon className="h-5 w-5 text-[#03809c] mr-3 mt-0.5" />
-                <div>
-                  <h3 className="font-medium text-[#273f4f]">Transparent Transactions</h3>
-                  <p className="text-sm text-[#273f4f]/80">Benefit from our secure payment system with a clear 50% deposit and 50% upon completion structure.</p>
-                </div>
-              </div>
+          {/* Progress Bar */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm text-[#FCEBDC]/80">Step {step} of 3</span>
+              <span className="text-sm text-[#FCEBDC]/80">{Math.round((step / 3) * 100)}% Complete</span>
+            </div>
+            <div className="w-full bg-[#273F4F]/20 rounded-full h-2">
+              <div 
+                className="bg-[#B40101] h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(step / 3) * 100}%` }}
+              ></div>
             </div>
           </div>
 
-          {/* Application Form */}
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-4 sm:p-6">
-              <h2 className="text-lg sm:text-xl font-semibold text-[#273f4f] mb-4 sm:mb-6">
-                Vendor Application
-              </h2>
+          {/* Step 1: Basic Information */}
+          {step === 1 && (
+            <div className="bg-black border border-[#273F4F]/20 rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-[#FCEBDC] mb-6">Basic Information</h2>
               
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                {/* Basic Information */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                      className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                      Company/Business Name
-                    </label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm"
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                      Website/Portfolio URL
-                    </label>
-                    <input
-                      type="url"
-                      name="website"
-                      value={formData.website}
-                      onChange={handleChange}
-                      placeholder="https://yourwebsite.com"
-                      className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm"
-                    />
-                  </div>
-                </div>
-
-                {/* Services */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">
-                    Services Offered * (Select all that apply)
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                    Contact Person Name *
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
-                    {serviceOptions.map((service) => {
-                      const Icon = service.icon;
-                      return (
-                        <label
-                          key={service.id}
-                          className={`flex items-center p-2 sm:p-3 border rounded-lg cursor-pointer transition-colors ${
-                            formData.services.includes(service.id)
-                              ? 'border-[#f37521] bg-[#f37521]/10'
-                              : 'border-gray-300 hover:border-gray-400'
-                          }`}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={formData.services.includes(service.id)}
-                            onChange={() => handleServiceToggle(service.id)}
-                            className="sr-only"
-                          />
-                          <Icon className={`h-5 w-5 mr-2 ${
-                            formData.services.includes(service.id) ? 'text-[#f37521]' : 'text-gray-500'
-                          }`} />
-                          <span className={`text-sm font-medium ${
-                            formData.services.includes(service.id) ? 'text-[#f37521]' : 'text-gray-700'
-                          }`}>
-                            {service.label}
+                  <input
+                    type="text"
+                    value={application.name}
+                    onChange={(e) => setApplication(prev => ({ ...prev, name: e.target.value }))}
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    placeholder="Your full name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                    Company Name *
+                  </label>
+                  <input
+                    type="text"
+                    value={application.company}
+                    onChange={(e) => setApplication(prev => ({ ...prev, company: e.target.value }))}
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    placeholder="Your company name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    value={application.email}
+                    onChange={(e) => setApplication(prev => ({ ...prev, email: e.target.value }))}
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    value={application.phone}
+                    onChange={(e) => setApplication(prev => ({ ...prev, phone: e.target.value }))}
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    placeholder="+65 9123 4567"
+                  />
+                </div>
+                
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                    Business Address
+                  </label>
+                  <input
+                    type="text"
+                    value={application.address}
+                    onChange={(e) => setApplication(prev => ({ ...prev, address: e.target.value }))}
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    placeholder="Your business address"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Step 2: Services and Description */}
+          {step === 2 && (
+            <div className="bg-black border border-[#273F4F]/20 rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-[#FCEBDC] mb-6">Services & Description</h2>
+              
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-[#FCEBDC] mb-4">
+                  Services Offered *
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {availableServices.map((service) => {
+                    const Icon = service.icon;
+                    const isSelected = application.services.includes(service.id);
+                    return (
+                      <div
+                        key={service.id}
+                        className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                          isSelected
+                            ? 'border-[#B40101] bg-[#B40101]/10'
+                            : 'border-[#273F4F]/20 hover:border-[#273F4F]/40'
+                        }`}
+                        onClick={() => handleServiceToggle(service.id)}
+                      >
+                        <div className="flex items-center">
+                          <Icon className={`h-5 w-5 mr-3 ${isSelected ? 'text-[#B40101]' : 'text-[#FCEBDC]/60'}`} />
+                          <span className={`text-sm font-medium ${isSelected ? 'text-[#FCEBDC]' : 'text-[#FCEBDC]/80'}`}>
+                            {service.name}
                           </span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                  
-                  {/* Other Services Input */}
-                  {formData.services.includes('others') && (
-                    <div className="mt-4">
-                      <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                        Please specify other services you offer
-                      </label>
-                      <input
-                        name="otherServices"
-                        value={formData.otherServices}
-                        onChange={handleChange}
-                        placeholder="Describe the additional services you provide..."
-                        className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm resize-vertical"
-                      />
-                    </div>
-                  )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
+              </div>
+              
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                  Company Description *
+                </label>
+                <textarea
+                  value={application.description}
+                  onChange={(e) => setApplication(prev => ({ ...prev, description: e.target.value }))}
+                  rows={4}
+                  className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                  placeholder="Describe your company, services, and what makes you unique..."
+                />
+              </div>
+              
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                  Years of Experience
+                </label>
+                <input
+                  type="text"
+                  value={application.experience}
+                  onChange={(e) => setApplication(prev => ({ ...prev, experience: e.target.value }))}
+                  className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                  placeholder="e.g., 5+ years"
+                />
+              </div>
+            </div>
+          )}
 
-                {/* Experience */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                    Years of Experience *
-                  </label>
-                  <select
-                    name="experience"
-                    value={formData.experience}
-                    onChange={handleChange}
-                    required
-                    className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm"
+          {/* Step 3: Additional Information */}
+          {step === 3 && (
+            <div className="bg-black border border-[#273F4F]/20 rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-[#FCEBDC] mb-6">Additional Information</h2>
+              
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                  Specialties
+                </label>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {application.specialties.map((specialty) => (
+                    <span
+                      key={specialty}
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#f2a16d]/10 text-[#f2a16d]"
+                    >
+                      {specialty}
+                      <button
+                        onClick={() => handleSpecialtyRemove(specialty)}
+                        className="ml-2 text-[#f2a16d] hover:text-[#f2a16d]/80"
+                      >
+                        <XMarkIcon className="h-4 w-4" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                <div className="flex">
+                  <input
+                    type="text"
+                    placeholder="Add a specialty..."
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleSpecialtyAdd(e.currentTarget.value);
+                        e.currentTarget.value = '';
+                      }
+                    }}
+                    className="flex-1 border border-[#273F4F]/20 rounded-l-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                  />
+                  <button
+                    onClick={(e) => {
+                      const input = e.currentTarget.previousElementSibling as HTMLInputElement;
+                      handleSpecialtyAdd(input.value);
+                      input.value = '';
+                    }}
+                    className="bg-[#B40101] text-white px-4 py-2 rounded-r-md hover:bg-[#e0651a] transition"
                   >
-                    <option value="">Select experience level</option>
-                    <option value="0-1">0-1 years</option>
-                    <option value="1-3">1-3 years</option>
-                    <option value="3-5">3-5 years</option>
-                    <option value="5-10">5-10 years</option>
-                    <option value="10+">10+ years</option>
-                  </select>
+                    Add
+                  </button>
                 </div>
-
-                {/* Portfolio */}
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                    Portfolio Description *
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                    Website URL
                   </label>
-                  <textarea
-                    name="portfolio"
-                    value={formData.portfolio}
-                    onChange={handleChange}
-                    required
-                    rows={4}
-                    placeholder="Describe your portfolio, notable projects, and the types of real estate work you've done..."
-                    className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm resize-vertical"
+                  <input
+                    type="url"
+                    value={application.website}
+                    onChange={(e) => setApplication(prev => ({ ...prev, website: e.target.value }))}
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    placeholder="https://yourwebsite.com"
                   />
                 </div>
-
-                {/* Why Join */}
+                
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                    Why do you want to join Chief Media? *
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                    Social Media
                   </label>
-                  <textarea
-                    name="whyJoin"
-                    value={formData.whyJoin}
-                    onChange={handleChange}
-                    required
-                    rows={3}
-                    placeholder="Tell us why you want to join our network and how you can contribute to KW realtors..."
-                    className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm resize-vertical"
+                  <input
+                    type="text"
+                    value={application.socialMedia}
+                    onChange={(e) => setApplication(prev => ({ ...prev, socialMedia: e.target.value }))}
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    placeholder="Instagram, LinkedIn, etc."
                   />
                 </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-[#FCEBDC] mb-2">
+                  Portfolio Link
+                </label>
+                <input
+                  type="url"
+                  value={application.portfolio}
+                  onChange={(e) => setApplication(prev => ({ ...prev, portfolio: e.target.value }))}
+                  className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                  placeholder="Link to your portfolio or sample work"
+                />
+              </div>
+            </div>
+          )}
 
-                {/* Availability */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                    Availability for Projects *
-                  </label>
-                  <select
-                    name="availability"
-                    value={formData.availability}
-                    onChange={handleChange}
-                    required
-                    className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm"
-                  >
-                    <option value="">Select availability</option>
-                    <option value="immediate">Immediate availability</option>
-                    <option value="within-week">Within 1 week</option>
-                    <option value="within-month">Within 1 month</option>
-                    <option value="flexible">Flexible scheduling</option>
-                  </select>
-                </div>
-
+          {/* Navigation Buttons */}
+          <div className="flex justify-between mt-8">
+            <button
+              onClick={prevStep}
+              disabled={step === 1}
+              className="px-6 py-2 border border-[#273F4F]/20 text-[#FCEBDC] rounded-md hover:bg-[#273F4F]/10 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            
+            <div className="flex space-x-4">
+              {step < 3 ? (
                 <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-[#f37521] text-white py-3 px-4 rounded-lg hover:bg-[#e0651a] disabled:bg-[#f37521]/50 disabled:cursor-not-allowed transition-colors font-medium text-sm sm:text-base"
+                  onClick={nextStep}
+                  className="px-6 py-2 bg-[#B40101] text-white rounded-md hover:bg-[#e0651a] transition"
                 >
-                  {loading ? 'Submitting...' : 'Submit Application'}
+                  Next
                 </button>
-              </form>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  className="px-6 py-2 bg-[#B40101] text-white rounded-md hover:bg-[#e0651a] transition flex items-center"
+                >
+                  <CheckIcon className="h-5 w-5 mr-2" />
+                  Submit Application
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Notification */}
+      <Notification
+        message={notification.message}
+        type={notification.type}
+        isVisible={notification.isVisible}
+        onClose={() => setNotification(prev => ({ ...prev, isVisible: false }))}
+        duration={5000}
+      />
     </div>
   );
 } 

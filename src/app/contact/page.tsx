@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { 
   EnvelopeIcon,
   PhoneIcon,
@@ -57,18 +58,18 @@ export default function ContactPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center">
+      <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center">
         <AnimatedBackground />
         <div className="max-w-md mx-auto text-center">
-          <div className="bg-[#fcebdc] rounded-lg shadow-lg p-8">
-            <CheckCircleIcon className="h-16 w-16 text-[#f37521] mx-auto mb-4" />
-            <h1 className="text-2xl font-semibold text-[#273f4f] mb-4 font-poppins">
+          <div className="bg-black border border-[#273F4F]/20 rounded-lg shadow-lg p-8">
+            <CheckCircleIcon className="h-16 w-16 text-[#B40101] mx-auto mb-4" />
+            <h1 className="text-2xl font-semibold text-[#FCEBDC] mb-4 font-poppins">
               Message Sent!
             </h1>
-            <p className="text-[#273f4f]/90 mb-6 font-poppins">
+            <p className="text-[#FCEBDC]/90 mb-6 font-poppins">
               Thank you for reaching out to Chief Media. Isabelle will get back to you within 24 hours.
             </p>
-            <div className="space-y-3 text-sm text-[#273f4f]/80 font-poppins">
+            <div className="space-y-3 text-sm text-[#FCEBDC]/80 font-poppins">
               <p>What happens next:</p>
               <ul className="text-left space-y-2">
                 <li>• Isabelle will review your message</li>
@@ -84,17 +85,17 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden">
       <AnimatedBackground />
       <div className="max-w-6xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-3xl font-semibold text-[#273f4f] mb-4 font-poppins">
+            <h1 className="text-3xl font-semibold text-[#FCEBDC] mb-4 font-poppins">
               Contact us
             </h1>
-            <p className="text-lg text-[#273f4f]/90 max-w-2xl mx-auto font-poppins">
-              Get in touch with us - Whether youre a KW Singapore Realtor looking to streamline your media support or a creative looking to join our network, we’re happy to chat
+            <p className="text-lg text-[#FCEBDC]/90 max-w-2xl mx-auto font-poppins">
+              Get in touch with us - Whether you&apos;re a KW Singapore Realtor looking to streamline your media support or a creative looking to join our network, we&apos;re happy to chat
             </p>
           </div>
 
@@ -102,28 +103,28 @@ export default function ContactPage() {
             {/* Contact Information */}
             <div className="space-y-6 sm:space-y-8">
               <div>
-                <h2 className="text-xl sm:text-2xl font-medium text-[#273f4f] mb-4 sm:mb-6 font-poppins">
+                <h2 className="text-xl sm:text-2xl font-medium text-[#FCEBDC] mb-4 sm:mb-6 font-poppins">
                   Get in Touch
                 </h2>
                 <div className="space-y-4 sm:space-y-6">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <EnvelopeIcon className="h-5 w-5 sm:h-6 sm:w-6 text-[#f37521]" />
+                      <EnvelopeIcon className="h-5 w-5 sm:h-6 sm:w-6 text-[#B40101]" />
                     </div>
                     <div className="ml-3 sm:ml-4">
-                      <h3 className="text-base sm:text-lg font-medium text-[#273f4f] font-poppins">Email</h3>
-                      <p className="text-sm sm:text-base text-[#273f4f]/90 font-poppins">isabelle@chiefmedia.com</p>
-                      <p className="text-xs sm:text-sm text-[#273f4f]/70 font-poppins">Response within 24 hours</p>
+                      <h3 className="text-base sm:text-lg font-medium text-[#FCEBDC] font-poppins">Email</h3>
+                      <p className="text-sm sm:text-base text-[#FCEBDC]/90 font-poppins">isabelle@chiefmedia.com</p>
+                      <p className="text-xs sm:text-sm text-[#FCEBDC]/70 font-poppins">Response within 24 hours</p>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <PhoneIcon className="h-5 w-5 sm:h-6 sm:w-6 text-[#f37521]" />
+                      <PhoneIcon className="h-5 w-5 sm:h-6 sm:w-6 text-[#B40101]" />
                     </div>
                     <div className="ml-3 sm:ml-4">
-                      <h3 className="text-base sm:text-lg font-medium text-[#273f4f] font-poppins">Phone</h3>
-                      <p className="text-sm sm:text-base text-[#273f4f]/90 font-poppins">+65 93246195</p>
-                      <p className="text-xs sm:text-sm text-[#273f4f]/70 font-poppins">Mon-Fri, 9 AM - 6 PM SGT</p>
+                      <h3 className="text-base sm:text-lg font-medium text-[#FCEBDC] font-poppins">Phone</h3>
+                      <p className="text-sm sm:text-base text-[#FCEBDC]/90 font-poppins">+65 93246195</p>
+                      <p className="text-xs sm:text-sm text-[#FCEBDC]/70 font-poppins">Mon-Fri, 9 AM - 6 PM SGT</p>
                     </div>
                   </div>
                 </div>
@@ -131,29 +132,29 @@ export default function ContactPage() {
 
               {/* How Isabelle Helps */}
               <div>
-                <h3 className="text-lg sm:text-xl font-medium text-[#273f4f] mb-3 sm:mb-4 font-poppins">
+                <h3 className="text-lg sm:text-xl font-medium text-[#FCEBDC] mb-3 sm:mb-4 font-poppins">
                   How We Can Help You
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="bg-[#fcebdc] rounded-lg p-3 sm:p-4 border border-[#f37521]/20">
+                  <div className="bg-black border border-[#273F4F]/20 rounded-lg p-3 sm:p-4">
                     <div className="flex items-start">
-                      <UserGroupIcon className="h-4 w-4 sm:h-5 sm:w-5 text-[#f37521] mr-2 sm:mr-3 mt-0.5" />
+                      <UserGroupIcon className="h-4 w-4 sm:h-5 sm:w-5 text-[#B40101] mr-2 sm:mr-3 mt-0.5" />
                       <div>
-                        <h4 className="font-medium text-[#273f4f] text-sm sm:text-base font-poppins">For KW Singapore Realtors</h4>
-                        <p className="text-xs sm:text-sm text-[#273f4f]/80 font-poppins">
+                        <h4 className="font-medium text-[#FCEBDC] text-sm sm:text-base font-poppins">For KW Singapore Realtors</h4>
+                        <p className="text-xs sm:text-sm text-[#FCEBDC]/80 font-poppins">
                           Find the perfect vendor for your marketing needs, get matched with verified creatives, 
                           and ensure quality deliverables for your listings.
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-[#fcebdc] rounded-lg p-3 sm:p-4 border border-[#f37521]/20">
+                  <div className="bg-black border border-[#273F4F]/20 rounded-lg p-3 sm:p-4">
                     <div className="flex items-start">
-                      <BuildingOfficeIcon className="h-4 w-4 sm:h-5 sm:w-5 text-[#f37521] mr-2 sm:mr-3 mt-0.5" />
+                      <BuildingOfficeIcon className="h-4 w-4 sm:h-5 sm:w-5 text-[#B40101] mr-2 sm:mr-3 mt-0.5" />
                       <div>
-                        <h4 className="font-medium text-[#273f4f] text-sm sm:text-base font-poppins">For Vendors</h4>
-                        <p className="text-xs sm:text-sm text-[#273f4f]/80 font-poppins">
-                          Join our exclusive network, get access to KW Singapore’s network, and grow your business with our curated marketplace approach.
+                        <h4 className="font-medium text-[#FCEBDC] text-sm sm:text-base font-poppins">For Vendors</h4>
+                        <p className="text-xs sm:text-sm text-[#FCEBDC]/80 font-poppins">
+                          Join our exclusive network, get access to KW Singapore&apos;s network, and grow your business with our curated marketplace approach.
                         </p>
                       </div>
                     </div>
@@ -163,36 +164,35 @@ export default function ContactPage() {
 
               {/* Quick Actions */}
               <div>
-                <h3 className="text-lg sm:text-xl font-medium text-[#273f4f] mb-3 sm:mb-4 font-poppins">
+                <h3 className="text-lg sm:text-xl font-medium text-[#FCEBDC] mb-3 sm:mb-4 font-poppins">
                   Quick Actions
                 </h3>
                 <div className="space-y-2 sm:space-y-3">
-                  <a
+                  <Link
                     href="/vendors"
-                    className="block w-full bg-[#f37521] text-white py-2 sm:py-3 px-3 sm:px-4 rounded-lg hover:bg-[#e0651a] transition-colors text-center font-medium text-sm sm:text-base font-poppins"
+                    className="block w-full bg-[#B40101] text-white py-2 sm:py-3 px-3 sm:px-4 rounded-lg hover:bg-[#e0651a] transition-colors text-center font-medium text-sm sm:text-base font-poppins"
                   >
                     Browse Vendors
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/vendor-application"
-                    className="block w-full bg-[#f37521] text-white py-2 sm:py-3 px-3 sm:px-4 rounded-lg hover:bg-[#e0651a] transition-colors text-center font-medium text-sm sm:text-base font-poppins"
+                    className="block w-full bg-[#B40101] text-white py-2 sm:py-3 px-3 sm:px-4 rounded-lg hover:bg-[#e0651a] transition-colors text-center font-medium text-sm sm:text-base font-poppins"
                   >
                     Apply as Vendor
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="bg-[#fcebdc] rounded-lg shadow-lg p-6 sm:p-8">
-              <h2 className="text-xl sm:text-2xl font-semibold text-[#273f4f] mb-4 sm:mb-6 font-poppins">
-                Send a Message
+            <div className="bg-black border border-[#273F4F]/20 rounded-lg shadow-lg p-6 sm:p-8">
+              <h2 className="text-xl sm:text-2xl font-medium text-[#FCEBDC] mb-6 sm:mb-8 font-poppins">
+                Send us a Message
               </h2>
-              
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-[#273f4f] mb-1 sm:mb-2 font-poppins">
+                    <label className="block text-sm font-medium text-[#FCEBDC] mb-1 sm:mb-2 font-poppins">
                       Full Name *
                     </label>
                     <input
@@ -201,11 +201,11 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm font-poppins"
+                      className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-sm font-poppins"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#273f4f] mb-1 sm:mb-2 font-poppins">
+                    <label className="block text-sm font-medium text-[#FCEBDC] mb-1 sm:mb-2 font-poppins">
                       Email Address *
                     </label>
                     <input
@@ -214,14 +214,14 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm font-poppins"
+                      className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-sm font-poppins"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-[#273f4f] mb-1 sm:mb-2 font-poppins">
+                    <label className="block text-sm font-medium text-[#FCEBDC] mb-1 sm:mb-2 font-poppins">
                       Phone Number
                     </label>
                     <input
@@ -229,11 +229,11 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm font-poppins"
+                      className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-sm font-poppins"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#273f4f] mb-1 sm:mb-2 font-poppins">
+                    <label className="block text-sm font-medium text-[#FCEBDC] mb-1 sm:mb-2 font-poppins">
                       Company/Business
                     </label>
                     <input
@@ -241,13 +241,13 @@ export default function ContactPage() {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm font-poppins"
+                      className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-sm font-poppins"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-[#273f4f] mb-1 sm:mb-2 font-poppins">
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-1 sm:mb-2 font-poppins">
                     I am a... *
                   </label>
                   <select
@@ -255,7 +255,7 @@ export default function ContactPage() {
                     value={formData.role}
                     onChange={handleChange}
                     required
-                    className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm font-poppins"
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-sm font-poppins"
                   >
                     <option value="kw-realtor">KW SingaporeRealtor</option>
                     <option value="potential-vendor">Potential Vendor</option>
@@ -264,7 +264,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-[#273f4f] mb-1 sm:mb-2 font-poppins">
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-1 sm:mb-2 font-poppins">
                     Subject *
                   </label>
                   <input
@@ -274,12 +274,12 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     placeholder="What can we help you with?"
-                    className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm font-poppins"
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-sm font-poppins"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-[#273f4f] mb-1 sm:mb-2 font-poppins">
+                  <label className="block text-sm font-medium text-[#FCEBDC] mb-1 sm:mb-2 font-poppins">
                     Message *
                   </label>
                   <textarea
@@ -289,14 +289,14 @@ export default function ContactPage() {
                     required
                     rows={6}
                     placeholder="Tell us about your needs, questions, or how we can help you..."
-                    className="block w-full border border-[#273f4f]/20 rounded-md px-3 py-2 text-[#273f4f] bg-white focus:outline-none focus:ring-[#f37521] focus:border-[#f37521] text-sm resize-vertical font-poppins"
+                    className="block w-full border border-[#273F4F]/20 rounded-md px-3 py-2 text-[#FCEBDC] bg-black focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-sm resize-vertical font-poppins"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#f37521] text-white py-3 px-4 rounded-lg hover:bg-[#e0651a] disabled:bg-[#f37521]/50 disabled:cursor-not-allowed transition-colors font-medium text-sm sm:text-base font-poppins"
+                  className="w-full bg-[#B40101] text-white py-3 px-4 rounded-lg hover:bg-[#e0651a] disabled:bg-[#B40101]/50 disabled:cursor-not-allowed transition-colors font-medium text-sm sm:text-base font-poppins"
                 >
                   {loading ? 'Sending...' : 'Send Message'}
                 </button>

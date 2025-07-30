@@ -14,7 +14,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   
-  const { login } = useAuth();
+  const { login, getRedirectPath } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -25,7 +25,15 @@ export default function LoginPage() {
     try {
       const success = await login(email, password);
       if (success) {
-        router.push('/dashboard');
+        // Get the user from localStorage to determine redirect path
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          const user = JSON.parse(storedUser);
+          const redirectPath = getRedirectPath(user);
+          router.push(redirectPath);
+        } else {
+          router.push('/dashboard');
+        }
       } else {
         setError('Invalid email or password');
       }
@@ -50,6 +58,16 @@ export default function LoginPage() {
               create a new account
             </Link>
           </p>
+          
+          {/* Login Credentials Note */}
+          <div className="mt-6 p-4 bg-[#f37521]/10 border border-[#f37521]/20 rounded-lg">
+            <h3 className="text-sm font-medium text-[#273f4f] mb-2">Demo Login Credentials:</h3>
+            <div className="space-y-1 text-xs text-[#273f4f]/80">
+              <p><strong>Admin:</strong> isabelle@chiefmedia.sg | admin123</p>
+              <p><strong>Realtor:</strong> realtor@kwsingapore.com | password</p>
+              <p><strong>Client:</strong> client@example.com | password</p>
+            </div>
+          </div>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">

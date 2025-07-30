@@ -6,7 +6,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  role: 'vendor' | 'realtor' | 'client';
+  role: 'realtor' | 'client' | 'admin';
   company?: string;
   phone?: string;
   avatar?: string;
@@ -18,6 +18,7 @@ interface AuthContextType {
   signup: (userData: Omit<User, 'id'>) => Promise<boolean>;
   logout: () => void;
   loading: boolean;
+  getRedirectPath: (user: User) => string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -47,11 +48,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string): Promise<boolean> => {
     // Simulate API call - replace with actual authentication
     if (email && password) {
+      // Check if user has KW Singapore email for realtor access
+      const isKWRealtor = email.endsWith('@kwsingapore.com');
+      
+      // Check for admin access (in real app, this would be validated against database)
+      const isAdmin = email === 'isabelle@chiefmedia.sg' && password === 'admin123';
+      
+      let role: User['role'] = 'client';
+      if (isAdmin) {
+        role = 'admin';
+      } else if (isKWRealtor) {
+        role = 'realtor';
+      }
+      
       const mockUser: User = {
         id: '1',
         email,
         name: email.split('@')[0],
-        role: 'client',
+        role,
       };
       setUser(mockUser);
       if (typeof window !== 'undefined') {
@@ -82,17 +96,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const getRedirectPath = (user: User): string => {
+    // KW Singapore realtors should go to vendors page
+    if (user.email.endsWith('@kwsingapore.com') && user.role === 'realtor') {
+      return '/vendors';
+    }
+    
+    // Admins go to admin dashboard
+    if (user.role === 'admin') {
+      return '/admin/enquiries';
+    }
+    
+    // Default for clients and other users
+    return '/dashboard';
+  };
+
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
-      <AuthContext.Provider value={{ user: null, login, signup, logout, loading: true }}>
+      <AuthContext.Provider value={{ user: null, login, signup, logout, loading: true, getRedirectPath }}>
         {children}
       </AuthContext.Provider>
     );
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, loading, getRedirectPath }}>
       {children}
     </AuthContext.Provider>
   );

@@ -10,7 +10,8 @@ import {
   ShieldCheckIcon,
   StarIcon,
   ArrowRightIcon,
-  EnvelopeIcon
+  EnvelopeIcon,
+  CalendarIcon
 } from '@heroicons/react/24/outline';
 import CurrentYear from "../components/CurrentYear";
 import ScrollAnimation from "../components/ScrollAnimation";
@@ -152,12 +153,13 @@ export default function Home() {
                 </ScrollAnimation>
                 <ScrollAnimation delay={800}>
                   <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                    <Link href="/vendors" className="inline-flex items-center gap-2 bg-[#B40101] text-white px-8 py-4 rounded-lg hover:bg-[#e0651a] transition font-medium text-lg">
+                    <Link href="/vendors" className="inline-flex items-center gap-2 px-4 py-2 rounded bg-[#B40101] text-white hover:bg-[#e0651a] transition">
                       Browse Vendors
                       <ArrowRightIcon className="h-5 w-5" />
                     </Link>
-                    <Link href="/vendor-application" className="inline-flex items-center gap-2 bg-[#FCEBDC] text-[#273F4F] px-8 py-4 rounded-lg hover:bg-[#FCEBDC]/90 transition font-medium text-lg border-2 border-[#FCEBDC]">
-                      Become a Vendor
+                    <Link href="/studio" className="inline-flex items-center gap-2 px-4 py-2 rounded bg-[#FCEBDC] text-[#273F4F] hover:bg-[#e0651a] transition">
+                     Book Studio
+                     <CalendarIcon className="h-5 w-5" />
                     </Link>
                   </div>
                 </ScrollAnimation>

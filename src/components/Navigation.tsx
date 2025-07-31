@@ -61,9 +61,9 @@ export default function Navigation() {
             <Link href="/vendors" className={`transition-colors duration-300 ${linkClassName}`}>
               Browse Vendors
             </Link>
-            {/* <Link href="/portfolio" className={`transition-colors duration-300 ${linkClassName}`}>
-              Portfolio
-            </Link> */}
+            <Link href="/studio" className={`transition-colors duration-300 ${linkClassName}`}>
+              Studio
+            </Link>
             <Link href="/contact" className={`transition-colors duration-300 ${linkClassName}`}>
               Contact
             </Link>
@@ -98,13 +98,13 @@ export default function Navigation() {
               >
                 Browse Vendors
               </Link>
-              {/* <Link
-                href="/portfolio"
+              <Link
+                href="/studio"
                 className="block px-3 py-2 text-white hover:text-[#f37521] hover:bg-gray-50 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Portfolio
-              </Link> */}
+                Studio
+              </Link>
               <Link
                 href="/contact"
                 className="block px-3 py-2 text-white hover:text-[#f37521] hover:bg-gray-50 rounded-md"

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth';
-import { useEnquiries } from '@/lib/enquiries';
+import { useStudioEnquiries } from '@/lib/studio-enquiries';
 import { useRouter } from 'next/navigation';
 import { 
   EnvelopeIcon,
@@ -12,34 +12,31 @@ import {
   CheckIcon,
   XMarkIcon,
   EyeIcon,
-  ClockIcon,
-  LinkIcon
+  ClockIcon
 } from '@heroicons/react/24/outline';
 import AnimatedBackground from '../../../components/AnimatedBackground';
 import Notification from '../../../components/Notification';
 import AdminSidebar from '../../../components/AdminSidebar';
 
-interface Enquiry {
+interface StudioEnquiry {
   id: string;
-  vendorId: string;
-  vendorName: string;
-  realtorId: string;
+  studioName: string;
+  studioAddress: string;
   realtorName: string;
   realtorEmail: string;
-  offerings: string[];
+  realtorPhone: string;
+  selectedDate: string;
+  selectedTime: string;
   status: 'pending' | 'approved' | 'rejected' | 'completed';
   createdAt: string;
-  meetingDate?: string;
-  meetingTime?: string;
-  meetingType?: string;
   notes?: string;
 }
 
-export default function AdminEnquiriesPage() {
+export default function AdminStudioEnquiriesPage() {
   const { user, loading } = useAuth();
-  const { enquiries, updateEnquiryStatus } = useEnquiries();
+  const { studioEnquiries, updateStudioEnquiryStatus } = useStudioEnquiries();
   const router = useRouter();
-  const [selectedEnquiry, setSelectedEnquiry] = useState<Enquiry | null>(null);
+  const [selectedEnquiry, setSelectedEnquiry] = useState<StudioEnquiry | null>(null);
   const [filter, setFilter] = useState<string>('all');
   const [notification, setNotification] = useState<{
     isVisible: boolean;
@@ -57,20 +54,16 @@ export default function AdminEnquiriesPage() {
     }
   }, [user, loading, router]);
 
-  const handleStatusUpdate = (enquiryId: string, newStatus: Enquiry['status']) => {
-    updateEnquiryStatus(enquiryId, newStatus);
-  };
-
-  const handleSendCalendlyLink = () => {
-    // For now, just show a notification
+  const handleStatusUpdate = (enquiryId: string, newStatus: StudioEnquiry['status']) => {
+    updateStudioEnquiryStatus(enquiryId, newStatus);
     setNotification({
       isVisible: true,
-      message: 'Calendly link already sent to realtors',
+      message: `Enquiry status updated to ${newStatus}`,
       type: 'success'
     });
   };
 
-  const filteredEnquiries = enquiries.filter(enquiry => {
+  const filteredEnquiries = studioEnquiries.filter(enquiry => {
     if (filter === 'all') return true;
     return enquiry.status === filter;
   });
@@ -124,7 +117,7 @@ export default function AdminEnquiriesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-xl font-semibold text-[#273f4f]">
-                    Vendor Enquiries Management
+                    Studio Enquiries Management
                   </h1>
                   <p className="text-gray-600 mt-1">
                     Welcome, {user?.name}
@@ -142,23 +135,15 @@ export default function AdminEnquiriesPage() {
             </div>
           </div>
 
-                    <div className="p-6">
+          <div className="p-6">
             {/* Page Header */}
             <div className="mb-8">
               <h1 className="text-3xl font-bold text-[#273f4f]">
-                Vendor Enquiries Management
+                Studio Enquiries Management
               </h1>
               <p className="mt-2 text-[#273f4f]/80">
-                Manage and track enquiries from KW Singapore realtors to vendors. Vendors are managed by the admin and don&apos;t require accounts.
+                Manage and track studio booking enquiries from KW Singapore realtors.
               </p>
-              
-              {/* Login Credentials Note */}
-              <div className="mt-4 p-3 bg-[#B40101]/10 border border-[#B40101]/20 rounded-lg">
-                <h3 className="text-sm font-medium text-[#273f4f] mb-1">Admin Login:</h3>
-                <p className="text-xs text-[#273f4f]/80">
-                  <strong>Email:</strong> isabelle@chiefmedia.sg | <strong>Password:</strong> admin123
-                </p>
-              </div>
             </div>
 
           {/* Stats */}
@@ -168,7 +153,7 @@ export default function AdminEnquiriesPage() {
                 <EnvelopeIcon className="h-8 w-8 text-blue-600" />
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-900">Total Enquiries</h3>
-                  <p className="text-2xl font-bold text-blue-600">{enquiries.length}</p>
+                  <p className="text-2xl font-bold text-blue-600">{studioEnquiries.length}</p>
                 </div>
               </div>
             </div>
@@ -178,7 +163,7 @@ export default function AdminEnquiriesPage() {
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-900">Pending</h3>
                   <p className="text-2xl font-bold text-yellow-600">
-                    {enquiries.filter(e => e.status === 'pending').length}
+                    {studioEnquiries.filter(e => e.status === 'pending').length}
                   </p>
                 </div>
               </div>
@@ -189,7 +174,7 @@ export default function AdminEnquiriesPage() {
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-900">Approved</h3>
                   <p className="text-2xl font-bold text-green-600">
-                    {enquiries.filter(e => e.status === 'approved').length}
+                    {studioEnquiries.filter(e => e.status === 'approved').length}
                   </p>
                 </div>
               </div>
@@ -200,7 +185,7 @@ export default function AdminEnquiriesPage() {
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-900">Completed</h3>
                   <p className="text-2xl font-bold text-purple-600">
-                    {enquiries.filter(e => e.status === 'completed').length}
+                    {studioEnquiries.filter(e => e.status === 'completed').length}
                   </p>
                 </div>
               </div>
@@ -256,7 +241,7 @@ export default function AdminEnquiriesPage() {
           {/* Enquiries List */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-900">Enquiries</h2>
+              <h2 className="text-lg font-semibold text-gray-900">Studio Enquiries</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -266,10 +251,10 @@ export default function AdminEnquiriesPage() {
                       Realtor
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Vendor
+                      Studio
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Services
+                      Booking Details
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Status
@@ -301,6 +286,9 @@ export default function AdminEnquiriesPage() {
                               <div className="text-sm text-gray-500">
                                 {enquiryItem.realtorEmail}
                               </div>
+                              <div className="text-sm text-gray-500">
+                                {enquiryItem.realtorPhone}
+                              </div>
                             </div>
                           </div>
                         </td>
@@ -313,21 +301,24 @@ export default function AdminEnquiriesPage() {
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">
-                                {enquiryItem.vendorName}
+                                {enquiryItem.studioName}
+                              </div>
+                              <div className="text-sm text-gray-500">
+                                {enquiryItem.studioAddress}
                               </div>
                             </div>
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex flex-wrap gap-1">
-                            {enquiryItem.offerings.map((offering: string) => (
-                              <span
-                                key={offering}
-                                className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#f2a16d]/10 text-[#f2a16d]"
-                              >
-                                {offering.replace('-', ' ')}
-                              </span>
-                            ))}
+                          <div className="text-sm text-gray-900">
+                            <div className="flex items-center gap-2">
+                              <CalendarIcon className="h-4 w-4 text-gray-400" />
+                              {enquiryItem.selectedDate}
+                            </div>
+                            <div className="flex items-center gap-2 mt-1">
+                              <ClockIcon className="h-4 w-4 text-gray-400" />
+                              {enquiryItem.selectedTime}
+                            </div>
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -366,12 +357,12 @@ export default function AdminEnquiriesPage() {
                               </>
                             )}
                             {enquiryItem.status === 'approved' && (
-                                                              <button
-                                  onClick={() => handleSendCalendlyLink()}
-                                  className="text-blue-600 hover:text-blue-800"
-                                  title="Send Calendly Link"
-                                >
-                                <LinkIcon className="h-4 w-4" />
+                              <button
+                                onClick={() => handleStatusUpdate(enquiryItem.id, 'completed')}
+                                className="text-blue-600 hover:text-blue-800"
+                                title="Mark as Completed"
+                              >
+                                <CheckIcon className="h-4 w-4" />
                               </button>
                             )}
                           </div>
@@ -389,7 +380,7 @@ export default function AdminEnquiriesPage() {
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-semibold text-gray-900">Enquiry Details</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">Studio Enquiry Details</h2>
                   <button
                     onClick={() => setSelectedEnquiry(null)}
                     className="text-gray-400 hover:text-gray-600"
@@ -403,43 +394,25 @@ export default function AdminEnquiriesPage() {
                     <h3 className="font-medium text-gray-900">Realtor Information</h3>
                     <p className="text-gray-600">{selectedEnquiry.realtorName}</p>
                     <p className="text-gray-600">{selectedEnquiry.realtorEmail}</p>
+                    <p className="text-gray-600">{selectedEnquiry.realtorPhone}</p>
                   </div>
                   
                   <div>
-                    <h3 className="font-medium text-gray-900">Vendor</h3>
-                    <p className="text-gray-600">{selectedEnquiry.vendorName}</p>
+                    <h3 className="font-medium text-gray-900">Studio</h3>
+                    <p className="text-gray-600">{selectedEnquiry.studioName}</p>
+                    <p className="text-gray-600">{selectedEnquiry.studioAddress}</p>
                   </div>
                   
                   <div>
-                    <h3 className="font-medium text-gray-900">Requested Services</h3>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {selectedEnquiry.offerings.map((offering) => (
-                        <span
-                          key={offering}
-                          className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#f2a16d]/10 text-[#f2a16d]"
-                        >
-                          {offering.replace('-', ' ')}
-                        </span>
-                      ))}
-                    </div>
+                    <h3 className="font-medium text-gray-900">Booking Details</h3>
+                    <p className="text-gray-600">Date: {selectedEnquiry.selectedDate}</p>
+                    <p className="text-gray-600">Time: {selectedEnquiry.selectedTime}</p>
                   </div>
                   
                   {selectedEnquiry.notes && (
                     <div>
                       <h3 className="font-medium text-gray-900">Notes</h3>
                       <p className="text-gray-600">{selectedEnquiry.notes}</p>
-                    </div>
-                  )}
-                  
-                  {selectedEnquiry.meetingDate && (
-                    <div>
-                      <h3 className="font-medium text-gray-900">Meeting Details</h3>
-                      <p className="text-gray-600">
-                        {selectedEnquiry.meetingDate} at {selectedEnquiry.meetingTime}
-                      </p>
-                      <p className="text-gray-600 capitalize">
-                        Type: {selectedEnquiry.meetingType}
-                      </p>
                     </div>
                   )}
                   

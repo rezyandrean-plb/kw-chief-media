@@ -18,6 +18,7 @@ import {
 } from '@heroicons/react/24/outline';
 import AnimatedBackground from '../../../components/AnimatedBackground';
 import Notification from '../../../components/Notification';
+import AdminSidebar from '../../../components/AdminSidebar';
 
 interface Vendor {
   id: string;
@@ -239,52 +240,57 @@ export default function AdminVendorsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
       <AnimatedBackground />
       
-      {/* Admin Header */}
-      <div className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <h1 className="text-xl font-semibold text-[#273f4f]">
-                Chief Media Admin
-              </h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">
-                Welcome, {user?.name}
-              </span>
-              <button
-                onClick={() => router.push('/dashboard')}
-                className="text-sm text-[#B40101] hover:text-[#e0651a] transition"
-              >
-                Back to Dashboard
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="flex relative z-10">
+        {/* Sidebar */}
+        <AdminSidebar />
 
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
-        <div className="px-4 py-6 sm:px-0">
-          {/* Page Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-[#273f4f]">
-              Vendor Management
-            </h1>
-            <p className="mt-2 text-[#273f4f]/80">
-              Manage vendor profiles and their service offerings
-            </p>
-            
-            {/* Login Credentials Note */}
-            <div className="mt-4 p-3 bg-[#B40101]/10 border border-[#B40101]/20 rounded-lg">
-              <h3 className="text-sm font-medium text-[#273f4f] mb-1">Admin Login:</h3>
-              <p className="text-xs text-[#273f4f]/80">
-                <strong>Email:</strong> isabelle@chiefmedia.sg | <strong>Password:</strong> admin123
-              </p>
+        {/* Main Content */}
+        <div className="flex-1">
+          {/* Header */}
+          <div className="bg-white shadow-sm border-b border-gray-200">
+            <div className="px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-xl font-semibold text-[#273f4f]">
+                    Vendor Management
+                  </h1>
+                  <p className="text-gray-600 mt-1">
+                    Welcome, {user?.name}
+                  </p>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <button
+                    onClick={() => router.push('/admin')}
+                    className="text-sm text-[#B40101] hover:text-[#e0651a] transition"
+                  >
+                    Back to Dashboard
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+
+          <div className="p-6">
+            {/* Page Header */}
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold text-[#273f4f]">
+                Vendor Management
+              </h1>
+              <p className="mt-2 text-[#273f4f]/80">
+                Manage vendor profiles and their service offerings
+              </p>
+              
+              {/* Login Credentials Note */}
+              <div className="mt-4 p-3 bg-[#B40101]/10 border border-[#B40101]/20 rounded-lg">
+                <h3 className="text-sm font-medium text-[#273f4f] mb-1">Admin Login:</h3>
+                <p className="text-xs text-[#273f4f]/80">
+                  <strong>Email:</strong> isabelle@chiefmedia.sg | <strong>Password:</strong> admin123
+                </p>
+              </div>
+            </div>
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -566,6 +572,7 @@ export default function AdminVendorsPage() {
           )}
         </div>
       </div>
+    </div>
 
       {/* Notification */}
       <Notification

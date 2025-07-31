@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth";
 import { EnquiryProvider } from "@/lib/enquiries";
+import { StudioEnquiryProvider } from "@/lib/studio-enquiries";
 import ConditionalNavigation from "@/components/ConditionalNavigation";
 
 const poppins = Poppins({
@@ -32,8 +33,10 @@ export default function RootLayout({
       >
         <AuthProvider>
           <EnquiryProvider>
-            <ConditionalNavigation />
-            {children}
+            <StudioEnquiryProvider>
+              <ConditionalNavigation />
+              {children}
+            </StudioEnquiryProvider>
           </EnquiryProvider>
         </AuthProvider>
       </body>

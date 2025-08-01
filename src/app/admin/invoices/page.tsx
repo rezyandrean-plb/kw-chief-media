@@ -11,7 +11,7 @@ import {
   PencilIcon,
   TrashIcon
 } from '@heroicons/react/24/outline';
-import AnimatedBackground from '../../components/AnimatedBackground';
+import AnimatedBackground from '../../../components/AnimatedBackground';
 
 interface Invoice {
   id: string;
@@ -119,7 +119,7 @@ export default function InvoicesPage() {
                 </p>
               </div>
               <Link
-                href="/invoices/create"
+                href="/admin/invoices/create"
                 className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
               >
                 <PlusIcon className="h-5 w-5 mr-2" />
@@ -180,7 +180,7 @@ export default function InvoicesPage() {
                 </p>
                 {!searchTerm && statusFilter === 'all' && (
                   <Link
-                    href="/invoices/create"
+                    href="/admin/invoices/create"
                     className="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                   >
                     <PlusIcon className="h-5 w-5 mr-2" />
@@ -249,13 +249,13 @@ export default function InvoicesPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <div className="flex justify-end space-x-2">
                             <Link
-                              href={`/invoices/${invoice.id}`}
+                              href={`/admin/invoices/${invoice.id}`}
                               className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                             >
                               <EyeIcon className="h-5 w-5" />
                             </Link>
                             <Link
-                              href={`/invoices/${invoice.id}/edit`}
+                              href={`/admin/invoices/${invoice.id}/edit`}
                               className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300"
                             >
                               <PencilIcon className="h-5 w-5" />

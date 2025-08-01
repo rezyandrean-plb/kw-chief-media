@@ -7,7 +7,6 @@ import { useEnquiries } from '@/lib/enquiries';
 import Notification from '../../../components/Notification';
 import Image from 'next/image';
 import { 
-  CameraIcon,
   ArrowLeftIcon,
   StarIcon,
   EnvelopeIcon,

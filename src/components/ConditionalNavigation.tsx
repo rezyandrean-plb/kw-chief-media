@@ -7,7 +7,7 @@ export default function ConditionalNavigation() {
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith('/admin');
   const isAuthPage = pathname === '/login' || pathname === '/signup' || pathname === '/forgot-password';
-  const isDashboardPage = pathname === '/dashboard';
+  const isDashboardPage = pathname === '/admin';
 
   if (isAdminPage || isAuthPage || isDashboardPage) {
     return null;

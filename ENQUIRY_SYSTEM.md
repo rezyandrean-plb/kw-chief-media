@@ -12,8 +12,8 @@ The enquiry system allows KW Singapore realtors to connect with vendors through 
 - **Smart Redirects**: After login, users are automatically redirected based on their role:
   - KW Singapore realtors → `/vendors`
   - Admins → `/admin/enquiries`
-  - Vendors → `/dashboard`
-  - Clients → `/dashboard`
+  - Vendors → `/admin`
+- Clients → `/admin`
 
 ### 2. Enquiry Process
 1. **Browse Vendors**: Users can view vendor profiles at `/vendors`

@@ -5,16 +5,11 @@ import { useAuth } from '@/lib/auth';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { 
-  PencilIcon,
   TrashIcon,
   EyeIcon,
   CheckIcon,
   XMarkIcon,
   BuildingOfficeIcon,
-  CameraIcon,
-  VideoCameraIcon,
-  DocumentTextIcon,
-  UserGroupIcon,
   MagnifyingGlassIcon
 } from '@heroicons/react/24/outline';
 import AnimatedBackground from '../../../components/AnimatedBackground';
@@ -216,8 +211,6 @@ export default function AdminVendorsPage() {
     }
   };
 
-
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
@@ -284,140 +277,138 @@ export default function AdminVendorsPage() {
               </div>
             </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center">
-                <BuildingOfficeIcon className="h-8 w-8 text-blue-600" />
-                <div className="ml-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Total Vendors</h3>
-                  <p className="text-2xl font-bold text-blue-600">{vendors.length}</p>
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center">
+                  <BuildingOfficeIcon className="h-8 w-8 text-blue-600" />
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-gray-900">Total Vendors</h3>
+                    <p className="text-2xl font-bold text-blue-600">{vendors.length}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center">
+                  <CheckIcon className="h-8 w-8 text-green-600" />
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-gray-900">Active</h3>
+                    <p className="text-2xl font-bold text-green-600">
+                      {vendors.filter(v => v.status === 'active').length}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center">
+                  <XMarkIcon className="h-8 w-8 text-yellow-600" />
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-gray-900">Pending</h3>
+                    <p className="text-2xl font-bold text-yellow-600">
+                      {vendors.filter(v => v.status === 'pending').length}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center">
+                  <XMarkIcon className="h-8 w-8 text-red-600" />
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-gray-900">Inactive</h3>
+                    <p className="text-2xl font-bold text-red-600">
+                      {vendors.filter(v => v.status === 'inactive').length}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center">
-                <CheckIcon className="h-8 w-8 text-green-600" />
-                <div className="ml-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Active</h3>
-                  <p className="text-2xl font-bold text-green-600">
-                    {vendors.filter(v => v.status === 'active').length}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center">
-                <XMarkIcon className="h-8 w-8 text-yellow-600" />
-                <div className="ml-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Pending</h3>
-                  <p className="text-2xl font-bold text-yellow-600">
-                    {vendors.filter(v => v.status === 'pending').length}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center">
-                <XMarkIcon className="h-8 w-8 text-red-600" />
-                <div className="ml-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Inactive</h3>
-                  <p className="text-2xl font-bold text-red-600">
-                    {vendors.filter(v => v.status === 'inactive').length}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Search and Filters */}
-          <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-1">
-                <div className="relative">
-                  <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Search vendors..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
-                  />
+            {/* Search and Filters */}
+            <div className="bg-white rounded-lg shadow p-6 mb-8">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1">
+                  <div className="relative">
+                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Search vendors..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    />
+                  </div>
+                </div>
+                <div className="sm:w-48">
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
                 </div>
               </div>
-              <div className="sm:w-48">
-                <select
-                  value={statusFilter}
-                  onChange={(e) => setStatusFilter(e.target.value)}
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
-                >
-                  <option value="all">All Status</option>
-                  <option value="active">Active</option>
-                  <option value="pending">Pending</option>
-                  <option value="inactive">Inactive</option>
-                </select>
+            </div>
+
+            {/* Vendors List */}
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200">
+                <h2 className="text-lg font-semibold text-gray-900">Vendors</h2>
               </div>
-
-            </div>
-          </div>
-
-          {/* Vendors List */}
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-900">Vendors</h2>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Vendor
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Services
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Contact
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Updated
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredVendors.map((vendor) => (
-                    <tr key={vendor.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 h-10 w-10">
-                            <div className="h-10 w-10 rounded-full bg-[#f37521]/10 flex items-center justify-center overflow-hidden">
-                              <Image
-                                src={vendor.image}
-                                alt={`${vendor.name} logo`}
-                                width={40}
-                                height={40}
-                                className="w-full h-full object-cover rounded-full"
-                                onError={(e) => {
-                                  // Fallback to a default icon if image fails to load
-                                  const target = e.target as HTMLImageElement;
-                                  target.style.display = 'none';
-                                  const parent = target.parentElement;
-                                  if (parent) {
-                                    const fallbackIcon = document.createElement('div');
-                                    fallbackIcon.className = 'w-full h-full flex items-center justify-center';
-                                    fallbackIcon.innerHTML = '<svg class="h-5 w-5 text-[#f37521]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
-                                    parent.appendChild(fallbackIcon);
-                                  }
-                                }}
-                              />
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Vendor
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Services
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Contact
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Updated
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {filteredVendors.map((vendor) => (
+                      <tr key={vendor.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0 h-10 w-10">
+                              <div className="h-10 w-10 rounded-full bg-[#f37521]/10 flex items-center justify-center overflow-hidden">
+                                <Image
+                                  src={vendor.image}
+                                  alt={`${vendor.name} logo`}
+                                  width={40}
+                                  height={40}
+                                  className="w-full h-full object-cover rounded-full"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.style.display = 'none';
+                                    const parent = target.parentElement;
+                                    if (parent) {
+                                      const fallbackIcon = document.createElement('div');
+                                      fallbackIcon.className = 'w-full h-full flex items-center justify-center';
+                                      fallbackIcon.innerHTML = '<svg class="h-5 w-5 text-[#f37521]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
+                                      parent.appendChild(fallbackIcon);
+                                    }
+                                  }}
+                                />
+                              </div>
                             </div>
-                          </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">
                                 {vendor.name}
@@ -450,46 +441,28 @@ export default function AdminVendorsPage() {
                             {vendor.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">{vendor.contact.email}</div>
-                          <div className="text-sm text-gray-500">{vendor.contact.phone}</div>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {vendor.contact.email}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {new Date(vendor.updatedAt).toLocaleDateString()}
+                          {vendor.updatedAt}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <div className="flex space-x-2">
+                          <div className="flex items-center space-x-2">
                             <button
                               onClick={() => setSelectedVendor(vendor)}
-                              className="text-[#03809c] hover:text-[#03809c]/80"
+                              className="text-blue-600 hover:text-blue-900"
                               title="View Details"
                             >
                               <EyeIcon className="h-4 w-4" />
                             </button>
                             <button
-                              className="text-blue-600 hover:text-blue-800"
-                              title="Edit"
+                              onClick={() => handleStatusUpdate(vendor.id, vendor.status === 'active' ? 'inactive' : 'active')}
+                              className="text-green-600 hover:text-green-900"
+                              title="Toggle Status"
                             >
-                              <PencilIcon className="h-4 w-4" />
+                              {vendor.status === 'active' ? <XMarkIcon className="h-4 w-4" /> : <CheckIcon className="h-4 w-4" />}
                             </button>
-                            {vendor.status === 'pending' && (
-                              <>
-                                <button
-                                  onClick={() => handleStatusUpdate(vendor.id, 'active')}
-                                  className="text-green-600 hover:text-green-800"
-                                  title="Approve"
-                                >
-                                  <CheckIcon className="h-4 w-4" />
-                                </button>
-                                <button
-                                  onClick={() => handleStatusUpdate(vendor.id, 'inactive')}
-                                  className="text-red-600 hover:text-red-800"
-                                  title="Reject"
-                                >
-                                  <XMarkIcon className="h-4 w-4" />
-                                </button>
-                              </>
-                            )}
                             <button
                               onClick={() => handleDeleteVendor(vendor.id)}
                               className="text-red-600 hover:text-red-800"
@@ -500,10 +473,10 @@ export default function AdminVendorsPage() {
                           </div>
                         </td>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -580,7 +553,6 @@ export default function AdminVendorsPage() {
           )}
         </div>
       </div>
-    </div>
 
       {/* Notification */}
       <Notification

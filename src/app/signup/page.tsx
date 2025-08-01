@@ -67,7 +67,7 @@ export default function SignupPage() {
           const redirectPath = getRedirectPath(user);
           router.push(redirectPath);
         } else {
-          router.push('/dashboard');
+          router.push('/admin');
         }
       } else {
         setError('Failed to create account');

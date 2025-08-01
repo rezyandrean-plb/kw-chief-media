@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
-import AnimatedBackground from '../../../components/AnimatedBackground';
+import AnimatedBackground from '../../../../components/AnimatedBackground';
 
 interface InvoiceItem {
   id: string;
@@ -86,7 +86,7 @@ export default function CreateInvoicePage() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Redirect to invoices list
-      router.push('/invoices');
+      router.push('/admin/invoices');
     } catch (error) {
       console.error('Error creating invoice:', error);
     } finally {

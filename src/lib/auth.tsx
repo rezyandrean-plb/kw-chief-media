@@ -108,7 +108,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     
     // Default for clients and other users
-    return '/dashboard';
+    return '/admin';
   };
 
   // Prevent hydration mismatch by not rendering until mounted

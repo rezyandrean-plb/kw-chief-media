@@ -8,7 +8,8 @@ import {
   BuildingOfficeIcon,
   UserGroupIcon,
   ChartBarIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  DocumentTextIcon
 } from '@heroicons/react/24/outline';
 import AdminSidebar from '@/components/AdminSidebar';
 import AnimatedBackground from '@/components/AnimatedBackground';
@@ -69,6 +70,14 @@ export default function AdminDashboard() {
       color: 'text-yellow-600',
       bgColor: 'bg-yellow-100',
       href: '/admin/enquiries'
+    },
+    {
+      name: 'Total Invoices',
+      value: '18',
+      icon: DocumentTextIcon,
+      color: 'text-indigo-600',
+      bgColor: 'bg-indigo-100',
+      href: '/admin/invoices'
     }
   ];
 
@@ -90,6 +99,12 @@ export default function AdminDashboard() {
       description: 'Add, edit, or remove vendor profiles',
       href: '/admin/vendors',
       icon: UserGroupIcon
+    },
+    {
+      name: 'Manage Invoices',
+      description: 'Create and manage invoices',
+      href: '/admin/invoices',
+      icon: DocumentTextIcon
     }
   ];
 

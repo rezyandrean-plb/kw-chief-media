@@ -6,7 +6,8 @@ import {
   EnvelopeIcon,
   BuildingOfficeIcon,
   HomeIcon,
-  UserGroupIcon
+  UserGroupIcon,
+  DocumentTextIcon
 } from '@heroicons/react/24/outline';
 
 export default function AdminSidebar() {
@@ -17,6 +18,7 @@ export default function AdminSidebar() {
     { name: 'Enquiries', href: '/admin/enquiries', icon: EnvelopeIcon },
     { name: 'Studio Enquiries', href: '/admin/studio-enquiries', icon: BuildingOfficeIcon },
     { name: 'Vendors', href: '/admin/vendors', icon: UserGroupIcon },
+    { name: 'Invoices', href: '/admin/invoices', icon: DocumentTextIcon },
   ];
 
   const isActive = (href: string) => {

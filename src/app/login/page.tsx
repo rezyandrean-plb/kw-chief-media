@@ -32,7 +32,7 @@ export default function LoginPage() {
           const redirectPath = getRedirectPath(user);
           router.push(redirectPath);
         } else {
-          router.push('/dashboard');
+          router.push('/admin');
         }
       } else {
         setError('Invalid email or password');

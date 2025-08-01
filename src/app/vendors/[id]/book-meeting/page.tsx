@@ -202,7 +202,7 @@ export default function BookMeetingPage() {
               </div>
               <div className="space-x-4">
                 <button
-                  onClick={() => router.push('/dashboard')}
+                  onClick={() => router.push('/admin')}
                   className="bg-[#B40101] text-white px-6 py-3 rounded-lg hover:bg-[#e0651a] transition font-medium"
                 >
                   Go to Dashboard

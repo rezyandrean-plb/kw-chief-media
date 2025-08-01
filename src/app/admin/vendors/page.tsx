@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { 
   PencilIcon,
   TrashIcon,
@@ -37,7 +38,7 @@ interface Vendor {
     phone: string;
     address: string;
   };
-  icon: string;
+  image: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -83,7 +84,7 @@ export default function AdminVendorsPage() {
           phone: '+65 9123 4567',
           address: 'Singapore'
         },
-        icon: 'CameraIcon',
+        image: '/images/vendors/tubear.svg',
         createdAt: '2024-01-15',
         updatedAt: '2024-01-20'
       },
@@ -104,7 +105,7 @@ export default function AdminVendorsPage() {
           phone: '+65 9876 5432',
           address: 'Singapore'
         },
-        icon: 'UserGroupIcon',
+        image: '/images/vendors/chief-media.svg',
         createdAt: '2024-01-10',
         updatedAt: '2024-01-18'
       },
@@ -125,7 +126,7 @@ export default function AdminVendorsPage() {
           phone: '+65 8765 4321',
           address: 'Singapore'
         },
-        icon: 'VideoCameraIcon',
+        image: '/images/vendors/lfg-content.svg',
         createdAt: '2024-01-12',
         updatedAt: '2024-01-19'
       },
@@ -146,7 +147,7 @@ export default function AdminVendorsPage() {
           phone: '+65 7654 3210',
           address: 'Singapore'
         },
-        icon: 'DocumentTextIcon',
+        image: '/images/vendors/cc-creative.svg',
         createdAt: '2024-01-25',
         updatedAt: '2024-01-25'
       },
@@ -167,7 +168,7 @@ export default function AdminVendorsPage() {
           phone: '+65 6543 2109',
           address: 'Singapore'
         },
-        icon: 'BuildingOfficeIcon',
+        image: '/images/vendors/win-media.svg',
         createdAt: '2024-01-08',
         updatedAt: '2024-01-22'
       },
@@ -215,16 +216,7 @@ export default function AdminVendorsPage() {
     }
   };
 
-  const getIconComponent = (iconName: string) => {
-    switch (iconName) {
-      case 'CameraIcon': return CameraIcon;
-      case 'VideoCameraIcon': return VideoCameraIcon;
-      case 'DocumentTextIcon': return DocumentTextIcon;
-      case 'UserGroupIcon': return UserGroupIcon;
-      case 'BuildingOfficeIcon': return BuildingOfficeIcon;
-      default: return BuildingOfficeIcon;
-    }
-  };
+
 
   if (loading) {
     return (
@@ -399,17 +391,33 @@ export default function AdminVendorsPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredVendors.map((vendor) => {
-                    const IconComponent = getIconComponent(vendor.icon);
-                    return (
-                      <tr key={vendor.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="flex-shrink-0 h-10 w-10">
-                              <div className="h-10 w-10 rounded-full bg-[#f37521]/10 flex items-center justify-center">
-                                <IconComponent className="h-5 w-5 text-[#f37521]" />
-                              </div>
+                  {filteredVendors.map((vendor) => (
+                    <tr key={vendor.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-10 w-10">
+                            <div className="h-10 w-10 rounded-full bg-[#f37521]/10 flex items-center justify-center overflow-hidden">
+                              <Image
+                                src={vendor.image}
+                                alt={`${vendor.name} logo`}
+                                width={40}
+                                height={40}
+                                className="w-full h-full object-cover rounded-full"
+                                onError={(e) => {
+                                  // Fallback to a default icon if image fails to load
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                  const parent = target.parentElement;
+                                  if (parent) {
+                                    const fallbackIcon = document.createElement('div');
+                                    fallbackIcon.className = 'w-full h-full flex items-center justify-center';
+                                    fallbackIcon.innerHTML = '<svg class="h-5 w-5 text-[#f37521]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
+                                    parent.appendChild(fallbackIcon);
+                                  }
+                                }}
+                              />
                             </div>
+                          </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">
                                 {vendor.name}

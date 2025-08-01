@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import { useEnquiries } from '@/lib/enquiries';
 import Notification from '../../../components/Notification';
+import Image from 'next/image';
 import { 
   CameraIcon,
   ArrowLeftIcon,
@@ -26,7 +27,7 @@ interface Vendor {
   experience: string;
   description: string;
   specialties: string[];
-  icon: React.ComponentType<{ className?: string }>;
+  image: string;
   portfolio: PortfolioItem[];
   offerings: Offering[];
   contact: {
@@ -89,7 +90,7 @@ export default function VendorDetailPage() {
     experience: '5+ years',
     description: 'Specializing in virtual staging, digital decluttering, and 3D rendering services. Expert in creating immersive 360° virtual tours and virtual renovation simulations.',
     specialties: ['Virtual Staging', 'Digital Decluttering', '3D Rendering', '360° Virtual Tours', 'Virtual Renovation', 'Professional Photography'],
-    icon: CameraIcon,
+    image: '/images/vendors/tubear.svg',
     portfolio: [
       {
         id: '1',
@@ -287,11 +288,29 @@ export default function VendorDetailPage() {
           </button>
 
           {/* Vendor Header */}
-          <div className="bg-black border border-[#273F4F]/20 rounded-lg shadow-lg p-6 mb-8">
+          <div className="bg-black border border-[#273F4F]/30 rounded-xl shadow-2xl p-6 mb-8">
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
               <div className="flex items-start mb-6 lg:mb-0">
-                <div className="w-16 h-16 bg-[#03809c]/10 rounded-full flex items-center justify-center mr-4">
-                  <vendor.icon className="h-8 w-8 text-[#03809c]" />
+                <div className="w-16 h-16 bg-[#03809c]/10 rounded-full flex items-center justify-center mr-4 overflow-hidden">
+                  <Image
+                    src={vendor.image}
+                    alt={`${vendor.name} logo`}
+                    width={64}
+                    height={64}
+                    className="w-full h-full object-cover rounded-full"
+                    onError={(e) => {
+                      // Fallback to a default icon if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        const fallbackIcon = document.createElement('div');
+                        fallbackIcon.className = 'w-full h-full flex items-center justify-center';
+                        fallbackIcon.innerHTML = '<svg class="h-8 w-8 text-[#03809c]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
+                        parent.appendChild(fallbackIcon);
+                      }
+                    }}
+                  />
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold text-[#FCEBDC] mb-2">
@@ -351,7 +370,7 @@ export default function VendorDetailPage() {
             <h2 className="text-2xl font-bold text-[#FCEBDC] mb-6">Portfolio</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {vendor.portfolio.map((item) => (
-                <div key={item.id} className="bg-black border border-[#273F4F]/20 rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div key={item.id} className="bg-black border border-[#273F4F]/30 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl hover:border-[#273F4F]/50 transition-all duration-300 transform hover:-translate-y-1">
                   <div className="h-48 bg-gradient-to-br from-[#273F4F]/20 to-[#03809c]/20 flex items-center justify-center">
                     <span className="text-[#FCEBDC]/40 text-sm">Portfolio Image</span>
                   </div>
@@ -372,7 +391,7 @@ export default function VendorDetailPage() {
             <h2 className="text-2xl font-bold text-[#FCEBDC] mb-6">Services & Offerings</h2>
             
             {showEnquiryForm ? (
-              <div className="bg-black border border-[#273F4F]/20 rounded-lg p-6">
+              <div className="bg-black border border-[#273F4F]/30 rounded-xl shadow-2xl p-6">
                 <h3 className="text-xl font-semibold text-[#FCEBDC] mb-4">Select Services You&apos;re Interested In</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                   {vendor.offerings.map((offering) => (
@@ -415,13 +434,13 @@ export default function VendorDetailPage() {
                 </div>
               </div>
             ) : showPricing ? (
-              <div className="bg-black border border-[#273F4F]/20 rounded-lg p-6">
+              <div className="bg-black border border-[#273F4F]/30 rounded-xl shadow-2xl p-6">
                 <h3 className="text-xl font-semibold text-[#FCEBDC] mb-4">Pricing & Packages</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                   {vendor.offerings
                     .filter(offering => selectedOfferings.includes(offering.id))
                     .map((offering) => (
-                      <div key={offering.id} className="border border-[#273F4F]/20 rounded-lg p-6">
+                      <div key={offering.id} className="border border-[#273F4F]/30 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                         <h4 className="font-semibold text-[#FCEBDC] mb-2">{offering.name}</h4>
                         <p className="text-sm text-[#FCEBDC]/70 mb-4">{offering.description}</p>
                         <div className="text-2xl font-bold text-[#B40101] mb-2">{offering.price}</div>
@@ -448,7 +467,7 @@ export default function VendorDetailPage() {
               <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                   {vendor.offerings.map((offering) => (
-                    <div key={offering.id} className="bg-black border border-[#273F4F]/20 rounded-lg p-6">
+                    <div key={offering.id} className="bg-black border border-[#273F4F]/30 rounded-xl shadow-lg p-6 hover:shadow-xl hover:border-[#273F4F]/50 transition-all duration-300">
                       <h3 className="font-semibold text-[#FCEBDC] mb-2">{offering.name}</h3>
                       <p className="text-sm text-[#FCEBDC]/70 mb-4">{offering.description}</p>
                       <div className="text-sm text-[#FCEBDC]/60 mb-4">Duration: {offering.duration}</div>
@@ -486,7 +505,7 @@ export default function VendorDetailPage() {
           </div>
 
           {/* Contact Information */}
-          <div className="bg-black border border-[#273F4F]/20 rounded-lg p-6">
+          <div className="bg-black border border-[#273F4F]/30 rounded-xl shadow-2xl p-6">
             <h2 className="text-2xl font-bold text-[#FCEBDC] mb-6">Contact Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="flex items-center">

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { 
   CameraIcon,
   VideoCameraIcon,
@@ -24,7 +25,7 @@ interface Vendor {
   experience: string;
   description: string;
   specialties: string[];
-  icon: React.ComponentType<{ className?: string }>;
+  image: string;
 }
 
 export default function VendorsPage() {
@@ -44,7 +45,7 @@ export default function VendorsPage() {
       experience: '5+ years',
       description: 'Specializing in virtual staging, digital decluttering, and 3D rendering services. Expert in creating immersive 360° virtual tours and virtual renovation simulations.',
       specialties: ['Virtual Staging', 'Digital Decluttering', '3D Rendering', '360° Virtual Tours', 'Virtual Renovation', 'Professional Photography'],
-      icon: CameraIcon,
+      image: '/images/vendors/tubear.webp',
     },
     {
       id: '2',
@@ -57,7 +58,7 @@ export default function VendorsPage() {
       experience: '8+ years',
       description: 'Realtor brand consulting firm specializing in strategic brand development and marketing solutions for real estate professionals.',
       specialties: ['Brand Strategy', 'Realtor Consulting', 'Marketing Solutions', 'Brand Development'],
-      icon: UserGroupIcon,
+      image: '/images/vendors/chief-media.webp',
     },
     {
       id: '3',
@@ -70,7 +71,7 @@ export default function VendorsPage() {
       experience: '6+ years',
       description: 'Full-service content production company offering podcast production, video content creation, and live streaming services with professional multi-camera setups.',
       specialties: ['Podcast Production', 'Multi-camera Setup', 'Live Editing', 'Cinematic Videos', 'Live Streaming', 'Webinars'],
-      icon: VideoCameraIcon,
+      image: '/images/vendors/lfg-content.webp',
     },
     {
       id: '4',
@@ -83,7 +84,7 @@ export default function VendorsPage() {
       experience: '7+ years',
       description: 'Comprehensive creative services including digital assets, logo design, website development, and content creation for real estate professionals.',
       specialties: ['Digital Assets', 'Logo Design', 'Graphic Design', 'Website Design', 'Content Writing', 'Book Creation'],
-      icon: DocumentTextIcon,
+      image: '/images/vendors/cc-creative.webp',
     },
     {
       id: '5',
@@ -96,7 +97,7 @@ export default function VendorsPage() {
       experience: '4+ years',
       description: 'Personal branding content system specialists offering full content creation, distribution, and landing page development with funnel automation.',
       specialties: ['Personal Branding', 'Content Strategy', 'Batch Creation', 'Landing Pages', 'Funnel Automation'],
-      icon: BuildingOfficeIcon,
+      image: '/images/vendors/win-media.webp',
     },
   ];
 
@@ -145,7 +146,7 @@ export default function VendorsPage() {
           </div>
 
           {/* Search and Filters */}
-          <div className="bg-black border border-[#273F4F]/20 rounded-lg shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
+          <div className="bg-black border border-[#273F4F]/30 rounded-xl shadow-2xl p-4 sm:p-6 mb-6 sm:mb-8">
             <div className="grid grid-cols-1 sm:grid-cols-10 gap-4">
               {/* Search */}
               <div className="sm:col-span-7">
@@ -197,83 +198,94 @@ export default function VendorsPage() {
 
           {/* Vendors Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {filteredVendors.map((vendor) => {
-              const Icon = vendor.icon;
-              return (
-                <div key={vendor.id} className="bg-black border border-[#273F4F]/20 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full">
-                  {/* Header */}
-                  <div className="p-4 sm:p-6 border-b border-[#273F4F]/20">
-                    <div className="flex items-start justify-between mb-3 sm:mb-4">
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#03809c]/10 rounded-full flex items-center justify-center mr-3 sm:mr-4">
-                          <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-[#03809c]" />
-                        </div>
-                        <div>
-                          <h3 className="text-base sm:text-lg font-semibold text-[#FCEBDC]">
-                            {vendor.name}
-                          </h3>
-                          <p className="text-sm text-[#FCEBDC]/80">
-                            {vendor.company}
-                          </p>
-                        </div>
+            {filteredVendors.map((vendor) => (
+              <div key={vendor.id} className="bg-black border border-[#273F4F]/30 rounded-xl shadow-2xl overflow-hidden hover:shadow-3xl hover:border-[#273F4F]/50 transition-all duration-300 flex flex-col h-full transform hover:-translate-y-1">
+                {/* Header */}
+                <div className="p-4 sm:p-6 border-b border-[#273F4F]/20">
+                  <div className="flex items-start justify-between mb-3 sm:mb-4">
+                    <div className="flex items-center">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#03809c]/10 rounded-full flex items-center justify-center mr-3 sm:mr-4 overflow-hidden">
+                        <Image
+                          src={vendor.image}
+                          alt={`${vendor.name} logo`}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-cover rounded-full"
+                          onError={(e) => {
+                            // Fallback to a default icon if image fails to load
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent) {
+                              const fallbackIcon = document.createElement('div');
+                              fallbackIcon.className = 'w-full h-full flex items-center justify-center';
+                              fallbackIcon.innerHTML = '<svg class="h-6 w-6 text-[#03809c]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
+                              parent.appendChild(fallbackIcon);
+                            }
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-base sm:text-lg font-semibold text-[#FCEBDC]">
+                          {vendor.name}
+                        </h3>
+                        <p className="text-sm text-[#FCEBDC]/80">
+                          {vendor.company}
+                        </p>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Services */}
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {vendor.services.map((service) => (
+                  {/* Services */}
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {vendor.services.map((service) => (
+                      <span
+                        key={service}
+                        className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#f37521]/10 text-[#f37521]"
+                      >
+                        {service.charAt(0).toUpperCase() + service.slice(1).replace('-', ' ')}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Stats */}
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-[#FCEBDC]/70">
+                      <span className="font-medium text-[#FCEBDC]">{vendor.projects}</span> projects
+                    </span>
+                    <span className="text-[#FCEBDC]/70">
+                      <span className="font-medium text-[#FCEBDC]">{vendor.experience}</span> experience
+                    </span>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="p-4 sm:p-6 flex-1 flex flex-col">
+                  {/* Specialties */}
+                  <div className="mb-4 flex-1">
+                    <h4 className="text-sm font-medium text-[#FCEBDC] mb-2">Specialties:</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {vendor.specialties.map((specialty) => (
                         <span
-                          key={service}
-                          className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#f37521]/10 text-[#f37521]"
+                          key={specialty}
+                          className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#f2a16d]/10 text-[#f2a16d]"
                         >
-                          {service.charAt(0).toUpperCase() + service.slice(1).replace('-', ' ')}
+                          {specialty}
                         </span>
                       ))}
                     </div>
-
-                    {/* Stats */}
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-[#FCEBDC]/70">
-                        <span className="font-medium text-[#FCEBDC]">{vendor.projects}</span> projects
-                      </span>
-                      <span className="text-[#FCEBDC]/70">
-                        <span className="font-medium text-[#FCEBDC]">{vendor.experience}</span> experience
-                      </span>
-                    </div>
                   </div>
 
-                  {/* Description */}
-                  <div className="p-4 sm:p-6 flex-1 flex flex-col">
-                    <p className="text-sm text-[#FCEBDC]/80 mb-4">
-                      {vendor.description}
-                    </p>
-
-                    {/* Specialties */}
-                    <div className="mb-4 flex-1">
-                      <h4 className="text-sm font-medium text-[#FCEBDC] mb-2">Specialties:</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {vendor.specialties.map((specialty) => (
-                          <span
-                            key={specialty}
-                            className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#f2a16d]/10 text-[#f2a16d]"
-                          >
-                            {specialty}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Contact Button */}
-                    <button 
-                      onClick={() => router.push(`/vendors/${vendor.id}`)}
-                      className="w-full bg-[#B40101] text-white py-2 px-4 rounded-md hover:bg-[#e0651a] transition font-medium text-sm mt-auto"
-                    >
-                      Connect
-                    </button>
-                  </div>
+                  {/* Contact Button */}
+                  <button 
+                    onClick={() => router.push(`/vendors/${vendor.id}`)}
+                    className="w-full bg-[#B40101] text-white py-2 px-4 rounded-md hover:bg-[#e0651a] transition font-medium text-sm mt-auto"
+                  >
+                    Connect
+                  </button>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
 
           {/* No Results */}

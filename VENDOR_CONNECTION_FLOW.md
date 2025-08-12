@@ -1,14 +1,14 @@
 # Vendor Connection Flow Documentation
 
 ## Overview
-This document describes the vendor connection flow implemented for the Chief Media platform, allowing KW Singapore realtors to connect with verified vendors.
+This document describes the vendor connection flow implemented for the Chief Media platform, allowing KW Singapore realtors and Property Lim Brothers users to connect with verified vendors.
 
 ## User Roles & Access
 
-### Realtors (KW Singapore)
-- **Email Requirement**: Must use `@kwsingapore.com` email addresses
+### Realtors (KW Singapore & Property Lim Brothers)
+- **Email Requirement**: Must use `@kwsingapore.com` or `@propertylimbrothers.com` email addresses
 - **Access**: Can browse vendors, submit enquiries, and book meetings
-- **Login**: Standard login with KW Singapore email validation
+- **Login**: Standard login with KW Singapore or Property Lim Brothers email validation
 
 ### Vendors
 - **Access**: No direct login access initially
@@ -30,12 +30,12 @@ This document describes the vendor connection flow implemented for the Chief Med
 ### 2. Vendor Detail View (`/vendors/[id]`)
 - **Portfolio Section**: View vendor's work samples and projects
 - **Offerings Section**: See available services (pricing hidden initially)
-- **Connect Button**: Only visible to authenticated KW Singapore realtors
+- **Connect Button**: Only visible to authenticated KW Singapore and Property Lim Brothers realtors
 
 ### 3. Enquiry Submission
 - **Service Selection**: Choose specific services of interest
 - **Enquiry Form**: Submit interest in selected offerings
-- **Validation**: Ensures KW Singapore email requirement
+- **Validation**: Ensures KW Singapore or Property Lim Brothers email requirement
 - **Storage**: Enquiry saved to system for admin review
 
 ### 4. Pricing Reveal
@@ -46,57 +46,15 @@ This document describes the vendor connection flow implemented for the Chief Med
 ### 5. Meeting Booking (`/vendors/[id]/book-meeting`)
 - **Calendar Selection**: Choose available date and time slots
 - **Meeting Type**: Video call, phone call, or in-person
-- **Additional Notes**: Include specific requirements or questions
-- **Confirmation**: Meeting details saved and confirmation sent
+- **Confirmation**: Receive booking confirmation and details
 
-### 6. Admin Management (`/admin/enquiries`)
-- **Dashboard**: View all enquiries with status tracking
-- **Status Management**: Approve, reject, or mark as completed
-- **Filtering**: Filter by status (pending, approved, completed)
-- **Details**: View full enquiry details and meeting information
-
-## Technical Implementation
-
-### Authentication System
-- **Email Validation**: Automatic role assignment based on email domain
-- **KW Singapore**: `@kwsingapore.com` emails get realtor role
-- **Admin Access**: Specific admin credentials for Isabelle
-- **Session Management**: Local storage for user persistence
-
-### Data Management
-- **Enquiry Context**: React context for managing enquiry data
-- **Local Storage**: Persistent storage for enquiries and user data
-- **Real-time Updates**: Immediate UI updates when status changes
-
-### File Structure
-```
-src/
-├── app/
-│   ├── vendors/
-│   │   ├── page.tsx              # Vendor listing
-│   │   └── [id]/
-│   │       ├── page.tsx          # Vendor detail
-│   │       └── book-meeting/
-│   │           └── page.tsx      # Meeting booking
-│   ├── admin/
-│   │   └── enquiries/
-│   │       └── page.tsx          # Admin dashboard
-│   └── dashboard/
-│       └── page.tsx              # User dashboard
-├── lib/
-│   ├── auth.tsx                  # Authentication system
-│   └── enquiries.tsx             # Enquiry management
-└── components/
-    └── AnimatedBackground.tsx    # UI components
-```
-
-## Key Features
+## User Experience
 
 ### For Realtors
-- **Vendor Discovery**: Browse and filter verified vendors
-- **Portfolio Review**: View vendor work before connecting
-- **Service Selection**: Choose specific services of interest
-- **Meeting Booking**: Schedule consultations with vendors
+- **Seamless Access**: Quick login with company email
+- **Vendor Discovery**: Browse and filter vendors by services
+- **Easy Connection**: One-click enquiry submission
+- **Meeting Booking**: Schedule consultations directly
 - **Status Tracking**: Monitor enquiry and booking status
 
 ### For Admins
@@ -113,7 +71,7 @@ src/
 ## Security & Validation
 
 ### Email Validation
-- **KW Singapore Only**: Strict email domain validation
+- **KW Singapore & Property Lim Brothers Only**: Strict email domain validation
 - **Role Assignment**: Automatic role based on email domain
 - **Admin Access**: Restricted admin login credentials
 
@@ -146,27 +104,13 @@ src/
 3. View and manage enquiries
 
 ### Realtor Flow
-1. Login with any `@kwsingapore.com` email
+1. Login with any `@kwsingapore.com` or `@propertylimbrothers.com` email
 2. Browse vendors at `/vendors`
 3. Click "Connect" on any vendor
 4. Select services and submit enquiry
 5. Book meeting after pricing reveal
 
 ### Vendor Experience
-1. Vendor profiles are static (no login required)
-2. All interactions managed through admin dashboard
-3. Portfolio and offerings visible to all users
-
-## Support & Maintenance
-
-### Admin Responsibilities
-- **Enquiry Management**: Regular review and processing of enquiries
-- **Vendor Onboarding**: Adding new vendors to the platform
-- **System Monitoring**: Ensuring smooth operation of the platform
-- **User Support**: Assisting realtors and vendors with issues
-
-### Technical Maintenance
-- **Regular Updates**: Keep dependencies and security patches current
-- **Performance Monitoring**: Monitor system performance and user experience
-- **Backup Management**: Regular data backups and recovery procedures
-- **Security Audits**: Periodic security reviews and updates 
+- Vendors are managed through admin dashboard
+- No direct login access required
+- Profile information is static and managed by admin 

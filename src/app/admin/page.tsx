@@ -7,9 +7,9 @@ import {
   EnvelopeIcon,
   BuildingOfficeIcon,
   UserGroupIcon,
-  ChartBarIcon,
   ArrowRightIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
+  VideoCameraIcon
 } from '@heroicons/react/24/outline';
 import AdminSidebar from '@/components/AdminSidebar';
 import AnimatedBackground from '@/components/AnimatedBackground';
@@ -64,12 +64,12 @@ export default function AdminDashboard() {
       href: '/admin/vendors'
     },
     {
-      name: 'Pending Approvals',
-      value: '5',
-      icon: ChartBarIcon,
-      color: 'text-yellow-600',
-      bgColor: 'bg-yellow-100',
-      href: '/admin/enquiries'
+      name: 'Active Studios',
+      value: '2',
+      icon: VideoCameraIcon,
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-100',
+      href: '/admin/studios'
     },
     {
       name: 'Total Invoices',
@@ -101,6 +101,12 @@ export default function AdminDashboard() {
       icon: UserGroupIcon
     },
     {
+      name: 'Manage Studios',
+      description: 'Add, edit, or remove studio facilities',
+      href: '/admin/studios',
+      icon: VideoCameraIcon
+    },
+    {
       name: 'Manage Invoices',
       description: 'Create and manage invoices',
       href: '/admin/invoices',
@@ -117,9 +123,9 @@ export default function AdminDashboard() {
         <AdminSidebar />
 
         {/* Main Content */}
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col min-h-screen lg:ml-64">
           {/* Header */}
-          <div className="bg-white shadow-sm border-b border-gray-200">
+          <div className="bg-white shadow-sm border-b border-gray-200 flex-shrink-0">
             <div className="px-6 py-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -145,7 +151,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Dashboard Content */}
-          <div className="p-6">
+          <div className="flex-1 p-6 overflow-y-auto">
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {stats.map((stat) => {

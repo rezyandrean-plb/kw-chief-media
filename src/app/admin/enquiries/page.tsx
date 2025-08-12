@@ -117,7 +117,7 @@ export default function AdminEnquiriesPage() {
         <AdminSidebar />
 
         {/* Main Content */}
-        <div className="flex-1">
+        <div className="flex-1 lg:ml-64">
           {/* Header */}
           <div className="bg-white shadow-sm border-b border-gray-200">
             <div className="px-6 py-4">

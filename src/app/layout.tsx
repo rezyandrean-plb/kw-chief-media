@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "@/lib/auth";
-import { EnquiryProvider } from "@/lib/enquiries";
-import { StudioEnquiryProvider } from "@/lib/studio-enquiries";
+import Providers from "@/components/Providers";
 import ConditionalNavigation from "@/components/ConditionalNavigation";
+import ConditionalFooter from "@/components/ConditionalFooter";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -31,14 +30,11 @@ export default function RootLayout({
         className={`${poppins.variable} antialiased`}
         suppressHydrationWarning={true}
       >
-        <AuthProvider>
-          <EnquiryProvider>
-            <StudioEnquiryProvider>
-              <ConditionalNavigation />
-              {children}
-            </StudioEnquiryProvider>
-          </EnquiryProvider>
-        </AuthProvider>
+        <Providers>
+          <ConditionalNavigation />
+          {children}
+          <ConditionalFooter />
+        </Providers>
       </body>
     </html>
   );

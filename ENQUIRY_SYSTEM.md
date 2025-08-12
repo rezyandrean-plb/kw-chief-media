@@ -1,16 +1,17 @@
 # Enquiry System Documentation
 
 ## Overview
-The enquiry system allows KW Singapore realtors to connect with vendors through a structured process. Only users with @kwsingapore.com email addresses can submit enquiries.
+The enquiry system allows KW Singapore realtors and Property Lim Brothers users to connect with vendors through a structured process. Only users with @kwsingapore.com or @propertylimbrothers.com email addresses can submit enquiries.
 
 ## How It Works
 
 ### 1. User Authentication
 - Users must be logged in to submit enquiries
-- Only users with @kwsingapore.com email addresses are allowed to connect with vendors
+- Only users with @kwsingapore.com or @propertylimbrothers.com email addresses are allowed to connect with vendors
 - Users without the correct email domain will see an error notification
 - **Smart Redirects**: After login, users are automatically redirected based on their role:
   - KW Singapore realtors → `/vendors`
+  - Property Lim Brothers users → `/vendors`
   - Admins → `/admin/enquiries`
   - Vendors → `/admin`
 - Clients → `/admin`
@@ -95,14 +96,14 @@ interface Enquiry {
 - Enquiries are stored per user and can be filtered by vendor or realtor
 
 ### Security
-- Email domain validation for KW Singapore realtors
+- Email domain validation for KW Singapore realtors and Property Lim Brothers users
 - Role-based access control
 - User authentication required for all enquiry operations
 
 ## Usage Examples
 
 ### Testing the System
-1. Login with a @kwsingapore.com email (e.g., `test@kwsingapore.com`)
+1. Login with a @kwsingapore.com email (e.g., `test@kwsingapore.com`) or @propertylimbrothers.com email (e.g., `test@propertylimbrothers.com`)
 2. You'll be automatically redirected to `/vendors` (not dashboard)
 3. Select a vendor and click "Connect with [Vendor]"
 4. Select services and submit enquiry

@@ -1,19 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useAuth } from '@/lib/auth';
 import { useEnquiries } from '@/lib/enquiries';
-import Notification from '../../../components/Notification';
-import Image from 'next/image';
+import Notification from '@/components/Notification';
+import AnimatedBackground from '@/components/AnimatedBackground';
 import { 
   ArrowLeftIcon,
-  StarIcon,
-  EnvelopeIcon,
-  PhoneIcon,
   MapPinIcon
 } from '@heroicons/react/24/outline';
-import AnimatedBackground from '../../../components/AnimatedBackground';
 
 interface Vendor {
   id: string;
@@ -89,7 +86,7 @@ export default function VendorDetailPage() {
     experience: '5+ years',
     description: 'Specializing in virtual staging, digital decluttering, and 3D rendering services. Expert in creating immersive 360° virtual tours and virtual renovation simulations.',
     specialties: ['Virtual Staging', 'Digital Decluttering', '3D Rendering', '360° Virtual Tours', 'Virtual Renovation', 'Professional Photography'],
-    image: '/images/vendors/tubear.svg',
+    image: '/images/vendors/tubear.webp',
     portfolio: [
       {
         id: '1',
@@ -152,18 +149,18 @@ export default function VendorDetailPage() {
   const handleConnect = () => {
     if (!user) {
       setNotification({
-        message: 'Please login with your KW Singapore email to connect with vendors',
+        message: 'Please login with your KW Singapore or Property Lim Brothers email to connect with vendors',
         type: 'warning',
         isVisible: true,
         actions: [
           {
-            label: 'Login',
+            label: 'SSO Login',
             onClick: () => router.push('/login'),
             variant: 'primary'
           },
           {
-            label: 'Signup',
-            onClick: () => router.push('/signup'),
+            label: 'Manual Login',
+            onClick: () => router.push('/login'),
             variant: 'secondary'
           }
         ]
@@ -171,21 +168,24 @@ export default function VendorDetailPage() {
       return;
     }
     
-    // Check if user has KW Singapore email
-    if (!user.email.endsWith('@kwsingapore.com')) {
+    // Check if user has KW Singapore or Property Lim Brothers email
+    const allowedDomains = ['@kwsingapore.com', '@propertylimbrothers.com'];
+    const isAllowedDomain = allowedDomains.some(domain => user.email.endsWith(domain));
+    
+    if (!isAllowedDomain) {
       setNotification({
-        message: 'Only KW Singapore realtors can connect with vendors. Please use your @kwsingapore.com email.',
+        message: 'Only KW Singapore realtors and Property Lim Brothers users can connect with vendors. Please use your @kwsingapore.com or @propertylimbrothers.com email.',
         type: 'error',
         isVisible: true,
         actions: [
           {
-            label: 'Login with KW Email',
+            label: 'SSO Login with KW Email',
             onClick: () => router.push('/login'),
             variant: 'primary'
           },
           {
-            label: 'Signup with KW Email',
-            onClick: () => router.push('/signup'),
+            label: 'Manual Login',
+            onClick: () => router.push('/login'),
             variant: 'secondary'
           }
         ]
@@ -276,7 +276,7 @@ export default function VendorDetailPage() {
       />
       
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
-        <div className="px-4 py-6 sm:px-0">
+        <div className="px-4 py-6 sm:px-0 mt-4">
           {/* Back Button */}
           <button
             onClick={() => router.back()}
@@ -297,9 +297,9 @@ export default function VendorDetailPage() {
                     width={64}
                     height={64}
                     className="w-full h-full object-cover rounded-full"
-                    onError={(e) => {
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                       // Fallback to a default icon if image fails to load
-                      const target = e.target as HTMLImageElement;
+                      const target = e.currentTarget;
                       target.style.display = 'none';
                       const parent = target.parentElement;
                       if (parent) {
@@ -319,22 +319,17 @@ export default function VendorDetailPage() {
                     {vendor.company}
                   </p>
                   <div className="flex items-center space-x-4 text-sm text-[#FCEBDC]/70">
-                    <div className="flex items-center">
-                      <StarIcon className="h-4 w-4 text-yellow-400 mr-1" />
-                      <span>{vendor.rating} ({vendor.projects} projects)</span>
-                    </div>
+                    
                     <div className="flex items-center">
                       <MapPinIcon className="h-4 w-4 mr-1" />
                       <span>{vendor.location}</span>
-                    </div>
-                    <div>
-                      <span>{vendor.experience} experience</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {!showPricing && !showEnquiryForm && (
+              {/* Connect Button - Only show for KW Singapore and Property Lim Brothers realtors */}
+              {user && (user.email.endsWith('@kwsingapore.com') || user.email.endsWith('@propertylimbrothers.com')) && (
                 <button
                   onClick={handleConnect}
                   className="bg-[#B40101] text-white px-6 py-3 rounded-lg hover:bg-[#e0651a] transition font-medium"
@@ -489,7 +484,7 @@ export default function VendorDetailPage() {
                     </div>
                   ))}
                 </div>
-                {user && user.email.endsWith('@kwsingapore.com') && (
+                {user && (user.email.endsWith('@kwsingapore.com') || user.email.endsWith('@propertylimbrothers.com')) && (
                   <div className="text-center">
                     <button
                       onClick={() => setShowEnquiryForm(true)}
@@ -503,33 +498,7 @@ export default function VendorDetailPage() {
             )}
           </div>
 
-          {/* Contact Information */}
-          <div className="bg-black border border-[#273F4F]/30 rounded-xl shadow-2xl p-6">
-            <h2 className="text-2xl font-bold text-[#FCEBDC] mb-6">Contact Information</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="flex items-center">
-                <EnvelopeIcon className="h-5 w-5 text-[#03809c] mr-3" />
-                <div>
-                  <p className="text-sm text-[#FCEBDC]/60">Email</p>
-                  <p className="text-[#FCEBDC]">{vendor.contact.email}</p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <PhoneIcon className="h-5 w-5 text-[#03809c] mr-3" />
-                <div>
-                  <p className="text-sm text-[#FCEBDC]/60">Phone</p>
-                  <p className="text-[#FCEBDC]">{vendor.contact.phone}</p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <MapPinIcon className="h-5 w-5 text-[#03809c] mr-3" />
-                <div>
-                  <p className="text-sm text-[#FCEBDC]/60">Location</p>
-                  <p className="text-[#FCEBDC]">{vendor.contact.address}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>

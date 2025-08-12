@@ -13,6 +13,7 @@ import {
   FunnelIcon
 } from '@heroicons/react/24/outline';
 import AnimatedBackground from '../../components/AnimatedBackground';
+import SSOBanner from '../../components/SSOBanner';
 
 interface Vendor {
   id: string;
@@ -134,6 +135,9 @@ export default function VendorsPage() {
       <AnimatedBackground />
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
+          {/* SSO Banner */}
+          <SSOBanner />
+          
           {/* Header */}
           <div className="text-center mb-12 pt-8">
             <h1 className="text-4xl font-bold text-[#FCEBDC] mb-4">
@@ -248,15 +252,7 @@ export default function VendorsPage() {
                     ))}
                   </div>
 
-                  {/* Stats */}
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#FCEBDC]/70">
-                      <span className="font-medium text-[#FCEBDC]">{vendor.projects}</span> projects
-                    </span>
-                    <span className="text-[#FCEBDC]/70">
-                      <span className="font-medium text-[#FCEBDC]">{vendor.experience}</span> experience
-                    </span>
-                  </div>
+
                 </div>
 
                 {/* Description */}

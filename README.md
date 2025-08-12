@@ -1,24 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chief Media Platform
+
+A Next.js application for KW Singapore realtors and Property Lim Brothers users to connect with vendors and manage their media needs.
+
+## Features
+
+- **Email Code Authentication**: Secure login for KW Singapore realtors and Property Lim Brothers users using email verification codes
+- **Vendor Connections**: Browse and connect with media vendors
+- **Admin Dashboard**: Manage enquiries and platform administration
+- **Responsive Design**: Modern UI with Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+1. Node.js 18+ or Bun
+2. SendGrid account for email verification
+
+### Environment Setup
+
+Create a `.env.local` file in the project root:
+
+```env
+# SendGrid Configuration
+SENDGRID_API_KEY=your-sendgrid-api-key-here
+SENDGRID_FROM_EMAIL=noreply@chiefmedia.sg
+
+# Application Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-nextauth-secret-key-here
+```
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# Install dependencies
+bun install
+
+# Run the development server
 bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Authentication
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **KW Singapore Realtors**: Use email code authentication with @kwsingapore.com emails
+- **Property Lim Brothers Users**: Use email code authentication with @propertylimbrothers.com emails
+- **Admin Users**: Traditional password authentication
+- **Other Users**: Traditional password authentication
+
+For detailed setup instructions, see [SSO_SETUP.md](./SSO_SETUP.md).
 
 ## Learn More
 

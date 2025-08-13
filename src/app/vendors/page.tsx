@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { 
@@ -27,80 +27,21 @@ interface Vendor {
   description: string;
   specialties: string[];
   image: string;
+  status: string;
+  contact: {
+    email: string;
+    phone: string;
+    address: string;
+  };
 }
 
 export default function VendorsPage() {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedService, setSelectedService] = useState<string>('all');
-
-  const vendors: Vendor[] = [
-    {
-      id: '1',
-      name: 'TUBEAR',
-      company: 'TUBEAR',
-      services: ['virtual-staging', 'photography', 'virtual-tours', '3d-rendering'],
-      location: 'Singapore',
-      rating: 5.0,
-      projects: 50,
-      experience: '5+ years',
-      description: 'Specializing in virtual staging, digital decluttering, and 3D rendering services. Expert in creating immersive 360° virtual tours and virtual renovation simulations.',
-      specialties: ['Virtual Staging', 'Digital Decluttering', '3D Rendering', '360° Virtual Tours', 'Virtual Renovation', 'Professional Photography'],
-      image: '/images/vendors/tubear.webp',
-    },
-    {
-      id: '2',
-      name: 'Chief Media',
-      company: 'Chief Media',
-      services: ['brand-consulting'],
-      location: 'Singapore',
-      rating: 5.0,
-      projects: 35,
-      experience: '8+ years',
-      description: 'Realtor brand consulting firm specializing in strategic brand development and marketing solutions for real estate professionals.',
-      specialties: ['Brand Strategy', 'Realtor Consulting', 'Marketing Solutions', 'Brand Development'],
-      image: '/images/vendors/chief-media.webp',
-    },
-    {
-      id: '3',
-      name: 'LFG Content Co.',
-      company: 'LFG Content Co.',
-      services: ['videography', 'podcast-production', 'live-streaming'],
-      location: 'Singapore',
-      rating: 5.0,
-      projects: 28,
-      experience: '6+ years',
-      description: 'Full-service content production company offering podcast production, video content creation, and live streaming services with professional multi-camera setups.',
-      specialties: ['Podcast Production', 'Multi-camera Setup', 'Live Editing', 'Cinematic Videos', 'Live Streaming', 'Webinars'],
-      image: '/images/vendors/lfg-content.webp',
-    },
-    {
-      id: '4',
-      name: 'CC Creative',
-      company: 'CC Creative',
-      services: ['graphic-design', 'web-design', 'content-writing'],
-      location: 'Singapore',
-      rating: 5.0,
-      projects: 45,
-      experience: '7+ years',
-      description: 'Comprehensive creative services including digital assets, logo design, website development, and content creation for real estate professionals.',
-      specialties: ['Digital Assets', 'Logo Design', 'Graphic Design', 'Website Design', 'Content Writing', 'Book Creation'],
-      image: '/images/vendors/cc-creative.webp',
-    },
-    {
-      id: '5',
-      name: 'WIN Media Studios',
-      company: 'WIN Media Studios',
-      services: ['personal-branding', 'content-creation', 'web-design'],
-      location: 'Singapore',
-      rating: 5.0,
-      projects: 32,
-      experience: '4+ years',
-      description: 'Personal branding content system specialists offering full content creation, distribution, and landing page development with funnel automation.',
-      specialties: ['Personal Branding', 'Content Strategy', 'Batch Creation', 'Landing Pages', 'Funnel Automation'],
-      image: '/images/vendors/win-media.webp',
-    },
-  ];
+  const [vendors, setVendors] = useState<Vendor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const services = [
     { id: 'all', name: 'All Services', icon: BuildingOfficeIcon },
@@ -119,8 +60,42 @@ export default function VendorsPage() {
     { id: 'content-creation', name: 'Content Creation', icon: VideoCameraIcon },
   ];
 
+  // Fetch vendors from API
+  useEffect(() => {
+    const fetchVendors = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const params = new URLSearchParams();
+        if (searchTerm) params.append('search', searchTerm);
+        if (selectedService !== 'all') params.append('service', selectedService);
+        
+        const response = await fetch(`/api/vendors?${params.toString()}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch vendors');
+        }
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          setVendors(result.data);
+        } else {
+          throw new Error(result.error || 'Failed to fetch vendors');
+        }
+      } catch (err) {
+        console.error('Error fetching vendors:', err);
+        setError(err instanceof Error ? err.message : 'Failed to fetch vendors');
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchVendors();
+  }, [searchTerm, selectedService]);
 
+  // Filter vendors based on search and service selection
   const filteredVendors = vendors.filter(vendor => {
     const matchesSearch = vendor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          vendor.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -129,6 +104,73 @@ export default function VendorsPage() {
     
     return matchesSearch && matchesService;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black relative overflow-hidden">
+        <AnimatedBackground />
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
+          <div className="px-4 py-6 sm:px-0">
+            <SSOBanner />
+            
+            {/* Header */}
+            <div className="text-center mb-12 pt-8">
+              <h1 className="text-4xl font-bold text-[#FCEBDC] mb-4">
+                Our Verified Vendors
+              </h1>
+              <p className="text-xl text-[#FCEBDC]/80 max-w-3xl mx-auto">
+                Meet our carefully curated network of professional creatives, photographers, and marketing experts. 
+                Each vendor has been verified and approved to serve Keller Williams realtors with quality and reliability.
+              </p>
+            </div>
+
+            {/* Loading State */}
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#B40101] mx-auto mb-4"></div>
+              <p className="text-[#FCEBDC]/70">Loading vendors...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black relative overflow-hidden">
+        <AnimatedBackground />
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
+          <div className="px-4 py-6 sm:px-0">
+            <SSOBanner />
+            
+            {/* Header */}
+            <div className="text-center mb-12 pt-8">
+              <h1 className="text-4xl font-bold text-[#FCEBDC] mb-4">
+                Our Verified Vendors
+              </h1>
+              <p className="text-xl text-[#FCEBDC]/80 max-w-3xl mx-auto">
+                Meet our carefully curated network of professional creatives, photographers, and marketing experts. 
+                Each vendor has been verified and approved to serve Keller Williams realtors with quality and reliability.
+              </p>
+            </div>
+
+            {/* Error State */}
+            <div className="text-center py-12">
+              <div className="text-[#FCEBDC]/40 text-6xl mb-4">⚠️</div>
+              <h3 className="text-lg font-medium text-[#FCEBDC] mb-2">Error loading vendors</h3>
+              <p className="text-[#FCEBDC]/70 mb-4">{error}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="bg-[#B40101] text-white py-2 px-4 rounded-md hover:bg-[#e0651a] transition font-medium"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
@@ -210,7 +252,7 @@ export default function VendorsPage() {
                     <div className="flex items-center">
                       <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#03809c]/10 rounded-full flex items-center justify-center mr-3 sm:mr-4 overflow-hidden">
                         <Image
-                          src={vendor.image}
+                          src={vendor.image || '/images/vendors/default-vendor.svg'}
                           alt={`${vendor.name} logo`}
                           width={64}
                           height={64}
@@ -251,8 +293,6 @@ export default function VendorsPage() {
                       </span>
                     ))}
                   </div>
-
-
                 </div>
 
                 {/* Description */}

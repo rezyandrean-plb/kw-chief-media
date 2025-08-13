@@ -70,25 +70,6 @@ export default function Navigation() {
             <Link href="/vendor-application" className="px-4 py-2 rounded bg-[#B40101] text-white hover:bg-[#e0651a] transition">
               Become a Vendor
             </Link>
-            {user ? (
-              <div className="flex items-center space-x-4">
-                {user.role === 'admin' && (
-                  <Link href="/admin" className={`transition-colors duration-300 ${linkClassName}`}>
-                    Admin
-                  </Link>
-                )}
-                <button
-                  onClick={logout}
-                  className={`transition-colors duration-300 ${linkClassName}`}
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <Link href="/login" className={`transition-colors duration-300 ${linkClassName}`}>
-                Login
-              </Link>
-            )}
           </div>
 
           {/* Mobile menu button */}
@@ -138,36 +119,6 @@ export default function Navigation() {
               >
                 Become a Vendor
               </Link>
-              {user ? (
-                <>
-                  {user.role === 'admin' && (
-                    <Link
-                      href="/admin"
-                      className="block px-3 py-2 text-white hover:text-[#f37521] hover:bg-gray-50 rounded-md"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Admin
-                    </Link>
-                  )}
-                  <button
-                    onClick={() => {
-                      logout();
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left px-3 py-2 text-white hover:text-[#f37521] hover:bg-gray-50 rounded-md"
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <Link
-                  href="/login"
-                  className="block px-3 py-2 text-white hover:text-[#f37521] hover:bg-gray-50 rounded-md"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Login
-                </Link>
-              )}
             </div>
           </div>
         )}

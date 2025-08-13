@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { getAuthHeaders } from '@/lib/api-auth';
 import { 
   TrashIcon,
   EyeIcon,
@@ -120,143 +121,144 @@ export default function AdminVendorsPage() {
     message: '',
     type: 'info'
   });
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [vendorToDelete, setVendorToDelete] = useState<Vendor | null>(null);
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'admin')) {
       router.push('/login');
     }
     
-    // Mock vendor data - in real app, fetch from API
-    const mockVendors: Vendor[] = [
-      {
-        id: '1',
-        name: 'TUBEAR',
-        company: 'TUBEAR',
-        services: ['virtual-staging', 'photography', 'virtual-tours', '3d-rendering'],
-        location: 'Singapore',
-        rating: 5.0,
-        projects: 50,
-        experience: '5+ years',
-        description: 'Specializing in virtual staging, digital decluttering, and 3D rendering services. Expert in creating immersive 360° virtual tours and virtual renovation simulations.',
-        specialties: ['Virtual Staging', 'Digital Decluttering', '3D Rendering', '360° Virtual Tours', 'Virtual Renovation', 'Professional Photography'],
-        status: 'active',
-        contact: {
-          email: 'hello@tubear.sg',
-          phone: '+65 9123 4567',
-          address: 'Singapore'
-        },
-        image: '/images/vendors/tubear.svg',
-        createdAt: '2024-01-15',
-        updatedAt: '2024-01-20'
-      },
-      {
-        id: '2',
-        name: 'Chief Media',
-        company: 'Chief Media',
-        services: ['brand-consulting'],
-        location: 'Singapore',
-        rating: 5.0,
-        projects: 35,
-        experience: '8+ years',
-        description: 'Realtor brand consulting firm specializing in strategic brand development and marketing solutions for real estate professionals.',
-        specialties: ['Brand Strategy', 'Realtor Consulting', 'Marketing Solutions', 'Brand Development'],
-        status: 'active',
-        contact: {
-          email: 'isabelle@chiefmedia.sg',
-          phone: '+65 9876 5432',
-          address: 'Singapore'
-        },
-        image: '/images/vendors/chief-media.svg',
-        createdAt: '2024-01-10',
-        updatedAt: '2024-01-18'
-      },
-      {
-        id: '3',
-        name: 'LFG Content Co.',
-        company: 'LFG Content Co.',
-        services: ['videography', 'podcast-production', 'live-streaming'],
-        location: 'Singapore',
-        rating: 5.0,
-        projects: 28,
-        experience: '6+ years',
-        description: 'Full-service content production company offering podcast production, video content creation, and live streaming services with professional multi-camera setups.',
-        specialties: ['Podcast Production', 'Multi-camera Setup', 'Live Editing', 'Cinematic Videos', 'Live Streaming', 'Webinars'],
-        status: 'active',
-        contact: {
-          email: 'hello@lfgcontent.sg',
-          phone: '+65 8765 4321',
-          address: 'Singapore'
-        },
-        image: '/images/vendors/lfg-content.svg',
-        createdAt: '2024-01-12',
-        updatedAt: '2024-01-19'
-      },
-      {
-        id: '4',
-        name: 'CC Creative',
-        company: 'CC Creative',
-        services: ['graphic-design', 'web-design', 'content-writing'],
-        location: 'Singapore',
-        rating: 5.0,
-        projects: 45,
-        experience: '7+ years',
-        description: 'Comprehensive creative services including digital assets, logo design, website development, and content creation for real estate professionals.',
-        specialties: ['Digital Assets', 'Logo Design', 'Graphic Design', 'Website Design', 'Content Writing', 'Book Creation'],
-        status: 'pending',
-        contact: {
-          email: 'hello@cccreative.sg',
-          phone: '+65 7654 3210',
-          address: 'Singapore'
-        },
-        image: '/images/vendors/cc-creative.svg',
-        createdAt: '2024-01-25',
-        updatedAt: '2024-01-25'
-      },
-      {
-        id: '5',
-        name: 'WIN Media Studios',
-        company: 'WIN Media Studios',
-        services: ['personal-branding', 'content-creation', 'web-design'],
-        location: 'Singapore',
-        rating: 5.0,
-        projects: 32,
-        experience: '4+ years',
-        description: 'Personal branding content system specialists offering full content creation, distribution, and landing page development with funnel automation.',
-        specialties: ['Personal Branding', 'Content Strategy', 'Batch Creation', 'Landing Pages', 'Funnel Automation'],
-        status: 'inactive',
-        contact: {
-          email: 'hello@winmedia.sg',
-          phone: '+65 6543 2109',
-          address: 'Singapore'
-        },
-        image: '/images/vendors/win-media.svg',
-        createdAt: '2024-01-08',
-        updatedAt: '2024-01-22'
-      },
-    ];
-    
-    // Load vendors
-    setVendors(mockVendors);
+    if (user && user.role === 'admin') {
+      fetchVendors();
+    }
   }, [user, loading, router]);
 
-  const handleStatusUpdate = (vendorId: string, newStatus: Vendor['status']) => {
-    setVendors(prev => prev.map(vendor => 
-      vendor.id === vendorId ? { ...vendor, status: newStatus, updatedAt: new Date().toISOString().split('T')[0] } : vendor
-    ));
-    setNotification({
-      isVisible: true,
-      message: `Vendor status updated to ${newStatus}`,
-      type: 'success'
-    });
+  const fetchVendors = async () => {
+    try {
+      const authHeaders = getAuthHeaders();
+      const response = await fetch('/api/admin/vendors', {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(authHeaders as Record<string, string>)
+        }
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        setVendors(result.data);
+      } else {
+        const errorData = await response.json();
+        console.error('Failed to fetch vendors:', errorData);
+        setNotification({
+          isVisible: true,
+          message: errorData.error || 'Failed to fetch vendors',
+          type: 'error'
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching vendors:', error);
+      setNotification({
+        isVisible: true,
+        message: 'Error fetching vendors',
+        type: 'error'
+      });
+    }
   };
 
-  const handleDeleteVendor = (vendorId: string) => {
-    setVendors(prev => prev.filter(vendor => vendor.id !== vendorId));
-    setNotification({
-      isVisible: true,
-      message: 'Vendor deleted successfully',
-      type: 'success'
-    });
+  const handleStatusUpdate = async (vendorId: string, newStatus: Vendor['status']) => {
+    try {
+      const vendor = vendors.find(v => v.id === vendorId);
+      if (!vendor) return;
+
+      const authHeaders = getAuthHeaders();
+      const response = await fetch(`/api/admin/vendors/${vendorId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(authHeaders as Record<string, string>)
+        },
+        body: JSON.stringify({
+          ...vendor,
+          status: newStatus
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setVendors(prev => prev.map(v => v.id === vendorId ? result.data : v));
+        setNotification({
+          isVisible: true,
+          message: `Vendor status updated to ${newStatus}`,
+          type: 'success'
+        });
+      } else {
+        const error = await response.json();
+        setNotification({
+          isVisible: true,
+          message: error.error || 'Failed to update vendor status',
+          type: 'error'
+        });
+      }
+    } catch (error) {
+      console.error('Error updating vendor status:', error);
+      setNotification({
+        isVisible: true,
+        message: 'Error updating vendor status',
+        type: 'error'
+      });
+    }
+  };
+
+  const handleDeleteVendor = (vendor: Vendor) => {
+    setVendorToDelete(vendor);
+    setShowDeleteConfirmation(true);
+  };
+
+  const confirmDeleteVendor = async () => {
+    if (!vendorToDelete) return;
+
+    try {
+      const authHeaders = getAuthHeaders();
+      const response = await fetch(`/api/admin/vendors/${vendorToDelete.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(authHeaders as Record<string, string>)
+        }
+      });
+
+      if (response.ok) {
+        setVendors(prev => prev.filter(vendor => vendor.id !== vendorToDelete.id));
+        setNotification({
+          isVisible: true,
+          message: 'Vendor deleted successfully',
+          type: 'success'
+        });
+      } else {
+        const error = await response.json();
+        setNotification({
+          isVisible: true,
+          message: error.error || 'Failed to delete vendor',
+          type: 'error'
+        });
+      }
+    } catch (error) {
+      console.error('Error deleting vendor:', error);
+      setNotification({
+        isVisible: true,
+        message: 'Error deleting vendor',
+        type: 'error'
+      });
+    } finally {
+      setShowDeleteConfirmation(false);
+      setVendorToDelete(null);
+    }
+  };
+
+  const cancelDeleteVendor = () => {
+    setShowDeleteConfirmation(false);
+    setVendorToDelete(null);
   };
 
   const filteredVendors = vendors.filter(vendor => {
@@ -355,46 +357,83 @@ export default function AdminVendorsPage() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
       return;
     }
 
-    if (isEditing && editingVendorId) {
-      // Update existing vendor
-      setVendors(prev => prev.map(vendor => 
-        vendor.id === editingVendorId 
-          ? { 
-              ...vendor, 
-              ...formData, 
-              updatedAt: new Date().toISOString().split('T')[0] 
-            }
-          : vendor
-      ));
+    try {
+      const authHeaders = getAuthHeaders();
+      
+      if (isEditing && editingVendorId) {
+        // Update existing vendor
+        const response = await fetch(`/api/admin/vendors/${editingVendorId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(authHeaders as Record<string, string>)
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setVendors(prev => prev.map(vendor => 
+            vendor.id === editingVendorId ? result.data : vendor
+          ));
+          setNotification({
+            isVisible: true,
+            message: 'Vendor updated successfully',
+            type: 'success'
+          });
+        } else {
+          const error = await response.json();
+          setNotification({
+            isVisible: true,
+            message: error.error || 'Failed to update vendor',
+            type: 'error'
+          });
+        }
+      } else {
+        // Create new vendor
+        const response = await fetch('/api/admin/vendors', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(authHeaders as Record<string, string>)
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setVendors(prev => [...prev, result.data]);
+          setNotification({
+            isVisible: true,
+            message: 'Vendor created successfully',
+            type: 'success'
+          });
+        } else {
+          const error = await response.json();
+          setNotification({
+            isVisible: true,
+            message: error.error || 'Failed to create vendor',
+            type: 'error'
+          });
+        }
+      }
+
+      closeForm();
+    } catch (error) {
+      console.error('Error submitting form:', error);
       setNotification({
         isVisible: true,
-        message: 'Vendor updated successfully',
-        type: 'success'
-      });
-    } else {
-      // Create new vendor
-      const newVendor: Vendor = {
-        id: Date.now().toString(),
-        ...formData,
-        createdAt: new Date().toISOString().split('T')[0],
-        updatedAt: new Date().toISOString().split('T')[0]
-      };
-      setVendors(prev => [...prev, newVendor]);
-      setNotification({
-        isVisible: true,
-        message: 'Vendor created successfully',
-        type: 'success'
+        message: 'Error submitting form',
+        type: 'error'
       });
     }
-
-    closeForm();
   };
 
   const handleInputChange = (field: string, value: string | string[]) => {
@@ -748,13 +787,13 @@ export default function AdminVendorsPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1">
                   <div className="relative">
-                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-black" />
                     <input
                       type="text"
                       placeholder="Search vendors..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-black"
                     />
                   </div>
                 </div>
@@ -762,7 +801,7 @@ export default function AdminVendorsPage() {
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-[#B40101] focus:border-[#B40101]"
+                    className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-[#B40101] focus:border-[#B40101] text-black"
                   >
                     <option value="all">All Status</option>
                     <option value="active">Active</option>
@@ -809,24 +848,32 @@ export default function AdminVendorsPage() {
                           <div className="flex items-center">
                             <div className="flex-shrink-0 h-10 w-10">
                               <div className="h-10 w-10 rounded-full bg-[#f37521]/10 flex items-center justify-center overflow-hidden">
-                                <Image
-                                  src={vendor.image}
-                                  alt={`${vendor.name} logo`}
-                                  width={40}
-                                  height={40}
-                                  className="w-full h-full object-cover rounded-full"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.style.display = 'none';
-                                    const parent = target.parentElement;
-                                    if (parent) {
-                                      const fallbackIcon = document.createElement('div');
-                                      fallbackIcon.className = 'w-full h-full flex items-center justify-center';
-                                      fallbackIcon.innerHTML = '<svg class="h-5 w-5 text-[#f37521]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
-                                      parent.appendChild(fallbackIcon);
-                                    }
-                                  }}
-                                />
+                                {vendor.image && vendor.image.trim() !== '' ? (
+                                  <Image
+                                    src={vendor.image}
+                                    alt={`${vendor.name} logo`}
+                                    width={40}
+                                    height={40}
+                                    className="w-full h-full object-cover rounded-full"
+                                    onError={(e) => {
+                                      const target = e.target as HTMLImageElement;
+                                      target.style.display = 'none';
+                                      const parent = target.parentElement;
+                                      if (parent) {
+                                        const fallbackIcon = document.createElement('div');
+                                        fallbackIcon.className = 'w-full h-full flex items-center justify-center';
+                                        fallbackIcon.innerHTML = '<svg class="h-5 w-5 text-[#f37521]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
+                                        parent.appendChild(fallbackIcon);
+                                      }
+                                    }}
+                                  />
+                                ) : (
+                                  <div className="w-full h-full flex items-center justify-center">
+                                    <svg className="h-5 w-5 text-[#f37521]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                  </div>
+                                )}
                               </div>
                             </div>
                             <div className="ml-4">
@@ -891,7 +938,7 @@ export default function AdminVendorsPage() {
                               {vendor.status === 'active' ? <XMarkIcon className="h-4 w-4" /> : <CheckIcon className="h-4 w-4" />}
                             </button>
                             <button
-                              onClick={() => handleDeleteVendor(vendor.id)}
+                              onClick={() => handleDeleteVendor(vendor)}
                               className="text-red-600 hover:text-red-800"
                               title="Delete"
                             >
@@ -1325,19 +1372,25 @@ export default function AdminVendorsPage() {
                         </label>
                         <div className="flex items-center space-x-4">
                           <div className="w-16 h-16 rounded-lg border border-gray-300 overflow-hidden bg-gray-50 flex items-center justify-center">
-                            <img
-                              src={logoPreview || formData.image}
-                              alt="Logo preview"
-                              className="w-full h-full object-contain"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.style.display = 'none';
-                                const parent = target.parentElement;
-                                if (parent) {
-                                  parent.innerHTML = '<svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>';
-                                }
-                              }}
-                            />
+                            {(logoPreview || formData.image) && (logoPreview || formData.image).trim() !== '' ? (
+                              <img
+                                src={logoPreview || formData.image}
+                                alt="Logo preview"
+                                className="w-full h-full object-contain"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                  const parent = target.parentElement;
+                                  if (parent) {
+                                    parent.innerHTML = '<svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>';
+                                  }
+                                }}
+                              />
+                            ) : (
+                              <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                              </svg>
+                            )}
                           </div>
                           <div className="flex-1">
                             <p className="text-sm text-gray-600">
@@ -1442,6 +1495,47 @@ export default function AdminVendorsPage() {
                       {selectedVendor.status}
                     </span>
                   </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Delete Confirmation Modal */}
+          {showDeleteConfirmation && vendorToDelete && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+              <div className="bg-white rounded-lg p-6 max-w-md w-full">
+                <div className="flex items-center mb-4">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
+                    <TrashIcon className="h-6 w-6 text-red-600" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-lg font-medium text-gray-900">Delete Vendor</h3>
+                    <p className="text-sm text-gray-500">This action cannot be undone.</p>
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <p className="text-gray-700">
+                    Are you sure you want to delete <span className="font-semibold">{vendorToDelete.name}</span>?
+                  </p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    This will permanently remove the vendor and all associated data.
+                  </p>
+                </div>
+                
+                <div className="flex justify-end space-x-3">
+                  <button
+                    onClick={cancelDeleteVendor}
+                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={confirmDeleteVendor}
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors font-medium"
+                  >
+                    Delete Vendor
+                  </button>
                 </div>
               </div>
             </div>

@@ -9,6 +9,18 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cheerful-bouquet-5ddcfa597e.strapiapp.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

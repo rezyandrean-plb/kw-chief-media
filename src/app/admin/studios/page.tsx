@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { getAuthHeaders } from '@/lib/api-auth';
 import { 
   TrashIcon,
   EyeIcon,
@@ -20,22 +21,7 @@ import Notification from '../../../components/Notification';
 import AdminSidebar from '../../../components/AdminSidebar';
 import OperatingHoursPicker from '../../../components/OperatingHoursPicker';
 
-interface Studio {
-  id: string;
-  name: string;
-  address: string;
-  description: string;
-  image: string;
-  status: 'active' | 'inactive' | 'maintenance';
-  equipment: string[];
-  operatingHours: string;
-  contact: {
-    email: string;
-    phone: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-}
+import { Studio } from '@/lib/studios-data';
 
 interface StudioFormData {
   name: string;
@@ -89,6 +75,8 @@ export default function AdminStudiosPage() {
     message: '',
     type: 'info'
   });
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [studioToDelete, setStudioToDelete] = useState<Studio | null>(null);
 
   const availableEquipment = [
     'Professional Cameras',
@@ -113,63 +101,136 @@ export default function AdminStudiosPage() {
       router.push('/login');
     }
     
-    // Mock studio data based on the studio page
-    const mockStudios: Studio[] = [
-      {
-        id: '1',
-        name: 'North Studio',
-        address: '5 Ang Mo Kio Industrial Park 2A AMK Tech II #05-08 S567760',
-        description: 'High-quality property photography with professional lighting and state-of-the-art equipment.',
-        image: '/images/studio/north-studio.webp',
-        status: 'active',
-        equipment: ['Professional Cameras', 'Lighting Equipment', 'Audio Equipment', 'Green Screen'],
-        operatingHours: 'Monday - Friday: 9:00 AM - 6:00 PM',
-        contact: {
-          email: 'north@chiefmedia.sg',
-          phone: '+65 9123 4567'
-        },
-        createdAt: '2024-01-15',
-        updatedAt: '2024-01-20'
-      },
-      {
-        id: '2',
-        name: 'East Studio',
-        address: '47 Kallang Pudding Road #09-13',
-        description: 'Cinematic property videos with drone footage and professional video production services.',
-        image: '/images/studio/east-studio.webp',
-        status: 'active',
-        equipment: ['Video Cameras', 'Drone Equipment', 'Editing Suite', 'Sound System'],
-        operatingHours: 'Monday - Friday: 9:00 AM - 6:00 PM',
-        contact: {
-          email: 'east@chiefmedia.sg',
-          phone: '+65 9876 5432'
-        },
-        createdAt: '2024-01-10',
-        updatedAt: '2024-01-18'
-      }
-    ];
-    
-    setStudios(mockStudios);
+    if (user && user.role === 'admin') {
+      fetchStudios();
+    }
   }, [user, loading, router]);
 
-  const handleStatusUpdate = (studioId: string, newStatus: Studio['status']) => {
-    setStudios(prev => prev.map(studio => 
-      studio.id === studioId ? { ...studio, status: newStatus, updatedAt: new Date().toISOString().split('T')[0] } : studio
-    ));
-    setNotification({
-      isVisible: true,
-      message: `Studio status updated to ${newStatus}`,
-      type: 'success'
-    });
+  const fetchStudios = async () => {
+    try {
+      const authHeaders = getAuthHeaders();
+      const response = await fetch('/api/admin/studios', {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(authHeaders as Record<string, string>)
+        }
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        setStudios(result.data);
+      } else {
+        const errorData = await response.json();
+        console.error('Failed to fetch studios:', errorData);
+        setNotification({
+          isVisible: true,
+          message: errorData.error || 'Failed to fetch studios',
+          type: 'error'
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching studios:', error);
+      setNotification({
+        isVisible: true,
+        message: 'Error fetching studios',
+        type: 'error'
+      });
+    }
   };
 
-  const handleDeleteStudio = (studioId: string) => {
-    setStudios(prev => prev.filter(studio => studio.id !== studioId));
-    setNotification({
-      isVisible: true,
-      message: 'Studio deleted successfully',
-      type: 'success'
-    });
+  const handleStatusUpdate = async (studioId: string, newStatus: Studio['status']) => {
+    try {
+      const studio = studios.find(s => s.id === studioId);
+      if (!studio) return;
+
+      const authHeaders = getAuthHeaders();
+      const response = await fetch(`/api/admin/studios/${studioId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(authHeaders as Record<string, string>)
+        },
+        body: JSON.stringify({
+          ...studio,
+          status: newStatus
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setStudios(prev => prev.map(s => s.id === studioId ? result.data : s));
+        setNotification({
+          isVisible: true,
+          message: `Studio status updated to ${newStatus}`,
+          type: 'success'
+        });
+      } else {
+        const error = await response.json();
+        setNotification({
+          isVisible: true,
+          message: error.error || 'Failed to update studio status',
+          type: 'error'
+        });
+      }
+    } catch (error) {
+      console.error('Error updating studio status:', error);
+      setNotification({
+        isVisible: true,
+        message: 'Error updating studio status',
+        type: 'error'
+      });
+    }
+  };
+
+  const handleDeleteStudio = (studio: Studio) => {
+    setStudioToDelete(studio);
+    setShowDeleteConfirmation(true);
+  };
+
+  const confirmDeleteStudio = async () => {
+    if (!studioToDelete) return;
+
+    try {
+      const authHeaders = getAuthHeaders();
+      const response = await fetch(`/api/admin/studios/${studioToDelete.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(authHeaders as Record<string, string>)
+        }
+      });
+
+      if (response.ok) {
+        setStudios(prev => prev.filter(studio => studio.id !== studioToDelete.id));
+        setNotification({
+          isVisible: true,
+          message: 'Studio deleted successfully',
+          type: 'success'
+        });
+      } else {
+        const error = await response.json();
+        setNotification({
+          isVisible: true,
+          message: error.error || 'Failed to delete studio',
+          type: 'error'
+        });
+      }
+    } catch (error) {
+      console.error('Error deleting studio:', error);
+      setNotification({
+        isVisible: true,
+        message: 'Error deleting studio',
+        type: 'error'
+      });
+    } finally {
+      setShowDeleteConfirmation(false);
+      setStudioToDelete(null);
+    }
+  };
+
+  const cancelDeleteStudio = () => {
+    setShowDeleteConfirmation(false);
+    setStudioToDelete(null);
   };
 
   const filteredStudios = studios.filter(studio => {
@@ -257,40 +318,83 @@ export default function AdminStudiosPage() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
       return;
     }
 
-    if (isEditing && editingStudioId) {
-      setStudios(prev => prev.map(studio => 
-        studio.id === editingStudioId 
-          ? { ...studio, ...formData, updatedAt: new Date().toISOString().split('T')[0] }
-          : studio
-      ));
+    try {
+      if (isEditing && editingStudioId) {
+        // Update existing studio
+        const authHeaders = getAuthHeaders();
+        const response = await fetch(`/api/admin/studios/${editingStudioId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(authHeaders as Record<string, string>)
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setStudios(prev => prev.map(studio => 
+            studio.id === editingStudioId ? result.data : studio
+          ));
+          setNotification({
+            isVisible: true,
+            message: 'Studio updated successfully',
+            type: 'success'
+          });
+          closeForm();
+        } else {
+          const error = await response.json();
+          setNotification({
+            isVisible: true,
+            message: error.error || 'Failed to update studio',
+            type: 'error'
+          });
+        }
+      } else {
+        // Create new studio
+        const authHeaders = getAuthHeaders();
+        const response = await fetch('/api/admin/studios', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(authHeaders as Record<string, string>)
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setStudios(prev => [...prev, result.data]);
+          setNotification({
+            isVisible: true,
+            message: 'Studio created successfully',
+            type: 'success'
+          });
+          closeForm();
+        } else {
+          const error = await response.json();
+          setNotification({
+            isVisible: true,
+            message: error.error || 'Failed to create studio',
+            type: 'error'
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
       setNotification({
         isVisible: true,
-        message: 'Studio updated successfully',
-        type: 'success'
-      });
-    } else {
-      const newStudio: Studio = {
-        id: Date.now().toString(),
-        ...formData,
-        createdAt: new Date().toISOString().split('T')[0],
-        updatedAt: new Date().toISOString().split('T')[0]
-      };
-      setStudios(prev => [...prev, newStudio]);
-      setNotification({
-        isVisible: true,
-        message: 'Studio created successfully',
-        type: 'success'
+        message: 'Error submitting form',
+        type: 'error'
       });
     }
-
-    closeForm();
   };
 
   const handleInputChange = (field: string, value: string | string[]) => {
@@ -618,13 +722,19 @@ export default function AdminStudiosPage() {
                           <div className="flex items-center">
                             <div className="flex-shrink-0 h-12 w-12">
                               <div className="h-12 w-12 rounded-lg bg-[#f37521]/10 flex items-center justify-center overflow-hidden">
-                                <Image
-                                  src={studio.image}
-                                  alt={`${studio.name} image`}
-                                  width={48}
-                                  height={48}
-                                  className="w-full h-full object-cover"
-                                />
+                                {studio.image && studio.image.trim() !== '' ? (
+                                  <Image
+                                    src={studio.image}
+                                    alt={`${studio.name} image`}
+                                    width={48}
+                                    height={48}
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <div className="w-full h-full flex items-center justify-center">
+                                    <VideoCameraIcon className="h-6 w-6 text-[#f37521]" />
+                                  </div>
+                                )}
                               </div>
                             </div>
                             <div className="ml-4">
@@ -681,7 +791,7 @@ export default function AdminStudiosPage() {
                               {studio.status === 'active' ? <XMarkIcon className="h-4 w-4" /> : <CheckIcon className="h-4 w-4" />}
                             </button>
                             <button
-                              onClick={() => handleDeleteStudio(studio.id)}
+                              onClick={() => handleDeleteStudio(studio)}
                               className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-50"
                               title="Delete"
                             >
@@ -889,10 +999,11 @@ export default function AdminStudiosPage() {
                         </label>
                         <div className="flex items-center space-x-4">
                           <div className="w-16 h-16 rounded-lg border border-gray-300 overflow-hidden bg-gray-50 flex items-center justify-center">
-                            <img
-                              src={imagePreview || formData.image}
-                              alt="Image preview"
-                              className="w-full h-full object-contain"
+                            {(imagePreview || formData.image) && (imagePreview || formData.image).trim() !== '' ? (
+                              <img
+                                src={imagePreview || formData.image}
+                                alt="Image preview"
+                                className="w-full h-full object-contain"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
@@ -902,7 +1013,12 @@ export default function AdminStudiosPage() {
                                 }
                               }}
                             />
-                          </div>
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <VideoCameraIcon className="h-6 w-6 text-gray-400" />
+                            </div>
+                          )}
+                        </div>
                           <div className="flex-1">
                             <p className="text-sm text-gray-600">
                               {selectedImageFile ? selectedImageFile.name : 'URL Image'}
@@ -1118,6 +1234,47 @@ export default function AdminStudiosPage() {
                       {selectedStudio.status}
                     </span>
                   </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Delete Confirmation Modal */}
+          {showDeleteConfirmation && studioToDelete && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+              <div className="bg-white rounded-lg p-6 max-w-md w-full">
+                <div className="flex items-center mb-4">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
+                    <TrashIcon className="h-6 w-6 text-red-600" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-lg font-medium text-gray-900">Delete Studio</h3>
+                    <p className="text-sm text-gray-500">This action cannot be undone.</p>
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <p className="text-gray-700">
+                    Are you sure you want to delete <span className="font-semibold">{studioToDelete.name}</span>?
+                  </p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    This will permanently remove the studio and all associated data.
+                  </p>
+                </div>
+                
+                <div className="flex justify-end space-x-3">
+                  <button
+                    onClick={cancelDeleteStudio}
+                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={confirmDeleteStudio}
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors font-medium"
+                  >
+                    Delete Studio
+                  </button>
                 </div>
               </div>
             </div>

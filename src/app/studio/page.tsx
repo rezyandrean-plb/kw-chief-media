@@ -183,13 +183,19 @@ export default function Studio() {
                 <ScrollAnimation key={studio.name} delay={300 + index * 100}>
                   <div className="group bg-black border border-[#273F4F]/20 rounded-xl overflow-hidden hover:border-[#B40101]/30 transition-all duration-300 shadow-lg">
                     <div className="relative h-64 overflow-hidden">
-                      <Image 
-                        src={studio.image}
-                        alt={studio.name}
-                        width={600}
-                        height={300}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                      {studio.image && studio.image.trim() !== '' ? (
+                        <Image 
+                          src={studio.image}
+                          alt={studio.name}
+                          width={600}
+                          height={300}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-[#273F4F]/20 flex items-center justify-center">
+                          <VideoCameraIcon className="h-16 w-16 text-[#B40101]" />
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     </div>
                     <div className="p-8">
@@ -235,13 +241,19 @@ export default function Studio() {
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                   <div className="relative h-64 rounded-lg overflow-hidden">
-                    <Image 
-                      src={selectedStudio.image}
-                      alt={selectedStudio.name}
-                      width={600}
-                      height={400}
-                      className="w-full h-full object-cover"
-                    />
+                    {selectedStudio.image && selectedStudio.image.trim() !== '' ? (
+                      <Image 
+                        src={selectedStudio.image}
+                        alt={selectedStudio.name}
+                        width={600}
+                        height={400}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-[#273F4F]/20 flex items-center justify-center">
+                        <VideoCameraIcon className="h-16 w-16 text-[#B40101]" />
+                      </div>
+                    )}
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-[#B40101] mb-4">Studio Information</h3>

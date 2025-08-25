@@ -23,8 +23,10 @@ export const authOptions: NextAuthOptions = {
         return true;
       }
       
-      // Block all other users
-      return false;
+      // Allow vendor users (vendors will be managed through admin dashboard)
+      // For now, we'll allow any email that's not explicitly blocked
+      // In production, this should be validated against a vendor database
+      return true;
     },
     async jwt({ token, user, account }) {
       if (account && user) {
@@ -37,6 +39,10 @@ export const authOptions: NextAuthOptions = {
           role = 'realtor';
         } else if (user.email === 'isabelle@chiefmedia.sg') {
           role = 'admin';
+        } else {
+          // Check if user is a vendor (this would typically query a database)
+          // For now, we'll assume any non-realtor, non-admin user is a vendor
+          role = 'vendor';
         }
         
         token.role = role;

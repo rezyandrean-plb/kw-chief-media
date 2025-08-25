@@ -7,7 +7,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  role: 'realtor' | 'client' | 'admin';
+  role: 'realtor' | 'client' | 'admin' | 'vendor';
   company?: string;
   phone?: string;
   avatar?: string;
@@ -48,7 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: session.user.id || 'unknown',
         email: session.user.email || '',
         name: session.user.name || '',
-        role: (session.user.role as 'realtor' | 'client' | 'admin') || 'client',
+        role: (session.user.role as 'realtor' | 'client' | 'admin' | 'vendor') || 'client',
         avatar: session.user.image || undefined,
       };
       setUser(authUser);
@@ -85,11 +85,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Check for admin access (in real app, this would be validated against database)
       const isAdmin = email === 'isabelle@chiefmedia.sg' && password === 'admin123';
       
+      // Check for vendor access (in real app, this would be validated against database)
+      const isVendor = email === 'vendor@example.com' && password === 'vendor123';
+      
       let role: User['role'] = 'client';
       if (isAdmin) {
         role = 'admin';
       } else if (isRealtor) {
         role = 'realtor';
+      } else if (isVendor) {
+        role = 'vendor';
       }
       
       const mockUser: User = {
@@ -201,6 +206,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Admins go to admin dashboard
     if (user.role === 'admin') {
       return '/admin/enquiries';
+    }
+    
+    // Vendors go to their dashboard
+    if (user.role === 'vendor') {
+      return '/vendor/dashboard';
     }
     
     // Default for clients and other users
